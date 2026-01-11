@@ -35,17 +35,17 @@ export default function Navigation() {
         
         {/* Content */}
         <div className="relative w-full py-6 px-6">
-          <div className="max-w-6xl mx-auto flex items-center justify-between">
-            {/* Logo/Name */}
+          <div className="max-w-6xl mx-auto flex items-center justify-center">
+            {/* Logo/Name - Absolute positioned to left */}
             <a
               href="/"
-              className="text-xl font-bold text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white focus-visible:ring-offset-2 rounded-sm transition-colors duration-200"
+              className="absolute left-6 text-xl font-bold text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white focus-visible:ring-offset-2 rounded-sm transition-colors duration-200"
               aria-label="Home"
             >
               CS
             </a>
 
-            {/* Navigation Links */}
+            {/* Navigation Links - Centered */}
             <div className="flex gap-6 items-center">
               <a
                 href="/"
@@ -67,7 +67,6 @@ export default function Navigation() {
               >
                 Projects
               </a>
-              
               <a
                 href="#contact"
                 className="px-4 py-2 rounded-lg text-base font-medium text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white focus-visible:ring-offset-2 transition-all duration-200 motion-reduce:transition-none"
