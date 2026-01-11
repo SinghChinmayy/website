@@ -17,22 +17,22 @@ export default function ProjectsPage() {
   const projects = getAllProjects();
 
   return (
-    <main className="min-h-screen flex flex-col items-center">
-      {/* Hero Section - Centered with max-width */}
-      <section className="w-full flex justify-center px-4 sm:px-6 py-16 md:py-20 lg:py-24">
-        <div className="w-full max-w-3xl">
-          <div className="space-y-4 md:space-y-6">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white tracking-tight leading-tight">
+    <main id="main-content" className="min-h-screen pt-20">
+      {/* Hero Section */}
+      <section className="w-full px-6 py-20">
+        <div className="max-w-4xl mx-auto">
+          <div className="space-y-6">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-gray-900 dark:text-white tracking-tight leading-tight">
               My Projects
             </h1>
-            <p className="text-lg md:text-xl lg:text-2xl text-gray-600 dark:text-gray-400 leading-relaxed">
+            <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 leading-relaxed max-w-2xl">
               A collection of projects I&apos;ve worked on, showcasing my skills in backend development, operations, and AI/ML.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Projects List - Already centered in ProjectList component */}
+      {/* Projects List */}
       <ProjectList projects={projects} />
     </main>
   );

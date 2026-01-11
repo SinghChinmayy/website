@@ -49,7 +49,7 @@ export default function Hero() {
             transition={{ delay: 0.5, duration: 0.6 }}
             className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 max-w-2xl leading-relaxed mb-10"
           >
-            I am a backend dev with interst in scalable and high performance infrastructure.
+            I am a backend dev with interest in scalable and high performance infrastructure.
           </motion.p>
 
           {/* CTA Buttons */}
@@ -61,13 +61,13 @@ export default function Hero() {
           >
             <a
               href="/projects"
-              className="px-8 py-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg font-medium text-lg hover:bg-gray-800 dark:hover:bg-gray-100 transition-all duration-200 text-center border-2 border-gray-900 dark:border-white"
+              className="px-8 py-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg font-medium text-lg hover:bg-gray-800 dark:hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white focus-visible:ring-offset-2 transition-all duration-200 motion-reduce:transition-none text-center border-2 border-gray-900 dark:border-white"
             >
               View Projects
             </a>
             <a
               href="#contact"
-              className="px-8 py-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg font-medium text-lg hover:bg-gray-800 dark:hover:bg-gray-100 transition-all duration-200 text-center border-2 border-gray-900 dark:border-white"
+              className="px-8 py-4 bg-transparent text-gray-900 dark:text-white rounded-lg font-medium text-lg hover:bg-gray-100 dark:hover:bg-gray-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white focus-visible:ring-offset-2 transition-all duration-200 motion-reduce:transition-none text-center border-2 border-gray-900 dark:border-white"
             >
               Contact Me
             </a>
