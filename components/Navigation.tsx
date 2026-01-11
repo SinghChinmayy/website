@@ -13,14 +13,20 @@ export default function Navigation() {
       <div className="max-w-6xl mx-auto flex justify-between items-center">
         {/* Logo/Name */}
         <a
-          href="#"
+          href="/"
           className="text-xl font-bold text-gray-900 dark:text-white hover:opacity-70 transition-opacity"
         >
-          YN
+          CS
         </a>
 
         {/* Navigation Links */}
         <div className="flex gap-8">
+          <a
+            href="/"
+            className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors font-medium"
+          >
+            Home
+          </a>
           <a
             href="/projects"
             className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors font-medium"
