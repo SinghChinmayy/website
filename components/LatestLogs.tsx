@@ -14,8 +14,8 @@ export default function LatestLogs({ logs }: LatestLogsProps) {
   }
 
   return (
-    <section className="w-full px-6 py-20" aria-labelledby="latest-logs-heading">
-      <div className="max-w-4xl mx-auto">
+    <section className="flex items-center justify-center px-6 py-20" aria-labelledby="latest-logs-heading">
+      <div className="max-w-4xl w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -36,7 +36,7 @@ export default function LatestLogs({ logs }: LatestLogsProps) {
           </div>
 
           {/* Logs List */}
-          <div className="flex flex-col">
+          <div className="flex flex-col space-y-8">
             {logs.map((log, index) => (
               <LogEntry key={log.slug} log={log} index={index} />
             ))}

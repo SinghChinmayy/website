@@ -9,14 +9,14 @@ interface LogListProps {
 
 export default function LogList({ logs }: LogListProps) {
   return (
-    <section className="w-full px-6 py-12" aria-label="Engineering logs">
+    <section className="flex items-center justify-center px-6 py-12" aria-label="Engineering logs">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="max-w-4xl mx-auto"
+        className="max-w-4xl w-full"
       >
-        <div className="flex flex-col">
+        <div className="flex flex-col space-y-8">
           {logs.length > 0 ? (
             logs.map((log, index) => (
               <LogEntry key={log.slug} log={log} index={index} />

@@ -40,10 +40,10 @@ export default function LogEntry({ log, index }: LogEntryProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.05, duration: 0.4, ease: "easeOut" }}
-      className="py-6 border-b border-gray-200 dark:border-gray-800 last:border-b-0"
+      className="py-8 border-b border-gray-200 dark:border-gray-800 last:border-b-0"
       aria-labelledby={`log-title-${log.slug}`}
     >
-      <div className="space-y-3">
+      <div className="space-y-4">
         {/* Date */}
         <time 
           dateTime={date}
