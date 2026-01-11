@@ -44,11 +44,11 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
     <motion.article
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.1, duration: 0.6 }}
-      className="w-full border-2 border-gray-900 dark:border-white rounded-lg p-6 hover:bg-gray-50 dark:hover:bg-gray-900/50 focus-within:ring-2 focus-within:ring-gray-900 dark:focus-within:ring-white focus-within:ring-offset-2 transition-colors duration-200 motion-reduce:transition-none"
+      transition={{ delay: index * 0.05, duration: 0.4, ease: "easeOut" }}
+      className="w-full border-2 border-gray-900 dark:border-white rounded-lg p-8 hover:bg-gray-50 dark:hover:bg-gray-900/50 focus-within:ring-2 focus-within:ring-gray-900 dark:focus-within:ring-white focus-within:ring-offset-2 transition-colors duration-200 motion-reduce:transition-none"
     >
       {/* Single column layout */}
-      <div className="flex flex-col gap-6">
+      <div className="space-y-6">
         {/* Image Section (Optional) */}
         {image && (
           <div className="w-full">
@@ -65,20 +65,20 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
         )}
 
         {/* Content Section */}
-        <div className="flex flex-col gap-4">
+        <div className="space-y-4">
           {/* Title */}
-          <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white leading-tight">
+          <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white leading-tight">
             {title}
           </h3>
 
           {/* Description */}
-          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
+          <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
             {description}
           </p>
 
           {/* Tech Stack (Optional) */}
           {tech && tech.length > 0 && (
-            <div className="flex flex-wrap gap-2" role="list" aria-label="Technologies used">
+            <div className="flex flex-wrap gap-3" role="list" aria-label="Technologies used">
               {tech.map((technology) => (
                 <span
                   key={technology}
@@ -118,7 +118,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
 
           {/* Links Section (Optional) */}
           {hasLinks && (
-            <div className="flex flex-wrap gap-3 pt-2">
+            <div className="flex flex-wrap gap-4 pt-4">
               {github && (
                 <a
                   href={github}
@@ -154,7 +154,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
 
           {/* Date (Optional) */}
           {date && (
-            <p className="text-base text-gray-600 dark:text-gray-400 font-medium mt-2">
+            <p className="text-base text-gray-600 dark:text-gray-400 font-medium pt-2">
               <time dateTime={date}>{formatDate(date)}</time>
             </p>
           )}

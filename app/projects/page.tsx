@@ -19,8 +19,8 @@ export default function ProjectsPage() {
   return (
     <main id="main-content" className="min-h-screen pt-20">
       {/* Hero Section */}
-      <section className="w-full px-6 py-20">
-        <div className="max-w-4xl mx-auto">
+      <section className="flex items-center justify-center px-6 py-20 min-h-[40vh]">
+        <div className="max-w-4xl w-full">
           <div className="space-y-6">
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-gray-900 dark:text-white tracking-tight leading-tight">
               My Projects

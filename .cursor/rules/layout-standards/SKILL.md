@@ -24,8 +24,8 @@ space-y-3    // 12px - Compact content
 ```tsx
 px-6     // 24px - Standard horizontal padding for all sections
 px-4     // 16px - Buttons and smaller elements
-gap-4    // 16px - Between flex/grid items
-gap-3    // 12px - Between buttons/links
+gap-4    // 16px - Between flex/grid items (buttons, links)
+gap-3    // 12px - Between tags/badges
 ```
 
 ---
