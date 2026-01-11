@@ -41,7 +41,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <a
-                    href="#contact"
+                    href="/contact"
                     className="text-base font-medium text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white focus-visible:ring-offset-2 rounded-sm transition-colors duration-200"
                   >
                     Contact

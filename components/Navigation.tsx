@@ -49,7 +49,7 @@ export default function Navigation() {
             <div className="flex gap-6 items-center">
               <a
                 href="/"
-                className={`px-4 py-2 rounded-lg text-base font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white focus-visible:ring-offset-2 transition-all duration-200 motion-reduce:transition-none ${
+                className={`px-5 py-2.5 rounded-md text-base font-medium whitespace-nowrap flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white focus-visible:ring-offset-2 transition-all duration-200 motion-reduce:transition-none ${
                   isActive('/')
                     ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900'
                     : 'text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-400'
@@ -59,7 +59,7 @@ export default function Navigation() {
               </a>
               <a
                 href="/projects"
-                className={`px-4 py-2 rounded-lg text-base font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white focus-visible:ring-offset-2 transition-all duration-200 motion-reduce:transition-none ${
+                className={`px-5 py-2.5 rounded-md text-base font-medium whitespace-nowrap flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white focus-visible:ring-offset-2 transition-all duration-200 motion-reduce:transition-none ${
                   isActive('/projects')
                     ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900'
                     : 'text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-400'
@@ -67,12 +67,16 @@ export default function Navigation() {
               >
                 Projects
               </a>
-              <a
-                href="#contact"
-                className="px-4 py-2 rounded-lg text-base font-medium text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white focus-visible:ring-offset-2 transition-all duration-200 motion-reduce:transition-none"
-              >
-                Contact
-              </a>
+                <a
+                  href="/contact"
+                  className={`px-5 py-2.5 rounded-md text-base font-medium whitespace-nowrap flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white focus-visible:ring-offset-2 transition-all duration-200 motion-reduce:transition-none ${
+                    isActive('/contact')
+                      ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900'
+                      : 'text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-400'
+                  }`}
+                >
+                  Contact
+                </a>
             </div>
           </div>
         </div>

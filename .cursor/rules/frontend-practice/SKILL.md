@@ -197,12 +197,25 @@ Following Tailwind's default breakpoint system:
 </a>
 ```
 
-#### Navigation Link
+#### Navigation Link (Text Only)
 ```tsx
 <a href="#" className="text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-400 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white rounded-sm px-1">
   Nav Link
 </a>
 ```
+
+#### Navigation Button (With Background)
+```tsx
+<a href="#" className="px-5 py-2.5 rounded-md text-base font-medium whitespace-nowrap flex-shrink-0 bg-gray-900 dark:bg-white text-white dark:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white focus-visible:ring-offset-2 transition-all duration-200">
+  Nav Button
+</a>
+```
+
+**Important for Navigation Buttons:**
+- Use `whitespace-nowrap` to prevent text wrapping/overflow
+- Use `flex-shrink-0` to prevent buttons from shrinking
+- Use `rounded-md` (not `rounded-lg`) for subtler, cleaner look
+- Use `px-5 py-2.5` for better padding that prevents text overflow
 
 #### Link States
 - **Default**: Primary text color
