@@ -1,5 +1,6 @@
 ---
 alwaysApply: false
+description: Standards for designing and implementing consistent, high-quality frontend user interfaces and experiences for this project
 ---
 # Site Theme Guidelines
 
