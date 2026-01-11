@@ -60,7 +60,7 @@ export default function Hero() {
             className="flex flex-col sm:flex-row gap-4 pt-8 pb-4 px-4 sm:px-0"
           >
             <a
-              href="#projects"
+              href="/projects"
               className="px-8 py-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg font-medium text-lg hover:bg-gray-800 dark:hover:bg-gray-100 transition-all duration-200 text-center border-2 border-gray-900 dark:border-white"
             >
               View Projects

@@ -22,7 +22,7 @@ export default function Navigation() {
         {/* Navigation Links */}
         <div className="flex gap-8">
           <a
-            href="#projects"
+            href="/projects"
             className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors font-medium"
           >
             Projects

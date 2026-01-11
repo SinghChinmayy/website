@@ -1,8 +1,6 @@
 ---
-name: site-theme-guideline
-description: Portfolio site design system and theme guidelines - follow consistently for all components
+alwaysApply: false
 ---
-
 # Site Theme Guidelines
 
 This document defines the design system and theme guidelines for Chinmay Singh's portfolio website. **All components must follow these guidelines consistently.**
