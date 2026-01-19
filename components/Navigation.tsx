@@ -31,52 +31,42 @@ export default function Navigation() {
         aria-label="Main navigation"
       >
         {/* Backdrop with blur effect */}
-        <div className="absolute inset-0 backdrop-blur-md bg-white/80 dark:bg-black/80 border-b border-gray-200/50 dark:border-gray-800/50" />
+        <div className="absolute inset-0 backdrop-blur-lg bg-white/95 dark:bg-black/95 border-b border-gray-200/80 dark:border-gray-800/80 shadow-sm" />
         
         {/* Content */}
-        <div className="relative w-full py-6 px-6">
-          <div className="max-w-6xl mx-auto flex items-center justify-center">
-            {/* Logo/Name - Absolute positioned to left */}
+        <div className="relative w-full py-5 sm:py-6 px-4 sm:px-6">
+          <div className="max-w-6xl mx-auto flex items-center justify-between">
+            {/* Logo/Name - Enhanced styling */}
             <a
               href="/"
-              className="absolute left-6 text-xl font-bold text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white focus-visible:ring-offset-2 rounded-sm transition-colors duration-200"
+              className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white focus-visible:ring-offset-2 rounded-lg px-3 py-1.5 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 ease-out"
               aria-label="Home"
             >
               CS
             </a>
 
-            {/* Navigation Links - Centered */}
-            <div className="flex gap-6 items-center">
+            {/* Navigation Links - Elegant active state with underline */}
+            <div className="flex gap-6 sm:gap-8 items-center">
               <a
                 href="/"
-                className={`px-5 py-2.5 rounded-md text-base font-medium whitespace-nowrap flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white focus-visible:ring-offset-2 transition-all duration-200 motion-reduce:transition-none ${
+                className={`relative px-3 py-2 text-sm sm:text-base font-medium whitespace-nowrap flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white focus-visible:ring-offset-2 transition-all duration-200 ease-out motion-reduce:transition-none ${
                   isActive('/')
-                    ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900'
-                    : 'text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-400'
+                    ? 'text-gray-900 dark:text-white after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-gray-900 dark:after:bg-white'
+                    : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-gray-300 dark:after:bg-gray-700 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200 after:ease-out'
                 }`}
               >
                 Home
               </a>
               <a
-                href="/projects"
-                className={`px-5 py-2.5 rounded-md text-base font-medium whitespace-nowrap flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white focus-visible:ring-offset-2 transition-all duration-200 motion-reduce:transition-none ${
-                  isActive('/projects')
-                    ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900'
-                    : 'text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-400'
+                href="/contact"
+                className={`relative px-3 py-2 text-sm sm:text-base font-medium whitespace-nowrap flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white focus-visible:ring-offset-2 transition-all duration-200 ease-out motion-reduce:transition-none ${
+                  isActive('/contact')
+                    ? 'text-gray-900 dark:text-white after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-gray-900 dark:after:bg-white'
+                    : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-gray-300 dark:after:bg-gray-700 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200 after:ease-out'
                 }`}
               >
-                Projects
+                Contact
               </a>
-                <a
-                  href="/contact"
-                  className={`px-5 py-2.5 rounded-md text-base font-medium whitespace-nowrap flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white focus-visible:ring-offset-2 transition-all duration-200 motion-reduce:transition-none ${
-                    isActive('/contact')
-                      ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900'
-                      : 'text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-400'
-                  }`}
-                >
-                  Contact
-                </a>
             </div>
           </div>
         </div>

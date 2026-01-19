@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Button from './Button';
 
 export default function Hero() {
   return (
@@ -57,20 +58,11 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 pt-8 pb-4 px-4 sm:px-0"
+            className="flex flex-col sm:flex-row gap-4 pt-8"
           >
-            <a
-              href="/projects"
-              className="px-8 py-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg font-medium text-lg hover:bg-gray-800 dark:hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white focus-visible:ring-offset-2 transition-all duration-200 motion-reduce:transition-none text-center border-2 border-gray-900 dark:border-white"
-            >
-              View Projects
-            </a>
-            <a
-              href="#contact"
-              className="px-8 py-4 bg-transparent text-gray-900 dark:text-white rounded-lg font-medium text-lg hover:bg-gray-100 dark:hover:bg-gray-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white focus-visible:ring-offset-2 transition-all duration-200 motion-reduce:transition-none text-center border-2 border-gray-900 dark:border-white"
-            >
+            <Button variant="primary" size="lg" href="/contact">
               Contact Me
-            </a>
+            </Button>
           </motion.div>
         </motion.div>
       </div>

@@ -1,5 +1,7 @@
 import { Metadata } from 'next';
 import { getLinks } from '@/lib/links';
+import Button from '@/components/Button';
+import { GitHubIcon, LinkedInIcon, XIcon, YouTubeIcon, InstagramIcon, EmailIcon } from '@/components/icons';
 
 export const metadata: Metadata = {
   title: 'Contact | Chinmay Singh',
@@ -32,69 +34,84 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Links Section */}
-      <section className="flex items-center justify-center px-6 py-12">
+      <section className="flex items-center justify-center px-6 py-16">
         <div className="max-w-4xl w-full">
-          <div className="space-y-8">
+          <div className="space-y-12">
             {/* Social Links */}
             <div>
               <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-6">
                 Social Profiles
               </h2>
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 w-full overflow-hidden">
                 {links.social.github && (
-                  <a
-                    href={links.social.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-6 py-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg font-medium text-base text-center hover:bg-gray-800 dark:hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white focus-visible:ring-offset-2 transition-all duration-200 motion-reduce:transition-none border-2 border-gray-900 dark:border-white whitespace-nowrap"
-                    aria-label="Visit GitHub profile"
-                  >
-                    GitHub
-                  </a>
+                  <div className="min-w-0 overflow-hidden">
+                    <Button
+                      variant="primary"
+                      href={links.social.github}
+                      external
+                      icon={<GitHubIcon />}
+                      className="w-full whitespace-nowrap"
+                      aria-label="Visit GitHub profile"
+                    >
+                      GitHub
+                    </Button>
+                  </div>
                 )}
                 {links.social.linkedin && (
-                  <a
-                    href={links.social.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-6 py-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg font-medium text-base text-center hover:bg-gray-800 dark:hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white focus-visible:ring-offset-2 transition-all duration-200 motion-reduce:transition-none border-2 border-gray-900 dark:border-white whitespace-nowrap"
-                    aria-label="Visit LinkedIn profile"
-                  >
-                    LinkedIn
-                  </a>
+                  <div className="min-w-0 overflow-hidden">
+                    <Button
+                      variant="primary"
+                      href={links.social.linkedin}
+                      external
+                      icon={<LinkedInIcon />}
+                      className="w-full whitespace-nowrap"
+                      aria-label="Visit LinkedIn profile"
+                    >
+                      LinkedIn
+                    </Button>
+                  </div>
                 )}
                 {links.social.x && (
-                  <a
-                    href={links.social.x}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-6 py-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg font-medium text-base text-center hover:bg-gray-800 dark:hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white focus-visible:ring-offset-2 transition-all duration-200 motion-reduce:transition-none border-2 border-gray-900 dark:border-white whitespace-nowrap"
-                    aria-label="Visit X (Twitter) profile"
-                  >
-                    X
-                  </a>
+                  <div className="min-w-0 overflow-hidden">
+                    <Button
+                      variant="primary"
+                      href={links.social.x}
+                      external
+                      icon={<XIcon />}
+                      className="w-full whitespace-nowrap"
+                      aria-label="Visit X (Twitter) profile"
+                    >
+                      X
+                    </Button>
+                  </div>
                 )}
                 {links.social.youtube && (
-                  <a
-                    href={links.social.youtube}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-6 py-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg font-medium text-base text-center hover:bg-gray-800 dark:hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white focus-visible:ring-offset-2 transition-all duration-200 motion-reduce:transition-none border-2 border-gray-900 dark:border-white whitespace-nowrap"
-                    aria-label="Visit YouTube channel"
-                  >
-                    YouTube
-                  </a>
+                  <div className="min-w-0 overflow-hidden">
+                    <Button
+                      variant="primary"
+                      href={links.social.youtube}
+                      external
+                      icon={<YouTubeIcon />}
+                      className="w-full whitespace-nowrap"
+                      aria-label="Visit YouTube channel"
+                    >
+                      YouTube
+                    </Button>
+                  </div>
                 )}
                 {links.social.instagram && (
-                  <a
-                    href={links.social.instagram}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-6 py-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg font-medium text-base text-center hover:bg-gray-800 dark:hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white focus-visible:ring-offset-2 transition-all duration-200 motion-reduce:transition-none border-2 border-gray-900 dark:border-white whitespace-nowrap"
-                    aria-label="Visit Instagram profile"
-                  >
-                    Instagram
-                  </a>
+                  <div className="min-w-0 overflow-hidden">
+                    <Button
+                      variant="primary"
+                      href={links.social.instagram}
+                      external
+                      icon={<InstagramIcon />}
+                      className="w-full whitespace-nowrap"
+                      aria-label="Visit Instagram profile"
+                    >
+                      Instagram
+                    </Button>
+                  </div>
                 )}
               </div>
             </div>
@@ -105,26 +122,29 @@ export default function ContactPage() {
                 <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-6">
                   Direct Contact
                 </h2>
-                <div className="flex flex-wrap gap-4">
+                <div className="flex flex-wrap gap-4 w-full overflow-hidden">
                   {links.contact.email && (
-                    <a
+                    <Button
+                      variant="primary"
                       href={`mailto:${links.contact.email}`}
-                      className="px-6 py-4 bg-transparent text-gray-900 dark:text-white rounded-lg font-medium text-base text-center hover:bg-gray-100 dark:hover:bg-gray-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white focus-visible:ring-offset-2 transition-all duration-200 motion-reduce:transition-none border-2 border-gray-900 dark:border-white whitespace-nowrap min-w-[120px]"
+                      icon={<EmailIcon />}
+                      className="whitespace-nowrap"
                       aria-label="Send email"
                     >
                       Email
-                    </a>
+                    </Button>
                   )}
                   {links.contact.instagram && !links.social.instagram && (
-                    <a
+                    <Button
+                      variant="primary"
                       href={links.contact.instagram}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-6 py-4 bg-transparent text-gray-900 dark:text-white rounded-lg font-medium text-base text-center hover:bg-gray-100 dark:hover:bg-gray-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white focus-visible:ring-offset-2 transition-all duration-200 motion-reduce:transition-none border-2 border-gray-900 dark:border-white whitespace-nowrap min-w-[120px]"
+                      external
+                      icon={<InstagramIcon />}
+                      className="whitespace-nowrap"
                       aria-label="Contact via Instagram"
                     >
                       Instagram DM
-                    </a>
+                    </Button>
                   )}
                 </div>
               </div>

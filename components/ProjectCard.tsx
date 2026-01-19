@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useState } from 'react';
+import Button from './Button';
 
 export interface Project {
   title: string;
@@ -45,45 +46,45 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.05, duration: 0.4, ease: "easeOut" }}
-      className="w-full border-2 border-gray-900 dark:border-white rounded-lg p-8 hover:bg-gray-50 dark:hover:bg-gray-900/50 focus-within:ring-2 focus-within:ring-gray-900 dark:focus-within:ring-white focus-within:ring-offset-2 transition-colors duration-200 motion-reduce:transition-none"
+      className="w-full bg-white dark:bg-gray-900 rounded-xl shadow-sm p-6 sm:p-8 hover:shadow-md hover:-translate-y-1 focus-within:ring-2 focus-within:ring-gray-900 dark:focus-within:ring-white focus-within:ring-offset-2 transition-all duration-200 ease-out motion-reduce:transition-none h-full flex flex-col"
     >
       {/* Single column layout */}
-      <div className="space-y-6">
+      <div className="space-y-4 sm:space-y-6 flex-1 flex flex-col">
         {/* Image Section (Optional) */}
         {image && (
-          <div className="w-full">
-            <div className="relative w-full aspect-video rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800">
+          <div className="w-full -mx-6 sm:-mx-8 -mt-6 sm:-mt-8 mb-4 sm:mb-6">
+            <div className="relative w-full aspect-video rounded-t-xl overflow-hidden bg-gray-100 dark:bg-gray-800">
               <Image
                 src={image}
                 alt={`Screenshot of ${title} project`}
                 fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 768px"
+                className="object-cover transition-transform duration-300 hover:scale-105"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
             </div>
           </div>
         )}
 
         {/* Content Section */}
-        <div className="space-y-4">
+        <div className="space-y-3 sm:space-y-4 flex-1 flex flex-col">
           {/* Title */}
-          <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white leading-tight">
+          <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 dark:text-white leading-tight">
             {title}
           </h3>
 
           {/* Description */}
-          <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+          <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 leading-relaxed flex-1">
             {description}
           </p>
 
           {/* Tech Stack (Optional) */}
           {tech && tech.length > 0 && (
-            <div className="flex flex-wrap gap-3" role="list" aria-label="Technologies used">
+            <div className="flex flex-wrap gap-2" role="list" aria-label="Technologies used">
               {tech.map((technology) => (
                 <span
                   key={technology}
                   role="listitem"
-                  className="px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg text-sm font-medium"
+                  className="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-full text-xs font-medium"
                 >
                   {technology}
                 </span>
@@ -95,15 +96,16 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
           {youtube && (
             <div className="mt-2">
               {!showYouTube ? (
-                <button
+                <Button
+                  variant="primary"
+                  size="sm"
                   onClick={() => setShowYouTube(true)}
                   aria-label={`Watch video about ${title}`}
-                  className="px-6 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg font-medium text-base hover:bg-gray-800 dark:hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white focus-visible:ring-offset-2 transition-all duration-200 motion-reduce:transition-none border-2 border-gray-900 dark:border-white"
                 >
                   ▶ Watch Video
-                </button>
+                </Button>
               ) : (
-                <div className="relative w-full aspect-video rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800">
+                <div className="relative w-full aspect-video -mx-6 sm:-mx-8 rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-800">
                   <iframe
                     src={`https://www.youtube.com/embed/${youtube}`}
                     title={`${title} - Video`}
@@ -118,43 +120,46 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
 
           {/* Links Section (Optional) */}
           {hasLinks && (
-            <div className="flex flex-wrap gap-4 pt-4">
+            <div className="flex flex-wrap gap-3 sm:gap-4 pt-2 sm:pt-4 w-full overflow-hidden">
               {github && (
-                <a
+                <Button
+                  variant="primary"
+                  size="sm"
                   href={github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-6 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg font-medium text-base hover:bg-gray-800 dark:hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white focus-visible:ring-offset-2 transition-all duration-200 motion-reduce:transition-none border-2 border-gray-900 dark:border-white"
+                  external
+                  className="flex-shrink min-w-0"
                 >
-                  View on GitHub
-                </a>
+                  GitHub
+                </Button>
               )}
               {demo && (
-                <a
+                <Button
+                  variant="primary"
+                  size="sm"
                   href={demo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-6 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg font-medium text-base hover:bg-gray-800 dark:hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white focus-visible:ring-offset-2 transition-all duration-200 motion-reduce:transition-none border-2 border-gray-900 dark:border-white"
+                  external
+                  className="flex-shrink min-w-0"
                 >
-                  View Live Demo
-                </a>
+                  Demo
+                </Button>
               )}
               {blog && (
-                <a
+                <Button
+                  variant="primary"
+                  size="sm"
                   href={blog}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-6 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg font-medium text-base hover:bg-gray-800 dark:hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white focus-visible:ring-offset-2 transition-all duration-200 motion-reduce:transition-none border-2 border-gray-900 dark:border-white"
+                  external
+                  className="flex-shrink min-w-0"
                 >
-                  Read Article
-                </a>
+                  Article
+                </Button>
               )}
             </div>
           )}
 
           {/* Date (Optional) */}
           {date && (
-            <p className="text-base text-gray-600 dark:text-gray-400 font-medium pt-2">
+            <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-500 font-medium pt-2 mt-auto">
               <time dateTime={date}>{formatDate(date)}</time>
             </p>
           )}

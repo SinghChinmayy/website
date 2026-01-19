@@ -1,8 +1,6 @@
 ---
-name: documentation-standard
-description: Standards for writing and maintaining project documentation
+alwaysApply: false
 ---
-
 # Documentation Standard
 
 This rule defines how documentation should be written and maintained for this project.
