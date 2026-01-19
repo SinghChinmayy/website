@@ -5,8 +5,8 @@ import Button from './Button';
 
 export default function Hero() {
   return (
-    <section className="min-h-screen flex items-center justify-center px-6 py-20">
-      <div className="max-w-4xl w-full">
+    <section className="min-h-screen flex items-center justify-center py-20">
+      <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

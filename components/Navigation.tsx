@@ -34,9 +34,9 @@ export default function Navigation() {
         <div className="absolute inset-0 backdrop-blur-lg bg-white/95 dark:bg-black/95 border-b border-gray-200/80 dark:border-gray-800/80 shadow-sm" />
         
         {/* Content */}
-        <div className="relative w-full py-5 sm:py-6 px-4 sm:px-6">
-          <div className="max-w-6xl mx-auto flex items-center justify-between">
-            {/* Logo/Name - Enhanced styling */}
+        <div className="relative w-full py-5 sm:py-6">
+          <div className="container flex items-center justify-between">
+            {/* Logo/Name */}
             <a
               href="/"
               className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white focus-visible:ring-offset-2 rounded-lg px-3 py-1.5 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 ease-out"
@@ -45,7 +45,7 @@ export default function Navigation() {
               CS
             </a>
 
-            {/* Navigation Links - Elegant active state with underline */}
+            {/* Navigation Links */}
             <div className="flex gap-6 sm:gap-8 items-center">
               <a
                 href="/"

@@ -81,3 +81,10 @@ a {
 ul, ol {
   list-style: none;
 }
+
+/* Shared container for consistent layout alignment */
+@layer components {
+  .container {
+    @apply w-full max-w-6xl mx-auto px-4 sm:px-6;
+  }
+}
