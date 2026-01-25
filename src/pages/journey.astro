@@ -90,6 +90,10 @@ const resumePdfPath = '/resume.pdf';
         </p>
         
         <div class="header-actions">
+           <a href={resumePdfPath} target="_blank" rel="noopener noreferrer" class="btn-secondary" aria-label="View Resume PDF">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+            <span>View Resume</span>
+          </a>
            <a href={resumePdfPath} download class="btn-primary glow-effect" aria-label="Download Resume PDF">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
             <span>Download Resume</span>
@@ -167,7 +171,7 @@ const resumePdfPath = '/resume.pdf';
     /* Header */
     .page-header {
         text-align: center;
-        margin-bottom: 5rem;
+        margin-bottom: 3rem;
     }
 
     .header-content {
@@ -225,18 +229,48 @@ const resumePdfPath = '/resume.pdf';
         box-shadow: 0 10px 20px -10px rgba(255,255,255,0.1);
     }
 
+    .btn-secondary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.875rem 1.75rem;
+        background: transparent;
+        color: var(--color-text);
+        font-weight: 600;
+        border: 2px solid var(--color-border);
+        border-radius: 9999px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+        margin-top: 1rem;
+    }
+
+    .btn-secondary:hover {
+        background: var(--color-bg-secondary);
+        border-color: var(--color-text);
+        color: var(--color-text);
+        transform: translateY(-2px);
+    }
+    
+    .header-actions {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
     /* Sections */
     .content-wrapper {
         display: flex;
         flex-direction: column;
-        gap: 6rem;
+        gap: 4rem;
     }
 
     .section-header {
         display: flex;
         align-items: center;
         gap: 1.5rem;
-        margin-bottom: 2.5rem;
+        margin-bottom: 1.5rem;
     }
 
     .section-title {
