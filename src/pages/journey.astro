@@ -1,28 +1,15 @@
 ---
 /**
- * Journey Timeline Page
+ * Journey & Resume Page
  * 
- * Displays a chronological timeline of career growth and learning progression through
- * expandable timeline entries. Each entry represents a milestone, learning experience,
- * or career transition, with optional detailed content that can be revealed.
+ * A showcase of professional history and technical expertise.
  * 
  * Features:
- * - Queries all journey entries from content collection
- * - Sorts by date (descending - most recent first)
- * - Renders expandable content for each entry
- * - Detects entries with body content vs. frontmatter-only
- * - Visual timeline with color-coded entry types
- * - Skills/technologies display per entry
- * - Empty state handling
- * 
- * Entry Types:
- * - milestone: Major achievements and launches
- * - learning: Education and skill development
- * - transition: Job changes and career moves
+ * - Premium Timeline Design
+ * - Interactive Tech Stack Grid
+ * - Resume Download
  * 
  * Route: /journey
- * 
- * @page
  */
 
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -31,81 +18,327 @@ import TimelineEntry from '../components/TimelineEntry.astro';
 import { getCollection, render } from 'astro:content';
 import { pagesConfig } from '../pages.config';
 
-/**
- * Queries all journey entries from the content collection
- */
+// Get all entries
 const allJourneyEntries = await getCollection('journey');
 
-/**
- * Sorts journey entries by date in descending order (most recent first)
- * 
- * Ensures the timeline displays with the latest experiences at the top,
- * allowing visitors to see current context before historical progression.
- */
+// Sort by date descending
 const sortedJourneyEntries = allJourneyEntries.sort((a, b) => {
   return b.data.date.getTime() - a.data.date.getTime();
 });
 
-/**
- * Renders content for each entry and checks for body content
- * 
- * Processes each journey entry to:
- * 1. Render the MDX content component
- * 2. Detect if the entry has body content beyond frontmatter
- * 3. Return entry data with Content component and hasContent flag
- * 
- * This allows the TimelineEntry component to conditionally show
- * the expand/collapse functionality only for entries with additional content.
- */
+// Prepare content
 const entriesWithContent = await Promise.all(
   sortedJourneyEntries.map(async (entry) => {
     const { Content } = await render(entry);
-    // Check if entry has body content (not just frontmatter)
     const hasContent = Boolean(entry.body && entry.body.trim().length > 0);
     return { entry, Content, hasContent };
   })
 );
+
+// Aggregate Skills
+const allSkills = new Set<string>();
+sortedJourneyEntries.forEach(entry => {
+  entry.data.skills?.forEach(skill => allSkills.add(skill));
+});
+const uniqueSkills = Array.from(allSkills).sort();
+
+
+// Helper for tech stack logos (using simple-icons CDN)
+const getSkillIcon = (skill: string) => {
+  const normalize = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, '');
+  const slug = normalize(skill);
+  
+  // Custom mappings for specific skills
+  const mappings: Record<string, string> = {
+    'machinelearning': 'tensorflow', // Proxy icon
+    'deeplearning': 'pytorch',      // Proxy icon
+    'awssagemaker': 'amazonaws',
+    'communityleadership': 'google', // Proxy (Google Developer Groups)
+    'eventmanagement': 'meetup',
+    'publicspeaking': 'ted',
+    'computerscience': 'academic', // Not a real simple-icon, fallback
+  };
+
+  const iconName = mappings[slug] || slug;
+  return `https://cdn.simpleicons.org/${iconName}`;
+};
+
+// Filter skills to show logos for tools/technologies
+const techSkills = uniqueSkills.filter(skill => {
+  const s = skill.toLowerCase();
+  // Filter out soft skills or generic terms unless mapped or known
+  return !['community leadership', 'public speaking', 'event management', 'mentoring', 'mathematics', 'computer science', 'software engineering'].includes(s.toLowerCase());
+});
+
+const resumePdfPath = '/resume.pdf';
 ---
 
 <BaseLayout>
   <SEO 
     slot="head"
-    title={pagesConfig.journey.title}
+    title="Journey"
     description={pagesConfig.journey.description}
-    type="website"
+    type="profile"
   />
 
   <main class="page-container">
     <header class="page-header">
-      <h1 class="page-title">{pagesConfig.journey.heading}</h1>
-      <p class="page-intro">
-        {pagesConfig.journey.intro}
-      </p>
+      <div class="header-content flow">
+        <h1 class="page-title gradient-text">{pagesConfig.journey.heading}</h1>
+        <p class="page-intro text-muted">
+          {pagesConfig.journey.intro}
+        </p>
+        
+        <div class="header-actions">
+           <a href={resumePdfPath} download class="btn-primary glow-effect" aria-label="Download Resume PDF">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            <span>Download Resume</span>
+          </a>
+        </div>
+      </div>
     </header>
 
-    {entriesWithContent.length > 0 ? (
-      <div class="journey-timeline">
-        {entriesWithContent.map(({ entry, Content, hasContent }) => (
-          <TimelineEntry
-            date={entry.data.date}
-            title={entry.data.title}
-            type={entry.data.type}
-            description={entry.data.description}
-            skills={entry.data.skills}
-            hasContent={hasContent}
-          >
-            {hasContent && <Content />}
-          </TimelineEntry>
-        ))}
-      </div>
-    ) : (
-      <p class="empty-state">No journey entries yet.</p>
-    )}
+    <div class="content-wrapper">
+        <!-- Tech Stack Section -->
+        {techSkills.length > 0 && (
+            <section class="tech-stack-section animate-fade-in">
+                <div class="section-header">
+                    <h2 class="section-title">Technologies & Tools</h2>
+                    <div class="section-line"></div>
+                </div>
+                
+                <div class="tech-grid">
+                    {techSkills.map(skill => (
+                        <div class="tech-item" title={skill}>
+                            <img 
+                                src={getSkillIcon(skill)} 
+                                alt={`${skill} logo`} 
+                                class="tech-icon"
+                                width="24"
+                                height="24"
+                                loading="lazy"
+                                onerror="this.style.display='none'" 
+                            />
+                            <span class="tech-name">{skill}</span>
+                        </div>
+                    ))}
+                </div>
+            </section>
+        )}
+
+        <!-- Timeline Section -->
+        <section class="timeline-section animate-slide-up">
+            <div class="section-header">
+                <h2 class="section-title">Professional Journey</h2>
+                <div class="section-line"></div>
+            </div>
+        
+            {entriesWithContent.length > 0 ? (
+                <div class="journey-timeline">
+                {entriesWithContent.map(({ entry, Content, hasContent }) => (
+                    <TimelineEntry
+                    date={entry.data.date}
+                    title={entry.data.title}
+                    type={entry.data.type}
+                    description={entry.data.description}
+                    skills={entry.data.skills}
+                    hasContent={hasContent}
+                    >
+                    {hasContent && <Content />}
+                    </TimelineEntry>
+                ))}
+                </div>
+            ) : (
+                <div class="empty-state">
+                    <p>No journey entries found.</p>
+                </div>
+            )}
+        </section>
+    </div>
   </main>
 
   <style>
+    .page-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 4rem 1.5rem;
+    }
+
+    /* Header */
+    .page-header {
+        text-align: center;
+        margin-bottom: 5rem;
+    }
+
+    .header-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .page-title {
+        font-size: clamp(2.5rem, 5vw, 3.5rem);
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+        margin-bottom: 0.5rem;
+    }
+
+    .gradient-text {
+        background: var(--gradient-text);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: var(--color-text); /* Fallback */
+    }
+
+    .page-intro {
+        font-size: 1.125rem;
+        color: var(--color-text-secondary);
+        max-width: 50ch;
+        line-height: 1.6;
+    }
+
+    /* Button */
+    .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.875rem 1.75rem;
+        background: var(--color-text);
+        color: var(--color-bg);
+        font-weight: 600;
+        border-radius: 9999px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+        margin-top: 1rem;
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px -10px rgba(0,0,0,0.3);
+    }
+    
+    :global([data-theme="dark"]) .btn-primary:hover {
+        box-shadow: 0 10px 20px -10px rgba(255,255,255,0.1);
+    }
+
+    /* Sections */
+    .content-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 6rem;
+    }
+
+    .section-header {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        margin-bottom: 2.5rem;
+    }
+
+    .section-title {
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-weight: 700;
+        color: var(--color-text-muted);
+        white-space: nowrap;
+    }
+
+    .section-line {
+        height: 1px;
+        width: 100%;
+        background: var(--color-border);
+        opacity: 0.5;
+    }
+
+    /* Tech Stack */
+    .tech-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .tech-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem 1.25rem;
+        background: var(--color-bg-secondary);
+        border: 1px solid var(--color-border);
+        border-radius: 12px;
+        transition: all 0.2s ease;
+        cursor: default;
+    }
+
+    .tech-item:hover {
+        background: var(--color-bg-elevated);
+        border-color: var(--color-accent);
+        transform: translateY(-2px);
+    }
+
+    .tech-icon {
+        width: 20px;
+        height: 20px;
+        object-fit: contain;
+    }
+    
+    :global([data-theme="dark"]) .tech-icon {
+        filter: invert(1);
+    }
+
+    .tech-name {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--color-text-secondary);
+    }
+
+    .tech-item:hover .tech-name {
+        color: var(--color-text);
+    }
+
+    /* Timeline Container */
     .journey-timeline {
-      margin-top: 2rem;
+        position: relative;
+        padding-left: 0;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-fade-in {
+        animation: fadeIn 0.8s ease-out forwards;
+    }
+
+    .animate-slide-up {
+        animation: slideUp 0.8s ease-out 0.2s forwards;
+        opacity: 0;
+    }
+
+    @media (max-width: 640px) {
+        .page-container {
+            padding-top: 2rem;
+        }
+        
+        .page-title {
+            font-size: 2rem;
+        }
+
+        .section-header {
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
     }
   </style>
 </BaseLayout>
