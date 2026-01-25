@@ -17,6 +17,7 @@
  * ```
  */
 import { siteConfig } from '../config';
+import NewsletterSignup from './NewsletterSignup.astro';
 
 /**
  * Gets the current year for copyright display
@@ -40,6 +41,7 @@ const socialLinks = Object.entries(siteConfig.social)
 ---
 
 <footer class="site-footer">
+  <NewsletterSignup />
   <div class="footer-container">
     <span class="copyright">© {currentYear} {siteConfig.author.name}</span>
     

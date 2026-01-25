@@ -40,44 +40,44 @@ const projectsCollection = defineCollection({
   schema: z.object({
     /** Project title */
     title: z.string(),
-    
+
     /** Your role in the project */
     role: z.string(),
-    
+
     /** Year the project was completed */
     year: z.number(),
-    
+
     /** Project duration (e.g., "3 months", "1.5 years") */
     duration: z.string().optional(),
-    
+
     /** Team size for scope context */
     teamSize: z.number().optional(),
-    
+
     /** Brief summary of outcomes and impact */
     outcomeSummary: z.string(),
-    
+
     /** High-level project overview */
     overview: z.string(),
-    
+
     /** Problem being addressed */
     problem: z.string(),
-    
+
     /** Project constraints and limitations */
     constraints: z.array(z.string()),
-    
+
     /** Solution approach and strategy */
     approach: z.string(),
-    
+
     /** Key technical decisions with reasoning */
     keyDecisions: z.array(z.object({
       decision: z.string(),
       reasoning: z.string(),
       alternatives: z.array(z.string()).optional(),
     })),
-    
+
     /** Technologies and frameworks used */
     techStack: z.array(z.string()),
-    
+
     /** Project impact and results */
     impact: z.object({
       /** Quantitative metrics (optional) */
@@ -88,22 +88,22 @@ const projectsCollection = defineCollection({
       /** Qualitative impact description */
       qualitative: z.string(),
     }),
-    
+
     /** Key learnings and takeaways */
     learnings: z.array(z.string()),
-    
+
     /** Whether to feature on homepage */
     featured: z.boolean().default(false),
-    
+
     /** Project status */
     status: z.enum(['completed', 'ongoing', 'archived']).default('completed'),
-    
+
     /** Custom sort order (lower numbers first) */
     order: z.number().optional(),
-    
+
     /** Related project slugs for cross-referencing */
     relatedProjects: z.array(z.string()).optional(),
-    
+
     /** Related decision slugs for cross-referencing */
     relatedDecisions: z.array(z.string()).optional(),
   }),
@@ -127,32 +127,32 @@ const decisionsCollection = defineCollection({
   schema: z.object({
     /** Decision title */
     title: z.string(),
-    
+
     /** Date the decision was made */
     date: z.coerce.date(),
-    
+
     /** Context and background for the decision */
     context: z.string(),
-    
+
     /** The decision that was made */
     decision: z.string(),
-    
+
     /** Alternative options considered */
     alternatives: z.array(z.object({
       option: z.string(),
       pros: z.array(z.string()).optional(),
       cons: z.array(z.string()).optional(),
     })),
-    
+
     /** Reasoning behind the decision */
     reasoning: z.string(),
-    
+
     /** Optional tags for categorization */
     tags: z.array(z.string()).optional(),
-    
+
     /** Related project slugs for cross-referencing */
     relatedProjects: z.array(z.string()).optional(),
-    
+
     /** Related decision slugs for cross-referencing */
     relatedDecisions: z.array(z.string()).optional(),
   }),
@@ -174,16 +174,16 @@ const journeyCollection = defineCollection({
   schema: z.object({
     /** Date of the timeline entry */
     date: z.coerce.date(),
-    
+
     /** Entry title */
     title: z.string(),
-    
+
     /** Type of timeline entry */
     type: z.enum(['milestone', 'learning', 'transition']),
-    
+
     /** Brief description */
     description: z.string(),
-    
+
     /** Skills or technologies associated with this entry */
     skills: z.array(z.string()).optional(),
   }),
@@ -204,51 +204,25 @@ const writingCollection = defineCollection({
   schema: z.object({
     /** Article title */
     title: z.string(),
-    
+
     /** Article description for SEO and previews */
     description: z.string(),
-    
+
     /** Original publication date */
     publishDate: z.coerce.date(),
-    
+
     /** Last updated date (optional) */
     updatedDate: z.coerce.date().optional(),
-    
+
     /** Tags for categorization */
     tags: z.array(z.string()).optional(),
-    
+
     /** Whether the article is a draft (hidden from production) */
     draft: z.boolean().default(false),
   }),
 });
 
-/**
- * Uses Collection
- * 
- * Documentation of tools, technologies, and environment used in development workflow.
- * 
- * Features:
- * - Three categories (tools, stack, environment)
- * - Items with name, description, and optional URL
- * - Custom order for intentional presentation
- */
-const usesCollection = defineCollection({
-  loader: glob({ pattern: '**/*.mdx', base: './src/content/uses' }),
-  schema: z.object({
-    /** Category for grouping */
-    category: z.enum(['tools', 'stack', 'environment']),
-    
-    /** List of items in this category */
-    items: z.array(z.object({
-      name: z.string(),
-      description: z.string(),
-      url: z.string().url().optional(),
-    })),
-    
-    /** Sort order within category */
-    order: z.number(),
-  }),
-});
+
 
 /**
  * Testimonials Collection
@@ -267,25 +241,25 @@ const testimonialsCollection = defineCollection({
   schema: z.object({
     /** Person's name */
     name: z.string(),
-    
+
     /** Person's role/title */
     role: z.string(),
-    
+
     /** Person's company */
     company: z.string(),
-    
+
     /** Relationship context (e.g., "Worked together at Company X") */
     relationship: z.string(),
-    
+
     /** Testimonial quote */
     quote: z.string(),
-    
+
     /** LinkedIn profile URL (optional) */
     linkedin: z.string().url().optional(),
-    
+
     /** Whether to feature on homepage */
     featured: z.boolean().default(false),
-    
+
     /** Date of the testimonial */
     date: z.coerce.date(),
   }),
@@ -302,6 +276,6 @@ export const collections = {
   decisions: decisionsCollection,
   journey: journeyCollection,
   writing: writingCollection,
-  uses: usesCollection,
+
   testimonials: testimonialsCollection,
 };

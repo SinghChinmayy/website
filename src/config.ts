@@ -49,7 +49,7 @@ export const siteConfig = {
    * Example: 'https://example.com'
    */
   url: getEnv('SITE_URL', 'https://example.com'),
-  
+
   /**
    * Site language (ISO 639-1 code)
    * 
@@ -57,21 +57,21 @@ export const siteConfig = {
    * Examples: 'en', 'id', 'es', 'fr'
    */
   language: getEnv('SITE_LANGUAGE', 'en'),
-  
+
   /**
    * Site title
    * 
    * Used as fallback when page-specific title is not provided.
    */
   title: getEnv('SITE_TITLE', 'Professional Portfolio'),
-  
+
   /**
    * Site description
    * 
    * Default meta description for SEO and social sharing.
    */
   description: getEnv('SITE_DESCRIPTION', 'Engineering leader specializing in system architecture, technical decision-making, and delivering measurable business impact.'),
-  
+
   /**
    * Author information
    * 
@@ -81,20 +81,20 @@ export const siteConfig = {
   author: {
     /** Full name */
     name: getEnv('SITE_AUTHOR_NAME', 'Your Name'),
-    
+
     /** Professional title or role */
     title: getEnv('SITE_AUTHOR_TITLE', 'Senior Software Engineer'),
-    
+
     /** Short biography or professional summary */
     bio: getEnv('SITE_AUTHOR_BIO', 'Engineering leader focused on solving complex technical challenges through thoughtful architecture and pragmatic trade-off analysis.'),
-    
+
     /** Contact email address */
     email: getEnv('SITE_AUTHOR_EMAIL', 'hello@example.com'),
-    
+
     /** Location (optional, empty string to hide) */
     location: getEnv('SITE_AUTHOR_LOCATION', ''),
   },
-  
+
   /**
    * Social media links
    * 
@@ -104,20 +104,20 @@ export const siteConfig = {
   social: {
     /** GitHub profile URL */
     github: getEnv('SOCIAL_GITHUB', ''),
-    
+
     /** LinkedIn profile URL */
     linkedin: getEnv('SOCIAL_LINKEDIN', ''),
-    
+
     /** Twitter/X profile URL */
     twitter: getEnv('SOCIAL_TWITTER', ''),
-    
+
     /** Mastodon profile URL */
     mastodon: getEnv('SOCIAL_MASTODON', ''),
-    
+
     /** Bluesky profile URL */
     bluesky: getEnv('SOCIAL_BLUESKY', ''),
   },
-  
+
   /**
    * Navigation links
    * 
@@ -129,7 +129,7 @@ export const siteConfig = {
     { label: 'Decisions', href: '/decisions' },
     { label: 'Journey', href: '/journey' },
     { label: 'Writing', href: '/writing' },
-    { label: 'Uses', href: '/uses' },
+
     { label: 'Contact', href: '/contact' },
   ],
 } as const;

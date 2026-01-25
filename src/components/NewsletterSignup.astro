@@ -7,10 +7,12 @@
  */
 ---
 
-<section class="newsletter-signup">
+<div class="newsletter-signup">
   <div class="newsletter-content">
-    <h3>Join the Newsletter</h3>
-    <p>Get insights on software architecture and engineering leadership delivered to your inbox.</p>
+    <div class="newsletter-text">
+      <span class="newsletter-label">Subscribe to updates</span>
+      <p class="newsletter-sub">Get insights on software architecture and engineering leadership.</p>
+    </div>
     
     <form class="signup-form" onsubmit="event.preventDefault(); alert('Thanks for subscribing! (This is a demo)');">
       <div class="input-group">
@@ -20,92 +22,117 @@
           aria-label="Email address"
           required
         />
-        <button type="submit">Subscribe</button>
+        <button type="submit" aria-label="Subscribe">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+        </button>
       </div>
-      <p class="form-note">No spam, unsubscribe at any time.</p>
     </form>
   </div>
-</section>
+</div>
 
 <style>
   .newsletter-signup {
-    padding: 3rem 0;
-    border-top: 1px solid var(--color-border);
+    padding-bottom: 2rem;
     margin-bottom: 2rem;
+    border-bottom: 1px solid var(--color-border);
   }
 
   .newsletter-content {
-    max-width: 600px;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
   }
 
-  h3 {
-    font-size: 1.25rem;
+  .newsletter-text {
+    flex: 1;
+    max-width: 500px;
+  }
+
+  .newsletter-label {
+    display: block;
+    font-size: 0.9375rem;
     font-weight: 600;
-    margin-bottom: 0.75rem;
     color: var(--color-text);
+    margin-bottom: 0.25rem;
   }
 
-  p {
+  .newsletter-sub {
+    font-size: 0.875rem;
     color: var(--color-text-secondary);
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
+    line-height: 1.5;
+    margin: 0;
   }
 
   .signup-form {
-    max-width: 450px;
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 320px;
   }
 
   .input-group {
     display: flex;
-    gap: 0.75rem;
-    margin-bottom: 0.75rem;
+    gap: 0.5rem;
+    position: relative;
   }
 
   input[type="email"] {
-    flex: 1;
-    padding: 0.75rem 1rem;
+    width: 100%;
+    padding: 0.625rem 2.75rem 0.625rem 0.875rem;
+    background: var(--color-bg-secondary);
     border: 1px solid var(--color-border);
     border-radius: 6px;
-    background: var(--color-bg);
     color: var(--color-text);
-    font-size: 0.9375rem;
-    transition: border-color 0.2s ease;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
   }
 
   input[type="email"]:focus {
     outline: none;
-    border-color: var(--color-text);
+    border-color: var(--color-text-muted);
+    background: var(--color-bg);
   }
 
   button {
-    padding: 0.75rem 1.25rem;
-    background: var(--color-text);
-    color: var(--color-bg);
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    bottom: 4px;
+    padding: 0 0.5rem;
+    background: transparent;
     border: none;
-    border-radius: 6px;
-    font-weight: 600;
-    font-size: 0.9375rem;
+    color: var(--color-text-muted);
     cursor: pointer;
-    transition: opacity 0.2s ease;
+    transition: color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   button:hover {
-    opacity: 0.9;
+    color: var(--color-text);
   }
 
-  .form-note {
-    font-size: 0.8125rem;
-    color: var(--color-text-muted);
-    margin-bottom: 0;
+  button svg {
+    width: 16px;
+    height: 16px;
   }
 
-  @media (max-width: 640px) {
-    .input-group {
+  @media (max-width: 768px) {
+    .newsletter-content {
       flex-direction: column;
+      align-items: stretch;
+      gap: 1.5rem;
+    }
+    
+    .newsletter-text {
+      max-width: 100%;
     }
 
-    button {
-      width: 100%;
+    .signup-form {
+      max-width: 100%;
     }
   }
 </style>
