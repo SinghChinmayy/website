@@ -14,14 +14,35 @@
       <p class="newsletter-sub">Get insights on software architecture and engineering leadership.</p>
     </div>
     
-    <form class="signup-form" onsubmit="event.preventDefault(); alert('Thanks for subscribing! (This is a demo)');">
+    <form 
+      class="signup-form" 
+      action="https://chinmaysingh.us16.list-manage.com/subscribe/post" 
+      method="POST" 
+      target="_blank"
+      novalidate
+    >
+      <input type="hidden" name="u" value="d16ebe6ee210f90bc2f6cae66" />
+      <input type="hidden" name="id" value="678ed84f8c" />
+      <input type="hidden" name="f_id" value="002f1ee1f0" />
+
       <div class="input-group">
         <input 
           type="email" 
+          name="EMAIL"
           placeholder="your@email.com" 
           aria-label="Email address"
           required
         />
+        
+        <!-- Bot trap (do not remove) -->
+        <div style="position: absolute; left: -5000px;" aria-hidden="true">
+          <input
+            type="text"
+            name="b_d16ebe6ee210f90bc2f6cae66_678ed84f8c"
+            tabindex="-1"
+          />
+        </div>
+
         <button type="submit" aria-label="Subscribe">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
         </button>

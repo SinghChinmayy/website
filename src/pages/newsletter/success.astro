@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = "Subscribed to Updates";
+const description = "You have successfully subscribed to the newsletter.";
+---
+
+<BaseLayout title={title} description={description}>
+  <main class="success-container">
+    <div class="content">
+      <div class="icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+          <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+      </div>
+      
+      <h1>Almost there!</h1>
+      
+      <p class="lead">Please check your inbox to confirm your subscription.</p>
+      
+      <p class="sub-text">
+        To protect your privacy, we use a double opt-in system. You won't receive any emails until you click the confirmation link we just sent to your address.
+      </p>
+
+      <a href="/" class="button">Return to Home</a>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .success-container {
+    padding: 6rem 1rem;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .content {
+    max-width: 500px;
+    text-align: center;
+  }
+
+  .icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    margin-bottom: 2rem;
+    color: var(--color-accent, #3b82f6);
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    color: var(--color-text);
+  }
+
+  .lead {
+    font-size: 1.25rem;
+    color: var(--color-text);
+    margin-bottom: 1rem;
+  }
+
+  .sub-text {
+    color: var(--color-text-secondary);
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+  }
+
+  .button {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--color-text);
+    color: var(--color-bg);
+    border-radius: 9999px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.2s;
+  }
+
+  .button:hover {
+    opacity: 0.9;
+  }
+</style>
