@@ -1,0 +1,91 @@
+---
+title: "C++ CLI Tool – FFmpeg Wrapper"
+role: "Developer"
+year: 2024
+duration: "2 months"
+teamSize: 1
+outcomeSummary: "Built a modular C++ command-line application that abstracts FFmpeg operations, providing a cleaner interface for media workflow automation"
+overview: "Developed a C++ command-line tool to simplify and orchestrate FFmpeg-based media processing workflows. The tool abstracts complex FFmpeg commands behind a more intuitive interface while maintaining flexibility for advanced use cases."
+problem: "FFmpeg is powerful but has a steep learning curve and complex command-line syntax. For repetitive media processing tasks, writing long FFmpeg commands is error-prone and hard to maintain. I needed a tool that could abstract common operations while still allowing access to FFmpeg's full capabilities when needed."
+constraints:
+  - "Must work in Linux environment"
+  - "Should maintain FFmpeg's performance characteristics"
+  - "Code must be maintainable and extensible"
+  - "Error handling must be clear and actionable"
+  - "No external dependencies beyond standard library and FFmpeg"
+approach: "Designed a modular architecture with separate components for argument parsing, process execution, and error handling. Used C++'s object-oriented features to create a clean abstraction layer over FFmpeg's command-line interface. Implemented structured error handling to provide meaningful feedback when operations fail."
+keyDecisions:
+  - decision: "Use C++ over Python or Bash"
+    reasoning: "C++ provides better performance for process execution and system calls. It also offers stronger type safety and better integration with system-level operations. The learning opportunity was also valuable for systems programming."
+    alternatives:
+      - "Python with subprocess (easier but slower)"
+      - "Bash script (less maintainable)"
+      - "Rust (learning curve too steep for timeline)"
+  - decision: "Abstract common operations into high-level functions"
+    reasoning: "Most users need common operations (convert format, resize, extract audio) more than they need full FFmpeg flexibility. Providing both high-level abstractions and low-level access gives the best of both worlds."
+    alternatives:
+      - "Thin wrapper around FFmpeg (less value)"
+      - "GUI application (not suitable for CLI workflows)"
+  - decision: "Implement structured error handling"
+    reasoning: "FFmpeg errors can be cryptic. Providing clear error messages and context helps users understand what went wrong and how to fix it. This improves the developer experience significantly."
+    alternatives:
+      - "Pass through FFmpeg errors directly (poor UX)"
+      - "Generic error messages (not helpful)"
+techStack:
+  - "C++"
+  - "FFmpeg"
+  - "Linux"
+  - "Make/CMake"
+impact:
+  metrics:
+    - label: "Code Maintainability"
+      value: "Modular architecture with clear separation of concerns"
+    - label: "Error Clarity"
+      value: "Structured error messages vs raw FFmpeg output"
+    - label: "Extensibility"
+      value: "Easy to add new operations via plugin-like architecture"
+  qualitative: "This project improved my understanding of systems programming, process management, and error handling in C++. The modular design makes it easy to extend with new features. It also serves as a practical tool for my own media processing needs."
+learnings:
+  - "Good abstractions reduce complexity without sacrificing power"
+  - "Error handling is as important as the happy path - users need clear feedback"
+  - "Modular design pays off when extending functionality"
+  - "C++ system programming requires careful memory and resource management"
+  - "Testing CLI tools requires different strategies than GUI applications"
+featured: true
+status: completed
+order: 2
+---
+
+## Architecture & Design
+
+The tool follows a modular design with three main components:
+
+1. **Argument Parser**: Validates and structures command-line arguments
+2. **Process Executor**: Manages FFmpeg process execution with proper error handling
+3. **Operation Handlers**: High-level functions for common media operations
+
+This separation allows each component to be tested and modified independently.
+
+## Error Handling Strategy
+
+One of the key challenges was making FFmpeg's errors more actionable. The tool:
+- Captures FFmpeg's stderr output
+- Parses common error patterns
+- Provides context about what operation was attempted
+- Suggests potential fixes when possible
+
+This transforms cryptic FFmpeg errors into actionable feedback.
+
+## Extensibility
+
+The architecture makes it easy to add new operations. Each operation is a self-contained module that can be added without modifying core functionality. This design principle - extensibility without modification - is valuable in larger codebases too.
+
+## Systems Programming Insights
+
+Working on this project taught me:
+- Process management and inter-process communication
+- Proper resource cleanup (file handles, processes)
+- Cross-platform considerations (even within Linux)
+- Performance implications of abstraction layers
+
+This project demonstrates that even small tools can teach valuable systems programming concepts.

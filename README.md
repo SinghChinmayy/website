@@ -61,7 +61,6 @@ Purpose-built collections for engineering professionals.
 - **Decisions** — ADR-style technical decision logs
 - **Journey** — Career milestones, transitions, and key learnings
 - **Writing** — Technical articles with auto-generated TOC
-- **Speaking** — Talks, podcasts, and workshop materials
 - **Tools** — Tech stack and development environment
 - **Testimonials** — Peer and client recommendations
 

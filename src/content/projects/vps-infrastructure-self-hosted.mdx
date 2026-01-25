@@ -1,0 +1,99 @@
+---
+title: "VPS Infrastructure & Self-Hosted Services Platform"
+role: "Infrastructure Engineer"
+year: 2024
+duration: "Ongoing"
+outcomeSummary: "Designed and deployed a production-ready self-hosted infrastructure platform running multiple services with secure remote access and automated HTTPS"
+overview: "Built a self-managed VPS and ARM-based Linux infrastructure to host multiple containerized services. The platform demonstrates real-world systems engineering skills including networking, security, reverse proxying, and infrastructure lifecycle management."
+problem: "I needed a platform to run self-hosted services (like personal cloud storage, development tools, and monitoring) but wanted to learn infrastructure management hands-on. Commercial solutions were either too expensive or didn't provide the learning experience I was seeking. I also needed secure remote access and proper domain-based routing."
+constraints:
+  - "Limited budget - needed cost-effective VPS hosting"
+  - "Must support ARM-based devices for homelab expansion"
+  - "Security-first approach - all services must be properly isolated"
+  - "Zero-downtime deployments when possible"
+  - "Self-maintained - no managed services to learn the full stack"
+approach: "Started with a Debian/Ubuntu VPS and built the infrastructure from the ground up. Used Docker and Docker Compose for containerization, Caddy as a reverse proxy for automated HTTPS, and WireGuard/Tailscale for secure remote access. Implemented proper networking, firewall rules, and monitoring to ensure reliability and security."
+keyDecisions:
+  - decision: "Use Caddy over Nginx for reverse proxy"
+    reasoning: "Caddy provides automatic HTTPS certificate management via Let's Encrypt, reducing operational overhead. Its configuration is simpler and more declarative, which is important for a solo-maintained infrastructure."
+    alternatives:
+      - "Nginx with manual Let's Encrypt setup"
+      - "Traefik with Docker labels"
+      - "Cloudflare Tunnel (managed solution)"
+  - decision: "Implement dual VPN solutions (WireGuard + Tailscale)"
+    reasoning: "WireGuard provides low-latency, high-performance VPN for direct access, while Tailscale offers mesh networking and easier device management. This redundancy ensures access even if one solution has issues."
+    alternatives:
+      - "WireGuard only"
+      - "Tailscale only"
+      - "OpenVPN (legacy, higher overhead)"
+  - decision: "Use Docker Compose for orchestration"
+    reasoning: "Docker Compose provides sufficient orchestration for a single-server setup without the complexity of Kubernetes. It's declarative, version-controlled, and easy to understand and maintain."
+    alternatives:
+      - "Kubernetes (overkill for single server)"
+      - "Podman (less ecosystem support)"
+      - "Manual service management (not scalable)"
+  - decision: "Use Cloudflare for DNS management"
+    reasoning: "Cloudflare provides free DNS with good performance, DDoS protection, and easy API access for automation. It integrates well with Caddy for DNS-01 challenge validation."
+    alternatives:
+      - "Route53 (AWS, more expensive)"
+      - "Namecheap DNS (less features)"
+      - "Self-hosted DNS (too complex)"
+techStack:
+  - "Linux (Debian/Ubuntu)"
+  - "Docker"
+  - "Docker Compose"
+  - "Caddy"
+  - "WireGuard"
+  - "Tailscale"
+  - "Portainer"
+  - "Cloudflare"
+  - "Bash Scripting"
+impact:
+  metrics:
+    - label: "Services Hosted"
+      value: "10+ containerized services"
+    - label: "Uptime"
+      value: "99%+ (self-maintained)"
+    - label: "HTTPS Automation"
+      value: "100% automated certificate renewal"
+    - label: "Remote Access Latency"
+      value: "<50ms via WireGuard"
+  qualitative: "This project has been invaluable for learning real-world infrastructure management. I've gained hands-on experience with networking, security, containerization, and system administration. The platform serves as both a practical tool and a learning environment for production-like scenarios. It's taught me the importance of monitoring, backups, and disaster recovery planning."
+learnings:
+  - "Infrastructure as Code principles apply even to personal projects - version control everything"
+  - "Security is not optional - proper firewall rules, VPN access, and service isolation are essential"
+  - "Automation reduces operational burden - automated HTTPS and backups save significant time"
+  - "Monitoring and logging are crucial for debugging production issues"
+  - "Documentation is essential - future you will thank present you for good notes"
+  - "Start simple, iterate - began with basic services and gradually added complexity"
+featured: true
+status: ongoing
+order: 1
+---
+
+## Architecture Overview
+
+The infrastructure follows a layered approach: network security at the edge (firewall, VPN), reverse proxy for routing and TLS termination (Caddy), and containerized services with proper isolation. Each service runs in its own Docker container with minimal privileges.
+
+## Security Implementation
+
+Security was a primary concern from day one. I implemented:
+- **Firewall rules**: Only necessary ports exposed, everything else blocked
+- **VPN-only access**: Services not exposed to public internet, accessed via WireGuard/Tailscale
+- **Container isolation**: Each service runs in its own network namespace
+- **Regular updates**: Automated security updates for the host system
+- **Backup strategy**: Regular backups of critical data and configurations
+
+## Networking & Routing
+
+Caddy handles all incoming requests, automatically obtaining and renewing SSL certificates. It routes traffic based on domain names to the appropriate Docker containers. This setup allows me to run multiple services on the same server while maintaining clean separation.
+
+## Lessons from Production-Like Operations
+
+Running this infrastructure has taught me valuable lessons about:
+- **Incident response**: When services go down, systematic debugging is essential
+- **Capacity planning**: Monitoring resource usage helps prevent unexpected failures
+- **Change management**: Testing changes in isolation before applying to production
+- **Documentation**: Good documentation makes troubleshooting much faster
+
+This project demonstrates that you don't need a large team or budget to learn production-grade infrastructure management. The principles scale from personal projects to enterprise systems.

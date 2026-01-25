@@ -109,31 +109,6 @@ Your article content in Markdown.
 Content here...
 ```
 
-## Speaking Template
-
-`src/content/speaking/your-talk-name.mdx`
-
-```yaml
----
-title: "Talk Title"
-description: "Brief description of what the talk covers"
-event: "Event or Conference Name"
-date: 2024-01-15
-location: "City, Country"
-type: "conference"
-slides: "https://speakerdeck.com/your-slides"
-video: "https://youtube.com/watch?v=xxx"
-duration: "30 min"
-topics:
-  - "Topic 1"
-featured: false
----
-
-Optional talk abstract.
-```
-
-**Type options:** `conference`, `meetup`, `podcast`, `workshop`, `webinar`
-
 ## Testimonial Template
 
 `src/content/testimonials/person-name.mdx`
@@ -182,6 +157,5 @@ Optional additional notes.
 | Decision | `decisions/` | title, date, context, decision, alternatives, reasoning |
 | Journey | `journey/` | date, title, type, description |
 | Writing | `writing/` | title, description, publishDate |
-| Speaking | `speaking/` | title, event, date, location, type |
 | Testimonial | `testimonials/` | name, role, company, quote, date |
 | Uses | `uses/` | category, items, order |

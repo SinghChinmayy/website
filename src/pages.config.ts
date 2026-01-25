@@ -99,16 +99,6 @@ export const pagesConfig = {
   },
 
   /**
-   * Speaking engagements page (/speaking)
-   */
-  speaking: {
-    title: 'Speaking - Talks & Presentations',
-    description: 'Conference talks, meetup presentations, podcast appearances, and workshops on software engineering, architecture, and technical leadership.',
-    heading: 'Speaking',
-    intro: 'I regularly speak at conferences, meetups, and on podcasts about software architecture, engineering practices, and technical leadership. Here\'s a collection of my talks and presentations.',
-  },
-  
-  /**
    * Uses/tools page (/uses)
    */
   uses: {

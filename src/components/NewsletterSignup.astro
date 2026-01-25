@@ -1,0 +1,111 @@
+---
+/**
+ * NewsletterSignup Component
+ * 
+ * A clean, simple newsletter signup form that encourages users to subscribe.
+ * Currently serves as a UI implementation that can be connected to a provider later.
+ */
+---
+
+<section class="newsletter-signup">
+  <div class="newsletter-content">
+    <h3>Join the Newsletter</h3>
+    <p>Get insights on software architecture and engineering leadership delivered to your inbox.</p>
+    
+    <form class="signup-form" onsubmit="event.preventDefault(); alert('Thanks for subscribing! (This is a demo)');">
+      <div class="input-group">
+        <input 
+          type="email" 
+          placeholder="your@email.com" 
+          aria-label="Email address"
+          required
+        />
+        <button type="submit">Subscribe</button>
+      </div>
+      <p class="form-note">No spam, unsubscribe at any time.</p>
+    </form>
+  </div>
+</section>
+
+<style>
+  .newsletter-signup {
+    padding: 3rem 0;
+    border-top: 1px solid var(--color-border);
+    margin-bottom: 2rem;
+  }
+
+  .newsletter-content {
+    max-width: 600px;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--color-text);
+  }
+
+  p {
+    color: var(--color-text-secondary);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  .signup-form {
+    max-width: 450px;
+  }
+
+  .input-group {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  input[type="email"] {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-size: 0.9375rem;
+    transition: border-color 0.2s ease;
+  }
+
+  input[type="email"]:focus {
+    outline: none;
+    border-color: var(--color-text);
+  }
+
+  button {
+    padding: 0.75rem 1.25rem;
+    background: var(--color-text);
+    color: var(--color-bg);
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+  }
+
+  button:hover {
+    opacity: 0.9;
+  }
+
+  .form-note {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 640px) {
+    .input-group {
+      flex-direction: column;
+    }
+
+    button {
+      width: 100%;
+    }
+  }
+</style>

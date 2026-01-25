@@ -1,0 +1,104 @@
+---
+title: "Identity and Access Management (IAM) System"
+role: "Full-Stack Developer"
+year: 2024
+duration: "3 months"
+teamSize: 3
+outcomeSummary: "Designed and implemented a complete IAM system with user authentication, role-based access control, and database-driven authorization logic"
+overview: "Built a comprehensive Identity and Access Management system as a college project, working across the full software development lifecycle. The system handles user authentication, authorization, and access control with a database-driven approach."
+problem: "The project required building a secure authentication and authorization system that could manage users, roles, and permissions. We needed to demonstrate understanding of security principles, database design, and full-stack development while delivering a working system."
+constraints:
+  - "Academic timeline - 3 months for complete implementation"
+  - "Must demonstrate security best practices"
+  - "Full-stack implementation required (frontend + backend + database)"
+  - "Team collaboration across different components"
+  - "Learning-focused - understanding concepts was as important as delivery"
+approach: "Started with database schema design, focusing on proper normalization and security considerations. Implemented backend authentication logic with password hashing, session management, and role-based access control. Built a frontend interface for user management and access control. Integrated all components with proper error handling and testing."
+keyDecisions:
+  - decision: "Use PostgreSQL as primary database"
+    reasoning: "PostgreSQL provides robust ACID guarantees, excellent support for complex queries, and strong security features. It's also industry-standard, making this experience transferable to real-world projects."
+    alternatives:
+      - "MySQL (similar capabilities)"
+      - "SQLite (too limited for multi-user system)"
+      - "NoSQL (not suitable for relational auth data)"
+  - decision: "Implement role-based access control (RBAC)"
+    reasoning: "RBAC is a well-understood pattern that scales well. It separates user identity from permissions, making the system more maintainable. It's also a common pattern in enterprise systems."
+    alternatives:
+      - "Attribute-based access control (more complex)"
+      - "Simple user-permission mapping (doesn't scale)"
+  - decision: "Hash passwords using bcrypt"
+    reasoning: "Bcrypt is a proven password hashing algorithm that's resistant to brute-force attacks. It's the industry standard and demonstrates understanding of security best practices."
+    alternatives:
+      - "SHA-256 (not designed for passwords)"
+      - "Plain text (security risk)"
+      - "Argon2 (newer but less widely supported)"
+  - decision: "Separate frontend and backend"
+    reasoning: "Separation of concerns makes the system more maintainable and allows team members to work in parallel. It also demonstrates understanding of modern web architecture."
+    alternatives:
+      - "Monolithic application (simpler but less flexible)"
+techStack:
+  - "Python"
+  - "HTML"
+  - "CSS"
+  - "JavaScript"
+  - "PostgreSQL"
+  - "MySQL"
+impact:
+  metrics:
+    - label: "Database Tables"
+      value: "8 normalized tables for users, roles, permissions"
+    - label: "Security Features"
+      value: "Password hashing, session management, RBAC"
+    - label: "Components Integrated"
+      value: "Frontend, backend, and database working together"
+    - label: "Team Collaboration"
+      value: "Successfully integrated work from 3 team members"
+  qualitative: "This project provided hands-on experience with the complete software development lifecycle. I learned database design, security principles, and full-stack integration. Working in a team taught me about code integration, debugging across components, and issue resolution. The project demonstrated that security is not an afterthought - it must be designed in from the beginning."
+learnings:
+  - "Database schema design is foundational - get it right early"
+  - "Security requires careful consideration at every layer"
+  - "Integration is harder than individual components - plan for it"
+  - "Testing across the full stack reveals issues unit tests miss"
+  - "Team collaboration requires clear interfaces and communication"
+  - "Error handling and user feedback are crucial for security systems"
+featured: false
+status: completed
+order: 3
+---
+
+## Database Schema Design
+
+The database design was critical to the project's success. I focused on:
+- **Normalization**: Properly normalized tables to reduce redundancy
+- **Relationships**: Clear foreign key relationships between users, roles, and permissions
+- **Indexing**: Strategic indexes for performance on common queries
+- **Security**: No sensitive data stored in plain text
+
+This foundation made the rest of the system much easier to build.
+
+## Security Implementation
+
+Security was a key learning area:
+- **Password hashing**: Used bcrypt with appropriate cost factors
+- **Session management**: Secure session tokens with expiration
+- **SQL injection prevention**: Parameterized queries throughout
+- **Input validation**: Both client-side and server-side validation
+- **Access control**: Enforced at both application and database levels
+
+## Full-Stack Integration
+
+Integrating frontend, backend, and database taught me:
+- **API design**: Clear interfaces between components
+- **Error propagation**: Handling errors across the stack
+- **State management**: Managing user sessions and permissions
+- **Debugging**: Tracing issues across multiple layers
+
+## Team Collaboration Lessons
+
+Working with a team on this project highlighted:
+- **Interface contracts**: Clear APIs prevent integration issues
+- **Version control**: Proper Git workflow is essential
+- **Communication**: Regular sync-ups prevent divergence
+- **Code review**: Catching issues before integration saves time
+
+This project was valuable not just for the technical skills, but for the experience of delivering a complete system from design to deployment.

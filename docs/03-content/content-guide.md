@@ -163,32 +163,6 @@ draft: false              # Set true to hide from production
 
 ---
 
-## Speaking
-
-Location: `src/content/speaking/`
-
-Conference talks, meetup presentations, podcast appearances.
-
-```yaml
----
-title: "Talk Title"
-description: "Talk description"
-event: "Event Name"
-date: 2024-01-15
-location: "City, Country"  # or "Online"
-type: "conference"         # Options: conference, meetup, podcast, workshop, webinar
-eventUrl: ""               # Optional
-slides: ""                 # Optional
-video: ""                  # Optional
-duration: "45 min"         # Optional
-topics:                    # Optional
-  - "Topic 1"
-featured: false
----
-```
-
----
-
 ## Uses
 
 Location: `src/content/uses/`

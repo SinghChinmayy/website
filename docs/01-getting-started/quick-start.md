@@ -73,8 +73,8 @@ rm -rf src/content/*/*.mdx
 Or remove by category:
 
 ```bash
-rm -rf src/content/speaking/*    # If you don't do presentations
 rm -rf src/content/decisions/*   # If you don't want decision logs
+rm -rf src/content/testimonials/* # If you don't have testimonials
 ```
 
 After removing, either:

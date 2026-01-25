@@ -11,7 +11,6 @@ All cards extend `BaseCard.astro` for consistent styling.
 | ProjectCard | `src/components/ProjectCard.astro` | Case study cards |
 | ArticleCard | `src/components/ArticleCard.astro` | Blog post cards |
 | DecisionCard | `src/components/DecisionCard.astro` | Decision log cards |
-| TalkCard | `src/components/TalkCard.astro` | Speaking cards |
 
 ### Modifying ProjectCard
 
@@ -231,6 +230,7 @@ import SEO from '../components/SEO.astro';
 ## Removing Sections
 
 1. Remove from navigation in `src/config.ts`
-2. Delete the page file (e.g., `src/pages/speaking.astro`)
-3. Delete the content folder (e.g., `src/content/speaking/`)
+2. Delete the page file (e.g., `src/pages/[section].astro`)
+3. Delete the content folder (e.g., `src/content/[section]/`)
 4. Remove the collection from `src/content.config.ts`
+5. Remove page config from `src/pages.config.ts` (if applicable)

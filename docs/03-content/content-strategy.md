@@ -31,11 +31,6 @@ order: 1         # Lower number = appears first
 - Choose different relationship types (manager, peer, report)
 - Prioritize specific praise over generic endorsements
 
-### Speaking
-
-- Feature talks with recordings or slides available
-- Prioritize larger events or well-known conferences
-
 ## Ordering Content
 
 The `order` field determines display sequence. Lower numbers appear first.
@@ -58,7 +53,6 @@ order: 5   # Third position
 | Decisions | 2 | 4-6 | 10 |
 | Journey | 3 | 5-10 | 15 |
 | Writing | 0 | 3-5 | No limit |
-| Speaking | 0 | 2-4 | No limit |
 | Testimonials | 2 | 3-5 | 8 |
 | Uses | 1 | 1 | 1 |
 

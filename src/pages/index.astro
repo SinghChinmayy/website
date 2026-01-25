@@ -37,7 +37,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import SEO from '../components/SEO.astro';
 import StructuredData from '../components/StructuredData.astro';
 import ForwardLink from '../components/ForwardLink.astro';
-import Testimonials from '../components/Testimonials.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import NewsletterSignup from '../components/NewsletterSignup.astro';
 import { getCollection } from 'astro:content';
 import { siteConfig } from '../config';
 
@@ -71,6 +72,16 @@ const allDecisions = await getCollection('decisions');
 const recentDecisions = allDecisions
   .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
   .slice(0, 2);
+
+/**
+ * Queries and filters writing for recent posts section
+ */
+const allPosts = await getCollection('writing', ({ data }) => {
+  return data.draft !== true;
+});
+const recentPosts = allPosts
+  .sort((a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime())
+  .slice(0, 3);
 ---
 
 <BaseLayout>
@@ -160,8 +171,31 @@ const recentDecisions = allDecisions
       )}
     </section>
 
-    <!-- Testimonials -->
-    <Testimonials limit={3} />
+    <!-- Recent Writing -->
+    <section class="recent-writing">
+      <div class="section-header">
+        <h2>Recent Writing</h2>
+        <ForwardLink href="/writing" text="View all" variant="muted" />
+      </div>
+      
+      {recentPosts.length > 0 ? (
+        <div class="writing-grid">
+          {recentPosts.map((post) => (
+            <ArticleCard
+              title={post.data.title}
+              slug={post.id}
+              description={post.data.description}
+              publishDate={post.data.publishDate}
+              tags={post.data.tags}
+            />
+          ))}
+        </div>
+      ) : (
+        <p class="no-content">No articles published yet.</p>
+      )}
+    </section>
+
+
 
     <!-- What I Think About -->
     <section class="thinking">
@@ -171,6 +205,8 @@ const recentDecisions = allDecisions
       </p>
     </section>
 
+    <NewsletterSignup />
+    
     <!-- CTA -->
     <section class="cta">
       <h2>Let's Work Together</h2>
@@ -419,6 +455,19 @@ const recentDecisions = allDecisions
       line-height: 1.9;
       color: var(--color-text-secondary);
       max-width: 680px;
+    }
+
+    .writing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 5rem;
+    }
+
+    .no-content {
+      color: var(--color-text-muted);
+      font-style: italic;
+      padding: 1rem 0;
     }
 
     .cta {

@@ -13,7 +13,6 @@ Overview of the codebase organization.
 │   │   ├── decisions/    # Decision logs
 │   │   ├── journey/      # Career timeline
 │   │   ├── writing/      # Blog posts
-│   │   ├── speaking/     # Talks & presentations
 │   │   ├── uses/         # Tools & setup
 │   │   └── testimonials/ # Recommendations
 │   ├── layouts/          # Page layouts
@@ -78,7 +77,6 @@ Each content type has its own folder in `src/content/` with schema validation de
 | decisions | `src/content/decisions/` | Technical decisions |
 | journey | `src/content/journey/` | Career timeline |
 | writing | `src/content/writing/` | Blog posts |
-| speaking | `src/content/speaking/` | Talks & presentations |
 | uses | `src/content/uses/` | Tools & setup |
 | testimonials | `src/content/testimonials/` | Recommendations |
 
