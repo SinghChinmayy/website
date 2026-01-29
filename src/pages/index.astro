@@ -147,6 +147,25 @@ const recentPosts = allPosts
       </div>
     </section>
 
+
+
+
+
+    <!-- Latest Updates -->
+    <section class="latest-updates">
+      <div class="section-header">
+        <h2>Latest Updates</h2>
+        <a href="https://twitter.com/0xchinmayy" target="_blank" rel="noopener noreferrer" class="twitter-link">
+          @0xchinmayy
+        </a>
+      </div>
+      
+      <div class="twitter-feed">
+        <a class="twitter-timeline" data-lang="en" data-theme="dark" data-height="500" data-chrome="noheader nofooter noborders transparent" href="https://twitter.com/0xchinmayy?ref_src=twsrc%5Etfw">Tweets by 0xchinmayy</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      </div>
+    </section>
+
+    {/*
     <!-- Recent Decisions -->
     <section class="recent-decisions">
       <div class="section-header">
@@ -172,6 +191,10 @@ const recentPosts = allPosts
         <p class="no-decisions">No decisions documented yet.</p>
       )}
     </section>
+    */}
+
+
+
 
     <!-- Recent Writing -->
     <section class="recent-writing">
@@ -493,6 +516,31 @@ const recentPosts = allPosts
       color: var(--color-text-muted);
       font-style: italic;
       padding: 1rem 0;
+    }
+
+    .latest-updates {
+      margin-bottom: 4rem;
+      padding-bottom: 5rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .twitter-link {
+        font-size: 0.9375rem;
+        color: var(--color-text-secondary);
+        text-decoration: none;
+    }
+
+    .twitter-link:hover {
+        color: var(--color-text);
+        text-decoration: underline;
+    }
+    
+    .twitter-feed {
+        border: 1px solid var(--color-border);
+        border-radius: 12px;
+        overflow: hidden;
+        background: var(--color-bg-secondary);
+        min-height: 500px;
     }
 
     .cta {
