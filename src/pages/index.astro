@@ -541,6 +541,27 @@ const recentPosts = allPosts
         overflow: hidden;
         background: var(--color-bg-secondary);
         min-height: 500px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .twitter-feed .twitter-timeline {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        background: var(--color-bg-elevated);
+        border: 1px solid var(--color-border);
+        border-radius: 9999px;
+        color: var(--color-text);
+        font-weight: 500;
+        text-decoration: none;
+        transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .twitter-feed .twitter-timeline:hover {
+        background: var(--color-text);
+        color: var(--color-bg);
+        transform: translateY(-1px);
     }
 
     .cta {
