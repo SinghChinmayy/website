@@ -22,6 +22,17 @@ export default config({
             path: 'src/content/cms/settings',
             format: { data: 'json' },
             schema: {
+                nav: fields.array(
+                    fields.object({
+                        label: fields.text({ label: 'Label' }),
+                        href: fields.text({ label: 'URL (e.g., /projects, https://github.com)' }),
+                        show: fields.checkbox({ label: 'Show in Navigation', defaultValue: true }),
+                    }),
+                    {
+                        label: 'Navigation Items',
+                        itemLabel: (props) => `${props.fields.label.value} ${props.fields.show.value ? '✅' : '❌'}`,
+                    }
+                ),
                 site: fields.object({
                     url: fields.text({ label: 'Site URL' }),
                     language: fields.text({ label: 'Language (ISO code)' }),
@@ -52,16 +63,6 @@ export default config({
                         publicPath: '/images/',
                     }),
                 }, { label: 'CMS Dashboard Configuration' }),
-                nav: fields.array(
-                    fields.object({
-                        label: fields.text({ label: 'Label' }),
-                        href: fields.text({ label: 'Href' }),
-                    }),
-                    {
-                        label: 'Navigation Items',
-                        itemLabel: (props) => props.fields.label.value,
-                    }
-                ),
             },
         }),
         contact: singleton({

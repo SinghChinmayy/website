@@ -33,17 +33,19 @@ const writingArticles = await getCollection('writing', ({ data }) => {
 const hasWriting = writingArticles.length > 0;
 
 /**
- * Navigation items with Home prepended
+ * Navigation items managed via CMS
  */
-const navItems = [
-  { label: 'Home', href: '/' },
-  ...siteConfig.nav.filter(item => {
-    if (item.label === 'Writing') {
-      return hasWriting;
-    }
-    return true;
-  }),
-];
+const navItems = siteConfig.nav.filter(item => {
+  // Filter out items explicitly marked as hidden
+  if ('show' in item && item.show === false) {
+    return false;
+  }
+  
+  if (item.label === 'Writing') {
+    return hasWriting;
+  }
+  return true;
+});
 
 /**
  * Determines if a navigation item should be marked as active

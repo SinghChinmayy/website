@@ -1,20 +1,22 @@
 ---
-title: "Making Code Reviews Actually Effective"
-description: "How to transform code reviews from a bottleneck into a tool for knowledge sharing, quality improvement, and team growth."
+title: Making Code Reviews Actually Effective
+description: >-
+  How to transform code reviews from a bottleneck into a tool for knowledge
+  sharing, quality improvement, and team growth.
 publishDate: 2025-07-24
 tags:
-  - "code-review"
-  - "team-practices"
-  - "engineering-culture"
-draft: true
+  - code-review
+  - team-practices
+  - engineering-culture
+draft: false
 ---
-
 ## Introduction
 
 Code reviews are one of the most valuable practices in software development—when done well. But too often they become:
-- A bottleneck that slows delivery
-- A source of conflict and frustration
-- A checkbox exercise that catches nothing
+
+* A bottleneck that slows delivery
+* A source of conflict and frustration
+* A checkbox exercise that catches nothing
 
 This guide covers how to make code reviews genuinely effective.
 
@@ -31,9 +33,9 @@ Before optimizing the process, align on why you're doing reviews:
 
 ### Secondary Goals
 
-- Document decisions (PR descriptions become documentation)
-- Spread ownership (multiple people understand each change)
-- Enforce standards (automated where possible)
+* Document decisions (PR descriptions become documentation)
+* Spread ownership (multiple people understand each change)
+* Enforce standards (automated where possible)
 
 ## As an Author
 
@@ -42,12 +44,13 @@ Before optimizing the process, align on why you're doing reviews:
 **Self-review first**. Read through your own diff as if you were the reviewer. You'll catch obvious issues and save everyone time.
 
 **Write a good PR description**:
-- What problem does this solve?
-- Why this approach?
-- What alternatives did you consider?
-- How can the reviewer test this?
 
-**Keep PRs small**. Aim for < 400 lines of changes. Large PRs get superficial reviews.
+* What problem does this solve?
+* Why this approach?
+* What alternatives did you consider?
+* How can the reviewer test this?
+
+**Keep PRs small**. Aim for \< 400 lines of changes. Large PRs get superficial reviews.
 
 ```
 # Bad: "Implement user authentication"
@@ -61,9 +64,10 @@ Before optimizing the process, align on why you're doing reviews:
 ```
 
 **Make it easy to review**:
-- Separate refactoring from behavior changes
-- Include relevant tests
-- Add comments explaining non-obvious decisions
+
+* Separate refactoring from behavior changes
+* Include relevant tests
+* Add comments explaining non-obvious decisions
 
 ### Responding to Feedback
 
@@ -88,24 +92,28 @@ Before optimizing the process, align on why you're doing reviews:
 ### What to Look For
 
 **Correctness**
-- Does the code do what it's supposed to?
-- Are edge cases handled?
-- Are there potential bugs?
+
+* Does the code do what it's supposed to?
+* Are edge cases handled?
+* Are there potential bugs?
 
 **Design**
-- Is this the right approach?
-- Does it fit with the existing architecture?
-- Is it over-engineered or under-engineered?
+
+* Is this the right approach?
+* Does it fit with the existing architecture?
+* Is it over-engineered or under-engineered?
 
 **Readability**
-- Can you understand the code without the author explaining it?
-- Are names clear and descriptive?
-- Is the code well-organized?
+
+* Can you understand the code without the author explaining it?
+* Are names clear and descriptive?
+* Is the code well-organized?
 
 **Maintainability**
-- Will this be easy to modify in the future?
-- Are there tests?
-- Is it documented where necessary?
+
+* Will this be easy to modify in the future?
+* Are there tests?
+* Is it documented where necessary?
 
 ### What NOT to Focus On
 
@@ -130,14 +138,14 @@ Consider `validateUserInput()` to make the purpose clear."
 
 **Distinguish severity**. Make it clear what's blocking vs. optional:
 
-- 🔴 **Blocker**: Must fix before merging
-- 🟡 **Suggestion**: Would improve the code, but not required
-- 💭 **Question**: Seeking to understand, not necessarily requesting changes
-- 🎨 **Nitpick**: Minor style preference, feel free to ignore
+* 🔴 **Blocker**: Must fix before merging
+* 🟡 **Suggestion**: Would improve the code, but not required
+* 💭 **Question**: Seeking to understand, not necessarily requesting changes
+* 🎨 **Nitpick**: Minor style preference, feel free to ignore
 
 **Offer alternatives**. Don't just say what's wrong—show what could be better.
 
-```
+````
 # Instead of
 "This is inefficient"
 
@@ -148,50 +156,55 @@ operations into a single pass:
 ```typescript
 const { valid, invalid } = items.reduce(...)
 ```"
-```
+````
 
 ## Team Practices
 
 ### Set Expectations
 
 Document your team's code review standards:
-- Expected turnaround time
-- What requires review (all changes? just production code?)
-- Who can approve (anyone? specific reviewers?)
-- What's blocking vs. non-blocking
+
+* Expected turnaround time
+* What requires review (all changes? just production code?)
+* Who can approve (anyone? specific reviewers?)
+* What's blocking vs. non-blocking
 
 ### Automate What You Can
 
 Don't waste human attention on things machines can check:
-- Formatting (Prettier, Black)
-- Linting (ESLint, Pylint)
-- Type checking (TypeScript, mypy)
-- Test coverage
-- Security scanning
+
+* Formatting (Prettier, Black)
+* Linting (ESLint, Pylint)
+* Type checking (TypeScript, mypy)
+* Test coverage
+* Security scanning
 
 ### Rotate Reviewers
 
 Avoid having the same person review all PRs:
-- Spreads knowledge across the team
-- Prevents bottlenecks
-- Exposes everyone to different parts of the codebase
+
+* Spreads knowledge across the team
+* Prevents bottlenecks
+* Exposes everyone to different parts of the codebase
 
 ### Review Review Quality
 
 Periodically assess:
-- Are reviews catching bugs?
-- Are they taking too long?
-- Is feedback constructive?
-- Are people learning from reviews?
+
+* Are reviews catching bugs?
+* Are they taking too long?
+* Is feedback constructive?
+* Are people learning from reviews?
 
 ## Common Anti-Patterns
 
 ### The Rubber Stamp
 
 Approving without really reading. Usually caused by:
-- PRs that are too large
-- Time pressure
-- Trust without verification
+
+* PRs that are too large
+* Time pressure
+* Trust without verification
 
 **Fix**: Require meaningful comments on approvals.
 
@@ -216,19 +229,21 @@ PRs that sit for days without review.
 ## Measuring Effectiveness
 
 Track these metrics:
-- **Time to first review**: How long until someone looks at a PR?
-- **Time to merge**: Total time from PR creation to merge
-- **Review iterations**: How many rounds of feedback?
-- **Bugs caught**: Issues found in review vs. production
+
+* **Time to first review**: How long until someone looks at a PR?
+* **Time to merge**: Total time from PR creation to merge
+* **Review iterations**: How many rounds of feedback?
+* **Bugs caught**: Issues found in review vs. production
 
 ## Conclusion
 
 Effective code review is a skill that takes practice. The goal isn't perfection—it's continuous improvement of both the code and the team.
 
 Focus on:
-- Small, well-described PRs
-- Timely, constructive feedback
-- Automation for style and formatting
-- A culture of learning, not gatekeeping
+
+* Small, well-described PRs
+* Timely, constructive feedback
+* Automation for style and formatting
+* A culture of learning, not gatekeeping
 
 When done well, code reviews become one of the most valuable activities your team does—not just for code quality, but for knowledge sharing and team growth.

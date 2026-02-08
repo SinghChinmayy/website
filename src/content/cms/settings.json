@@ -1,36 +1,45 @@
 {
-    "site": {
-        "url": "https://chinmaysingh.me",
-        "language": "en",
-        "title": "Chinmay Singh - Portfolio",
-        "description": "Computer Science undergraduate specializing in systems engineering, cloud infrastructure, and backend development. Building real-world systems with a focus on reliability, security, and performance.",
-        "favicon": "~/assets/images/site/favicon.png"
+  "nav": [
+    {
+      "label": "Home",
+      "href": "/",
+      "show": true
     },
-    "author": {
-        "name": "Chinmay Singh",
-        "title": "Computer Science Undergraduate | Systems, Cloud & C++",
-        "bio": "Computer Science undergraduate with a strong interest in low-level systems, cloud infrastructure, and backend engineering. I enjoy building and operating real-world systems — from self-hosted server platforms to C++ command-line tools — with a focus on reliability, security, and performance.",
-        "location": "BLR, India"
+    {
+      "label": "Projects",
+      "href": "/projects",
+      "show": true
     },
-    "cms": {
-        "brandName": "Chinmay Singh"
+    {
+      "label": "Writing",
+      "href": "/writing",
+      "show": true
     },
-    "nav": [
-        {
-            "label": "Projects",
-            "href": "/projects"
-        },
-        {
-            "label": "Writing",
-            "href": "/writing"
-        },
-        {
-            "label": "Contact",
-            "href": "/contact"
-        },
-        {
-            "label": "CV",
-            "href": "/journey"
-        }
-    ]
+    {
+      "label": "Contact",
+      "href": "/contact",
+      "show": true
+    },
+    {
+      "label": "CV",
+      "href": "/journey",
+      "show": true
+    }
+  ],
+  "site": {
+    "url": "https://chinmaysingh.me",
+    "language": "en",
+    "title": "Chinmay Singh - Portfolio",
+    "description": "Computer Science undergraduate specializing in systems engineering, cloud infrastructure, and backend development. Building real-world systems with a focus on reliability, security, and performance.",
+    "favicon": "~/assets/images/site/favicon.png"
+  },
+  "author": {
+    "name": "Chinmay Singh",
+    "title": "Computer Science Undergraduate | Systems, Cloud & C++",
+    "bio": "Computer Science undergraduate with a strong interest in low-level systems, cloud infrastructure, and backend engineering. I enjoy building and operating real-world systems — from self-hosted server platforms to C++ command-line tools — with a focus on reliability, security, and performance.",
+    "location": "BLR, India"
+  },
+  "cms": {
+    "brandName": "Chinmay Singh"
+  }
 }
