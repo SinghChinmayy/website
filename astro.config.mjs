@@ -25,6 +25,7 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import react from '@astrojs/react';
 import keystatic from '@keystatic/astro';
+import cloudflare from '@astrojs/cloudflare';
 
 /**
  * Load environment variables from .env file
@@ -43,18 +44,29 @@ const { SITE_URL } = loadEnv(process.env.NODE_ENV || 'production', process.cwd()
  */
 export default defineConfig({
   /**
-   * Output mode: Static Site Generation (SSG)
+   * Output mode: Static Site Generation with server routes support
    * 
-   * Generates static HTML files at build time for optimal performance
-   * and hosting flexibility. All pages are pre-rendered.
+   * In Astro v5+, 'static' mode supports both static generation and
+   * server-side rendering for specific routes (e.g., Keystatic CMS).
+   * Most pages are pre-rendered at build time for optimal performance.
    */
   output: 'static',
+
+  /**
+   * Cloudflare adapter
+   * 
+   * Enables deployment to Cloudflare Pages with support for server-side
+   * rendering where needed (e.g., Keystatic CMS routes).
+   */
+  adapter: cloudflare(),
 
   /**
    * Astro integrations
    * 
    * - MDX: Enables MDX support for rich content authoring with JSX components
    * - Sitemap: Automatically generates sitemap.xml for search engines
+   * - React: Enables React components in Astro
+   * - Keystatic: Headless CMS for content management
    */
   integrations: [
     mdx(),
