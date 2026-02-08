@@ -1,0 +1,71 @@
+---
+title: "Learning ML"
+description: "My experience learning Machine Learning"
+publishDate: 2026-02-01
+tags:
+  - "Machine Learning"
+  - "Deep Learning"
+  - "Python"
+draft: true
+---
+
+# February 2nd
+
+## Pandas Basics
+
+- **View Data**: `.head()` is used to view the top 5 elements of the dataframe.
+- **Selection**: Use `.loc` to select specific rows and columns based on filter criteria.
+  - Syntax: `df.loc[row_selector, column_selector]`
+- **DataFrame Creation**: 
+  - Use `pd.DataFrame` to convert data into a fresh Pandas dataframe.
+  - This is essential for data processing and cleaning before visualization.
+
+## Data Cleaning & Feature Engineering
+
+Example dataset: [US-pumpkins.csv](https://github.com/microsoft/ML-For-Beginners/blob/main/2-Regression/data/US-pumpkins.csv)
+
+### 1. Normalizing Data
+We found inconsistent weights in the dataset, so normalization was required.
+- **Using `.loc` for conditional updates**:
+  ```python
+  new_pumpkins.loc[new_pumpkins['Package'].str.contains('1/2'), 'Price'] = price / (1/2)
+  ```
+
+### 2. Date Processing
+Extracting the month from the date column:
+```python
+month = pd.DatetimeIndex(pumpkins['Date']).month
+```
+
+### 3. Modifying the DataFrame
+We merged the columns with the existing dataframe to create a new dataframe with only the relevant columns and new derived features:
+```python
+new_pumpkins = pd.DataFrame({
+    'Month': month, 
+    'Package': pumpkins['Package'], 
+    'Low Price': pumpkins['Low Price'], 
+    'Price': price
+})
+```
+
+- **Feature Selection**: Initially, there were many useless columns.
+  ![Initial Columns](_assets/Learn-ML-Article01.png)
+- **Feature Engineering**: We removed them and introduced derived columns like `Price` (derived from Low and High prices).
+  ![Cleaned DataFrame](_assets/Learn-ML-Article02.png)
+
+## Data Visualization
+
+We used Matplotlib to analyze the data.
+
+### Initial Attempts
+Trying to plot the graph directly:
+![Graph Attempt 1](_assets/Pasted%20image%2020260202135452.png)
+
+### Refining the Visualization
+We realized the initial plot was not visually making much sense, so we proceeded to create a bar chart for better clarity:
+
+```python
+new_pumpkins.groupby(['Month'])['Price'].mean().plot(kind='bar')
+```
+
+![Bar Chart](_assets/Pasted%20image%2020260202135730.png)
