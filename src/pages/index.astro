@@ -38,7 +38,7 @@ import SEO from '../components/SEO.astro';
 import StructuredData from '../components/StructuredData.astro';
 import ForwardLink from '../components/ForwardLink.astro';
 
-import ArticleCard from '../components/ArticleCard.astro';
+
 import SocialLinks from '../components/SocialLinks.astro';
 import { getCollection } from 'astro:content';
 import { siteConfig } from '../config';
@@ -69,10 +69,10 @@ const caseSnapshots = featuredProjects.slice(0, 3);
  * Retrieves all decisions, sorts by date (newest first), and limits to
  * top 2 for the homepage preview.
  */
-// const allDecisions = await getCollection('decisions');
-// const recentDecisions = allDecisions
-//   .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
-//   .slice(0, 2);
+const allDecisions = await getCollection('decisions');
+const recentDecisions = allDecisions
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+  .slice(0, 2);
 
 /**
  * Queries and filters writing for recent posts section
@@ -153,33 +153,39 @@ const recentPosts = allPosts
 
 
 
-    {/*
     <!-- Recent Decisions -->
-    <section class="recent-decisions">
-      <div class="section-header">
-        <h2>Recent Decisions</h2>
-        <ForwardLink href="/decisions" text="View all" variant="muted" />
-      </div>
-      
-      {recentDecisions.length > 0 ? (
+    {recentDecisions.length > 0 && (
+      <section class="recent-decisions">
+        <div class="section-header">
+          <h2>Recent Decisions</h2>
+          <ForwardLink href="/decisions" text="View all" variant="muted" />
+        </div>
+        
         <div class="decisions-list">
           {recentDecisions.map((decision) => {
             const date = new Date(decision.data.date);
-            const formattedDate = date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+            const formattedDate = date.toLocaleDateString('en-US', { 
+              month: 'short', 
+              year: 'numeric' 
+            });
+            
             return (
-              <article class="decision-item">
-                <span class="decision-date">{formattedDate}</span>
-                <h3 class="decision-title">{decision.data.title}</h3>
-                <p class="decision-context">{decision.data.context}</p>
-              </article>
+              <a href={`/decisions/${decision.id}`} class="decision-item">
+                <div class="decision-meta">
+                  <time class="decision-date" datetime={new Date(decision.data.date).toISOString()}>
+                    {formattedDate}
+                  </time>
+                </div>
+                <div class="decision-content">
+                  <h3 class="decision-title">{decision.data.title}</h3>
+                  <p class="decision-excerpt">{decision.data.context}</p>
+                </div>
+              </a>
             );
           })}
         </div>
-      ) : (
-        <p class="no-decisions">No decisions documented yet.</p>
-      )}
-    </section>
-    */}
+      </section>
+    )}
 
 
 
@@ -193,29 +199,45 @@ const recentPosts = allPosts
         </div>
         
         <div class="writing-grid">
-          {recentPosts.map((post) => (
-            <ArticleCard
-              title={post.data.title}
-              slug={post.id}
-              description={post.data.description}
-              publishDate={post.data.publishDate}
-              tags={post.data.tags}
-            />
-          ))}
+          {recentPosts.map((post) => {
+            const date = new Date(post.data.publishDate);
+            const formattedDate = date.toLocaleDateString('en-US', { 
+              month: 'short', 
+              day: 'numeric',
+              year: 'numeric' 
+            });
+            
+            return (
+              <a href={`/writing/${post.id}`} class="writing-item">
+                <time class="writing-date" datetime={post.data.publishDate.toISOString()}>
+                  {formattedDate}
+                </time>
+                <h3 class="writing-title">{post.data.title}</h3>
+                <p class="writing-description">{post.data.description}</p>
+                {post.data.tags && post.data.tags.length > 0 && (
+                  <div class="writing-tags">
+                    {post.data.tags.slice(0, 3).map((tag) => (
+                      <span class="writing-tag">{tag}</span>
+                    ))}
+                  </div>
+                )}
+              </a>
+            );
+          })}
         </div>
       </section>
     )}
 
 
 
-    <!-- What I Think About -->
+    <!-- What I Think About
     <section class="thinking">
       <h2>Problems I Enjoy Solving</h2>
       <p class="thinking-list">
         How to scale systems without scaling complexity · When to choose consistency over availability · Making legacy codebases maintainable · Designing APIs that last · Building teams that ship · Turning technical debt into technical investment · Documenting decisions so future-you understands past-you
       </p>
     </section>
-
+ -->
 
     
     <!-- CTA -->
@@ -435,43 +457,119 @@ const recentPosts = allPosts
     }
 
     .decision-item {
+      display: flex;
+      gap: 2rem;
       padding: 1.5rem 0;
       border-bottom: 1px solid var(--color-border);
+      text-decoration: none;
+      transition: opacity 0.2s ease;
     }
 
-    .decision-item:last-child {
-      border-bottom: none;
+    .decision-item:hover {
+      opacity: 0.7;
+    }
+
+    .decision-meta {
+      flex-shrink: 0;
+      width: 80px;
     }
 
     .decision-date {
+      display: block;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: var(--color-text-muted);
+    }
+
+    .decision-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .decision-title {
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.4;
+      color: var(--color-text);
+      margin: 0 0 0.5rem 0;
+    }
+
+    .decision-excerpt {
+      font-size: 0.9375rem;
+      line-height: 1.6;
+      color: var(--color-text-secondary);
+      margin: 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .recent-writing {
+      margin-bottom: 5rem;
+    }
+
+    .writing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .writing-item {
+      display: flex;
+      flex-direction: column;
+      padding: 1.25rem;
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      text-decoration: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .writing-item:hover {
+      border-color: var(--color-text-muted);
+    }
+
+    .writing-date {
       display: block;
       font-size: 0.75rem;
       font-weight: 500;
       text-transform: uppercase;
       letter-spacing: 0.05em;
       color: var(--color-text-muted);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.75rem;
     }
 
-    .decision-title {
-      font-size: 1.125rem;
+    .writing-title {
+      font-size: 1rem;
       font-weight: 600;
-      line-height: 1.3;
+      line-height: 1.4;
       color: var(--color-text);
-      margin-bottom: 0.5rem;
+      margin: 0 0 0.625rem 0;
     }
 
-    .decision-context {
-      font-size: 0.9375rem;
-      line-height: 1.6;
+    .writing-description {
+      font-size: 0.875rem;
+      line-height: 1.5;
       color: var(--color-text-secondary);
+      margin: 0 0 0.875rem 0;
+      flex: 1;
     }
 
-    .no-decisions {
-      color: var(--color-text-muted);
-      font-style: italic;
-      padding: 1.5rem 0;
+    .writing-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.375rem;
     }
+
+    .writing-tag {
+      font-size: 0.6875rem;
+      font-weight: 500;
+      color: var(--color-text-muted);
+      padding: 0.125rem 0.5rem;
+      background: var(--color-bg-secondary);
+      border-radius: 3px;
+    }
+
 
     .thinking {
       margin-bottom: 5rem;
@@ -490,17 +588,6 @@ const recentPosts = allPosts
       color: var(--color-text-secondary);
       max-width: 680px;
     }
-
-    .writing-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 5rem;
-    }
-
-
-
-
 
     .cta {
       padding: 3rem 0;
@@ -573,8 +660,39 @@ const recentPosts = allPosts
         gap: 0.5rem;
       }
 
+      .decision-item {
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 1.25rem 0;
+      }
+
+      .decision-meta {
+        width: auto;
+      }
+
       .decision-title {
-        font-size: 1rem;
+        font-size: 0.9375rem;
+      }
+
+      .decision-excerpt {
+        font-size: 0.875rem;
+      }
+
+      .writing-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .writing-item {
+        padding: 1rem;
+      }
+
+      .writing-title {
+        font-size: 0.9375rem;
+      }
+
+      .writing-description {
+        font-size: 0.8125rem;
       }
 
       .cta-buttons {
