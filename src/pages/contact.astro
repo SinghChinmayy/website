@@ -45,15 +45,15 @@ const socialLinks = siteConfig.social
 <BaseLayout>
   <SEO 
     slot="head"
-    title={pagesConfig.contact.title}
-    description={pagesConfig.contact.description}
+    title={siteConfig.contactPage.title}
+    description={siteConfig.contactPage.description}
     type="website"
   />
 
   <main class="contact-page">
     <!-- Zone 1: Primary Intent -->
     <section class="primary-zone">
-      <h1>{pagesConfig.contact.heading}</h1>
+      <h1>{siteConfig.contactPage.heading}</h1>
       <a href={`mailto:${siteConfig.author.email}`} class="email-link">
         {siteConfig.author.email}
       </a>

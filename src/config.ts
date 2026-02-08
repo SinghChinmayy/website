@@ -19,12 +19,15 @@
  * @module config
  */
 
-import settings from './content/settings.json';
+import settings from './content/cms/settings.json';
+import contact from './content/cms/contact.json';
+import newsletter from './content/cms/newsletter.json';
+import contactPage from './content/cms/pages/contact.json';
 
 /**
  * Site configuration object
  * 
- * Centralized configuration loaded from src/content/settings.json (managed by Keystatic).
+ * Centralized configuration loaded from src/content/cms/ (managed by Keystatic).
  * All values are loaded at build time and are type-safe throughout the application.
  * 
  * @constant
@@ -63,7 +66,10 @@ export const siteConfig = {
   /**
    * Author information
    */
-  author: settings.author,
+  author: {
+    ...settings.author,
+    email: contact.email,
+  },
 
   /**
    * CMS configuration
@@ -73,12 +79,17 @@ export const siteConfig = {
   /**
    * Social media links
    */
-  social: settings.social,
+  social: contact.social,
 
   /**
    * Newsletter configuration
    */
-  newsletter: settings.newsletter,
+  newsletter: newsletter,
+
+  /**
+   * Contact page content
+   */
+  contactPage: contactPage,
 
   /**
    * Navigation links

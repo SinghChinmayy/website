@@ -1,5 +1,5 @@
 import { config, fields, collection, singleton } from '@keystatic/core';
-import settingsData from './src/content/settings.json';
+import settingsData from './src/content/cms/settings.json';
 
 export default config({
     storage: {
@@ -11,13 +11,15 @@ export default config({
         },
         navigation: {
             'Editorial': ['writing', 'projects', 'decisions'],
-            'Configuration': ['settings', 'journey', 'testimonials'],
+            'Pages': ['contactPage'],
+            'Profile': ['journey', 'testimonials'],
+            'Configuration': ['settings', 'contact', 'newsletter'],
         },
     },
     singletons: {
         settings: singleton({
             label: 'Settings',
-            path: 'src/content/settings',
+            path: 'src/content/cms/settings',
             format: { data: 'json' },
             schema: {
                 site: fields.object({
@@ -40,7 +42,6 @@ export default config({
                     name: fields.text({ label: 'Name' }),
                     title: fields.text({ label: 'Title / Role' }),
                     bio: fields.text({ label: 'Bio', multiline: true }),
-                    email: fields.text({ label: 'Email' }),
                     location: fields.text({ label: 'Location' }),
                 }, { label: 'Author Information' }),
                 cms: fields.object({
@@ -51,6 +52,24 @@ export default config({
                         publicPath: '/images/',
                     }),
                 }, { label: 'CMS Dashboard Configuration' }),
+                nav: fields.array(
+                    fields.object({
+                        label: fields.text({ label: 'Label' }),
+                        href: fields.text({ label: 'Href' }),
+                    }),
+                    {
+                        label: 'Navigation Items',
+                        itemLabel: (props) => props.fields.label.value,
+                    }
+                ),
+            },
+        }),
+        contact: singleton({
+            label: 'Contact',
+            path: 'src/content/cms/contact',
+            format: { data: 'json' },
+            schema: {
+                email: fields.text({ label: 'Primary Contact Email' }),
                 social: fields.array(
                     fields.object({
                         platform: fields.select({
@@ -76,22 +95,27 @@ export default config({
                         itemLabel: (props) => props.fields.label.value || props.fields.platform.value,
                     }
                 ),
-                newsletter: fields.object({
-                    action: fields.text({ label: 'Form Action URL' }),
-                    u: fields.text({ label: 'User ID (u)' }),
-                    id: fields.text({ label: 'List ID (id)' }),
-                    f_id: fields.text({ label: 'Field ID (f_id)' }),
-                }, { label: 'Newsletter Configuration' }),
-                nav: fields.array(
-                    fields.object({
-                        label: fields.text({ label: 'Label' }),
-                        href: fields.text({ label: 'Href' }),
-                    }),
-                    {
-                        label: 'Navigation Items',
-                        itemLabel: (props) => props.fields.label.value,
-                    }
-                ),
+            },
+        }),
+        newsletter: singleton({
+            label: 'Newsletter',
+            path: 'src/content/cms/newsletter',
+            format: { data: 'json' },
+            schema: {
+                action: fields.text({ label: 'Form Action URL' }),
+                u: fields.text({ label: 'User ID (u)' }),
+                id: fields.text({ label: 'List ID (id)' }),
+                f_id: fields.text({ label: 'Field ID (f_id)' }),
+            },
+        }),
+        contactPage: singleton({
+            label: 'Contact Page',
+            path: 'src/content/cms/pages/contact',
+            format: { data: 'json' },
+            schema: {
+                title: fields.text({ label: 'Page Title' }),
+                description: fields.text({ label: 'Page Description', multiline: true }),
+                heading: fields.text({ label: 'Page Heading' }),
             },
         }),
     },
