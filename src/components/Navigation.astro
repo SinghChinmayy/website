@@ -17,20 +17,32 @@
  * <Navigation />
  * ```
  */
+import { getCollection } from 'astro:content';
 import { siteConfig } from '../config';
 import ThemeToggle from './ThemeToggle.astro';
 
 const currentPath = Astro.url.pathname;
 
 /**
+ * Fetch writing articles to check for published content
+ */
+const writingArticles = await getCollection('writing', ({ data }) => {
+  return data.draft !== true;
+});
+
+const hasWriting = writingArticles.length > 0;
+
+/**
  * Navigation items with Home prepended
- * 
- * Combines a hardcoded Home link with navigation items from site config
- * to ensure Home is always first in the navigation.
  */
 const navItems = [
   { label: 'Home', href: '/' },
-  ...siteConfig.nav,
+  ...siteConfig.nav.filter(item => {
+    if (item.label === 'Writing') {
+      return hasWriting;
+    }
+    return true;
+  }),
 ];
 
 /**
