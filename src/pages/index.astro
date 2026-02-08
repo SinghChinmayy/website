@@ -151,19 +151,7 @@ const recentPosts = allPosts
 
 
 
-    <!-- Latest Updates -->
-    <section class="latest-updates">
-      <div class="section-header">
-        <h2>Latest Updates</h2>
-        <a href="https://twitter.com/0xchinmayy" target="_blank" rel="noopener noreferrer" class="twitter-link">
-          @0xchinmayy
-        </a>
-      </div>
-      
-      <div class="twitter-feed">
-        <a class="twitter-timeline" data-lang="en" data-theme="dark" data-height="500" data-chrome="noheader nofooter noborders transparent" href="https://twitter.com/0xchinmayy?ref_src=twsrc%5Etfw">Tweets by 0xchinmayy</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-      </div>
-    </section>
+
 
     {/*
     <!-- Recent Decisions -->
@@ -196,14 +184,14 @@ const recentPosts = allPosts
 
 
 
-    <!-- Recent Writing -->
-    <section class="recent-writing">
-      <div class="section-header">
-        <h2>Recent Writing</h2>
-        <ForwardLink href="/writing" text="View all" variant="muted" />
-      </div>
-      
-      {recentPosts.length > 0 ? (
+    {recentPosts.length > 0 && (
+      <!-- Recent Writing -->
+      <section class="recent-writing">
+        <div class="section-header">
+          <h2>Recent Writing</h2>
+          <ForwardLink href="/writing" text="View all" variant="muted" />
+        </div>
+        
         <div class="writing-grid">
           {recentPosts.map((post) => (
             <ArticleCard
@@ -215,10 +203,8 @@ const recentPosts = allPosts
             />
           ))}
         </div>
-      ) : (
-        <p class="no-content">No articles published yet.</p>
-      )}
-    </section>
+      </section>
+    )}
 
 
 
@@ -512,57 +498,9 @@ const recentPosts = allPosts
       margin-bottom: 5rem;
     }
 
-    .no-content {
-      color: var(--color-text-muted);
-      font-style: italic;
-      padding: 1rem 0;
-    }
 
-    .latest-updates {
-      margin-bottom: 4rem;
-      padding-bottom: 5rem;
-      border-bottom: 1px solid var(--color-border);
-    }
 
-    .twitter-link {
-        font-size: 0.9375rem;
-        color: var(--color-text-secondary);
-        text-decoration: none;
-    }
 
-    .twitter-link:hover {
-        color: var(--color-text);
-        text-decoration: underline;
-    }
-    
-    .twitter-feed {
-        border: 1px solid var(--color-border);
-        border-radius: 12px;
-        overflow: hidden;
-        background: var(--color-bg-secondary);
-        min-height: 500px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .twitter-feed .twitter-timeline {
-        display: inline-block;
-        padding: 0.75rem 1.5rem;
-        background: var(--color-bg-elevated);
-        border: 1px solid var(--color-border);
-        border-radius: 9999px;
-        color: var(--color-text);
-        font-weight: 500;
-        text-decoration: none;
-        transition: transform 0.2s ease, background 0.2s ease;
-    }
-
-    .twitter-feed .twitter-timeline:hover {
-        background: var(--color-text);
-        color: var(--color-bg);
-        transform: translateY(-1px);
-    }
 
     .cta {
       padding: 3rem 0;
