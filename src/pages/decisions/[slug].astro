@@ -1,12 +1,12 @@
 ---
 /**
  * Decision Detail Page
- * 
+ *
  * Dynamic route that displays the full decision record for a specific decision entry.
  * Presents a structured view of the decision-making process including context, the
  * decision made, alternatives considered with pros/cons, reasoning, and optional
  * additional content.
- * 
+ *
  * Features:
  * - Static path generation for all decision entries
  * - Structured decision presentation (Context → Decision → Alternatives → Reasoning)
@@ -17,37 +17,40 @@
  * - Scroll-to-top functionality
  * - Related content navigation
  * - Back navigation to decisions list
- * 
+ *
  * Route: /decisions/[slug]
- * 
+ *
  * @page
  */
 
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import SEO from '../../components/SEO.astro';
-import ScrollToTop from '../../components/ScrollToTop.astro';
-import BackLink from '../../components/BackLink.astro';
-import RelatedContent from '../../components/RelatedContent.astro';
-import { getCollection, render } from 'astro:content';
-import type { GetStaticPaths } from 'astro';
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SEO from "../../components/SEO.astro";
+import ScrollToTop from "../../components/ScrollToTop.astro";
+import BackLink from "../../components/BackLink.astro";
+import RelatedContent from "../../components/RelatedContent.astro";
+import ShareButtons from "../../components/ShareButtons.astro";
+import { getCollection, render } from "astro:content";
+import type { GetStaticPaths } from "astro";
 
 /**
  * Generates static paths for all decision entries
- * 
+ *
  * Queries the decisions content collection and creates a route for each entry
  * using the entry ID as the slug parameter.
- * 
+ *
  * @returns Array of path objects with params and props
  */
 export const getStaticPaths: GetStaticPaths = async () => {
-  const decisions = await getCollection('decisions');
+  const decisions = await getCollection("decisions");
   return decisions.map((decision) => ({
     params: { slug: decision.id },
     props: { decision },
   }));
 };
 
-type DecisionEntry = Awaited<ReturnType<typeof getCollection<'decisions'>>>[number];
+type DecisionEntry = Awaited<
+  ReturnType<typeof getCollection<"decisions">>
+>[number];
 
 interface Props {
   /** The decision entry from the content collection */
@@ -59,19 +62,19 @@ const { Content } = await render(decision);
 
 /**
  * Formats the decision date for display
- * 
+ *
  * Uses US English locale with full date format.
  * Example output: "January 15, 2024"
  */
-const formattedDate = new Intl.DateTimeFormat('en-US', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric'
+const formattedDate = new Intl.DateTimeFormat("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
 }).format(decision.data.date);
 ---
 
 <BaseLayout>
-  <SEO 
+  <SEO
     slot="head"
     title={`${decision.data.title} - Decision Record`}
     description={decision.data.context}
@@ -84,17 +87,26 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
         <time class="decision-date" datetime={decision.data.date.toISOString()}>
           {formattedDate}
         </time>
-        
+
         <h1 class="decision-title">{decision.data.title}</h1>
-        
-        {decision.data.tags && decision.data.tags.length > 0 && (
-          <div class="decision-tags">
-            {decision.data.tags.map((tag) => (
-              <span class="tag">{tag}</span>
-            ))}
-          </div>
-        )}
+
+        {
+          decision.data.tags && decision.data.tags.length > 0 && (
+            <div class="decision-tags">
+              {decision.data.tags.map((tag) => (
+                <span class="tag">{tag}</span>
+              ))}
+            </div>
+          )
+        }
       </header>
+
+      <!-- Share Buttons -->
+      <ShareButtons
+        title={decision.data.title}
+        description={decision.data.context}
+        url={Astro.url.href}
+      />
 
       <section class="decision-section">
         <h2 class="section-label">Context</h2>
@@ -109,33 +121,35 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
       <section class="decision-section">
         <h2 class="section-label">Alternatives Considered</h2>
         <div class="alternatives-list">
-          {decision.data.alternatives.map((alt) => (
-            <div class="alternative-item">
-              <h3 class="alternative-option">{alt.option}</h3>
-              <div class="alternative-details">
-                {alt.pros && alt.pros.length > 0 && (
-                  <div class="pros-cons">
-                    <span class="detail-label pros-label">Pros</span>
-                    <ul class="detail-list">
-                      {alt.pros.map((pro) => (
-                        <li>{pro}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-                {alt.cons && alt.cons.length > 0 && (
-                  <div class="pros-cons">
-                    <span class="detail-label cons-label">Cons</span>
-                    <ul class="detail-list">
-                      {alt.cons.map((con) => (
-                        <li>{con}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
+          {
+            decision.data.alternatives.map((alt) => (
+              <div class="alternative-item">
+                <h3 class="alternative-option">{alt.option}</h3>
+                <div class="alternative-details">
+                  {alt.pros && alt.pros.length > 0 && (
+                    <div class="pros-cons">
+                      <span class="detail-label pros-label">Pros</span>
+                      <ul class="detail-list">
+                        {alt.pros.map((pro) => (
+                          <li>{pro}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  {alt.cons && alt.cons.length > 0 && (
+                    <div class="pros-cons">
+                      <span class="detail-label cons-label">Cons</span>
+                      <ul class="detail-list">
+                        {alt.cons.map((con) => (
+                          <li>{con}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
+            ))
+          }
         </div>
       </section>
 
@@ -144,15 +158,24 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
         <p class="section-content">{decision.data.reasoning}</p>
       </section>
 
-      {decision.body && decision.body.trim().length > 0 && (
-        <section class="decision-body prose">
-          <Content />
-        </section>
-      )}
+      {
+        decision.body && decision.body.trim().length > 0 && (
+          <section class="decision-body prose">
+            <Content />
+          </section>
+        )
+      }
 
-      <RelatedContent 
-        relatedProjects={decision.data.relatedProjects} 
-        relatedDecisions={decision.data.relatedDecisions} 
+      <RelatedContent
+        relatedProjects={decision.data.relatedProjects}
+        relatedDecisions={decision.data.relatedDecisions}
+      />
+
+      <!-- Share Buttons (Bottom) -->
+      <ShareButtons
+        title={decision.data.title}
+        description={decision.data.context}
+        url={Astro.url.href}
       />
 
       <BackLink href="/decisions" text="All decisions" />

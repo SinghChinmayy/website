@@ -1,11 +1,11 @@
 ---
 /**
  * Article Detail Page
- * 
+ *
  * Dynamic route that displays a full article with MDX content support, table of contents,
  * metadata, and structured data for SEO. Provides an optimized reading experience with
  * clean typography and responsive design.
- * 
+ *
  * Features:
  * - MDX content rendering with full markdown support
  * - Automatic table of contents generation (when 3+ sections)
@@ -15,31 +15,32 @@
  * - Scroll-to-top functionality
  * - Back navigation to articles list
  * - Responsive typography
- * 
+ *
  * Route: /writing/[slug]
- * 
+ *
  * @page
  */
 
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import SEO from '../../components/SEO.astro';
-import StructuredData from '../../components/StructuredData.astro';
-import TableOfContents from '../../components/TableOfContents.astro';
-import ScrollToTop from '../../components/ScrollToTop.astro';
-import BackLink from '../../components/BackLink.astro';
-import { getCollection, getEntry, render } from 'astro:content';
-import { getReadingTime } from '../../utils/readingTime';
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SEO from "../../components/SEO.astro";
+import StructuredData from "../../components/StructuredData.astro";
+import TableOfContents from "../../components/TableOfContents.astro";
+import ScrollToTop from "../../components/ScrollToTop.astro";
+import BackLink from "../../components/BackLink.astro";
+import ShareButtons from "../../components/ShareButtons.astro";
+import { getCollection, getEntry, render } from "astro:content";
+import { getReadingTime } from "../../utils/readingTime";
 
 /**
  * Generates static paths for all published articles
- * 
+ *
  * Queries the writing collection and filters for published articles only
  * (draft: false), creating a route for each article using its ID as the slug.
- * 
+ *
  * @returns Array of path objects with params
  */
 export async function getStaticPaths() {
-  const articles = await getCollection('writing', ({ data }) => {
+  const articles = await getCollection("writing", ({ data }) => {
     return data.draft === false;
   });
   return articles.map((article) => ({
@@ -51,58 +52,52 @@ const { slug } = Astro.params;
 
 /**
  * Retrieves the specific article entry by slug
- * 
+ *
  * Redirects to 404 if the article is not found.
  */
-const article = await getEntry('writing', slug!);
+const article = await getEntry("writing", slug!);
 
 if (!article) {
-  return Astro.redirect('/404');
+  return Astro.redirect("/404");
 }
 
 /**
  * Renders the article content and extracts headings
- * 
+ *
  * The Content component renders the MDX, and headings are used for
  * the table of contents generation.
  */
 const { Content, headings } = await render(article);
 
-const {
-  title,
-  description,
-  publishDate,
-  updatedDate,
-  tags,
-} = article.data;
+const { title, description, publishDate, updatedDate, tags } = article.data;
 
 /**
  * Calculates reading time from the article body
- * 
+ *
  * Uses word count to estimate reading time in minutes.
  */
-const readingTime = getReadingTime(article.body || '');
+const readingTime = getReadingTime(article.body || "");
 
 /**
  * Formats a date object for display
- * 
+ *
  * Uses US English locale with full date format.
  * Example output: "January 15, 2024"
- * 
+ *
  * @param date - The date to format
  * @returns Formatted date string
  */
 function formatDate(date: Date): string {
-  return new Intl.DateTimeFormat('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
+  return new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
   }).format(date);
 }
 ---
 
 <BaseLayout>
-  <SEO 
+  <SEO
     slot="head"
     title={`${title} - Writing`}
     description={description}
@@ -133,23 +128,34 @@ function formatDate(date: Date): string {
         </time>
         <span class="meta-separator">·</span>
         <span class="reading-time">{readingTime}</span>
-        {updatedDate && (
-          <>
-            <span class="meta-separator">·</span>
-            <time class="updated-date" datetime={updatedDate.toISOString()}>
-              Updated {formatDate(updatedDate)}
-            </time>
-          </>
-        )}
+        {
+          updatedDate && (
+            <>
+              <span class="meta-separator">·</span>
+              <time class="updated-date" datetime={updatedDate.toISOString()}>
+                Updated {formatDate(updatedDate)}
+              </time>
+            </>
+          )
+        }
       </div>
-      {tags && tags.length > 0 && (
-        <div class="article-tags">
-          {tags.map((tag) => (
-            <span class="tag">{tag}</span>
-          ))}
-        </div>
-      )}
+      {
+        tags && tags.length > 0 && (
+          <div class="article-tags">
+            {tags.map((tag) => (
+              <span class="tag">{tag}</span>
+            ))}
+          </div>
+        )
+      }
     </header>
+
+    <!-- Share Buttons -->
+    <ShareButtons
+      title={title}
+      description={description}
+      url={Astro.url.href}
+    />
 
     <!-- Table of Contents (conditionally rendered if 3+ sections) -->
     <TableOfContents headings={headings} />
@@ -158,6 +164,13 @@ function formatDate(date: Date): string {
     <article class="article-content">
       <Content />
     </article>
+
+    <!-- Share Buttons (Bottom) -->
+    <ShareButtons
+      title={title}
+      description={description}
+      url={Astro.url.href}
+    />
 
     <BackLink href="/writing" text="All articles" />
   </main>
@@ -276,7 +289,9 @@ function formatDate(date: Date): string {
     }
 
     .article-content :global(code) {
-      font-family: ui-monospace, 'JetBrains Mono', 'Cascadia Code', Menlo, Consolas, 'Courier New', monospace;
+      font-family:
+        ui-monospace, "JetBrains Mono", "Cascadia Code", Menlo, Consolas,
+        "Courier New", monospace;
       font-size: 0.9em;
       background: var(--color-bg-secondary);
       padding: 0.2em 0.4em;
