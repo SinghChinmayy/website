@@ -56,7 +56,7 @@ export const siteConfig = {
   /**
    * Site logo
    */
-  logo: settings.site.logo,
+  logo: 'logo' in settings.site ? settings.site.logo : undefined,
 
   /**
    * Site favicon

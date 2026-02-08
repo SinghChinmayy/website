@@ -27,10 +27,21 @@ export default config({
                         label: fields.text({ label: 'Label' }),
                         href: fields.text({ label: 'URL (e.g., /projects, https://github.com)' }),
                         show: fields.checkbox({ label: 'Show in Navigation', defaultValue: true }),
+                        children: fields.array(
+                            fields.object({
+                                label: fields.text({ label: 'Label' }),
+                                href: fields.text({ label: 'URL' }),
+                                show: fields.checkbox({ label: 'Show in Navigation', defaultValue: true }),
+                            }),
+                            {
+                                label: 'Submenu Items',
+                                itemLabel: (props) => `${props.fields.label.value} ${props.fields.show.value ? '✅' : '❌'}`,
+                            }
+                        ),
                     }),
                     {
                         label: 'Navigation Items',
-                        itemLabel: (props) => `${props.fields.label.value} ${props.fields.show.value ? '✅' : '❌'}`,
+                        itemLabel: (props) => `${props.fields.label.value} ${props.fields.show.value ? '✅' : '❌'}${props.fields.children.elements.length > 0 ? ' (Dropdown)' : ''}`,
                     }
                 ),
                 site: fields.object({

@@ -3,27 +3,42 @@
     {
       "label": "Home",
       "href": "/",
-      "show": true
-    },
-    {
-      "label": "Projects",
-      "href": "/projects",
-      "show": true
-    },
-    {
-      "label": "Writing",
-      "href": "/writing",
-      "show": true
+      "show": true,
+      "children": []
     },
     {
       "label": "Contact",
       "href": "/contact",
-      "show": true
+      "show": true,
+      "children": []
+    },
+    {
+      "label": "Editorial",
+      "href": "#",
+      "show": true,
+      "children": [
+        {
+          "label": "Projects",
+          "href": "/projects",
+          "show": true
+        },
+        {
+          "label": "Writing",
+          "href": "/writing",
+          "show": true
+        },
+        {
+          "label": "Decisions",
+          "href": "/decisions",
+          "show": true
+        }
+      ]
     },
     {
       "label": "CV",
       "href": "/journey",
-      "show": true
+      "show": true,
+      "children": []
     }
   ],
   "site": {
