@@ -83,8 +83,9 @@ const ogImage = image || defaultImage;
 const absoluteImageURL = ogImage.startsWith('http') ? ogImage : `${siteURL}${ogImage.replace(/^\//, '')}`;
 
 // Get Twitter handle from config (extract username from URL)
-const twitterHandle = siteConfig.social.twitter 
-  ? `@${siteConfig.social.twitter.split('/').pop()}`
+const twitterLink = siteConfig.social.find(s => s.platform === 'twitter')?.url;
+const twitterHandle = twitterLink 
+  ? `@${twitterLink.split('/').pop()}`
   : undefined;
 ---
 

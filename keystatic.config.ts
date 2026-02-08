@@ -23,13 +23,31 @@ export default config({
                     email: fields.text({ label: 'Email' }),
                     location: fields.text({ label: 'Location' }),
                 }, { label: 'Author Information' }),
-                social: fields.object({
-                    github: fields.text({ label: 'GitHub URL' }),
-                    linkedin: fields.text({ label: 'LinkedIn URL' }),
-                    twitter: fields.text({ label: 'Twitter URL' }),
-                    mastodon: fields.text({ label: 'Mastodon URL' }),
-                    bluesky: fields.text({ label: 'Bluesky URL' }),
-                }, { label: 'Social Links' }),
+                social: fields.array(
+                    fields.object({
+                        platform: fields.select({
+                            label: 'Platform',
+                            options: [
+                                { label: 'GitHub', value: 'github' },
+                                { label: 'LinkedIn', value: 'linkedin' },
+                                { label: 'Twitter/X', value: 'twitter' },
+                                { label: 'YouTube', value: 'youtube' },
+                                { label: 'Instagram', value: 'instagram' },
+                                { label: 'Mastodon', value: 'mastodon' },
+                                { label: 'Bluesky', value: 'bluesky' },
+                                { label: 'Email', value: 'email' },
+                                { label: 'Other', value: 'other' },
+                            ],
+                            defaultValue: 'github',
+                        }),
+                        url: fields.text({ label: 'URL' }),
+                        label: fields.text({ label: 'Label (Internal use or for "Other")' }),
+                    }),
+                    {
+                        label: 'Social Links',
+                        itemLabel: (props) => props.fields.label.value || props.fields.platform.value,
+                    }
+                ),
                 newsletter: fields.object({
                     action: fields.text({ label: 'Form Action URL' }),
                     u: fields.text({ label: 'User ID (u)' }),

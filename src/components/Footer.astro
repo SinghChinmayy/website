@@ -32,11 +32,11 @@ const currentYear = new Date().getFullYear();
  * 
  * @returns Array of social link objects with platform name and URL
  */
-const socialLinks = Object.entries(siteConfig.social)
-  .filter(([_, url]) => url)
-  .map(([platform, url]) => ({
-    platform: platform.charAt(0).toUpperCase() + platform.slice(1),
-    url
+const socialLinks = siteConfig.social
+  .filter((link) => !!link.url)
+  .map((link) => ({
+    label: link.label || link.platform.charAt(0).toUpperCase() + link.platform.slice(1),
+    url: link.url
   }));
 ---
 
@@ -50,7 +50,7 @@ const socialLinks = Object.entries(siteConfig.social)
         {socialLinks.map((link, index) => (
           <>
             <a href={link.url} target="_blank" rel="noopener noreferrer">
-              {link.platform}
+              {link.label}
             </a>
             {index < socialLinks.length - 1 && <span class="separator">·</span>}
           </>

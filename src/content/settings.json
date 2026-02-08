@@ -12,11 +12,23 @@
     "email": "hello@chinmaysingh.me",
     "location": "BLR, India"
   },
-  "social": {
-    "github": "https://github.com/singhchinmay",
-    "linkedin": "https://linkedin.com/in/singhchinmayy",
-    "twitter": "https://x.com/0xchinmayy"
-  },
+  "social": [
+    {
+      "platform": "github",
+      "url": "https://github.com/singhchinmay",
+      "label": "GitHub"
+    },
+    {
+      "platform": "linkedin",
+      "url": "https://linkedin.com/in/singhchinmayy",
+      "label": "LinkedIn"
+    },
+    {
+      "platform": "twitter",
+      "url": "https://x.com/0xchinmayy",
+      "label": "Twitter"
+    }
+  ],
   "newsletter": {
     "action": "https://chinmaysingh.us16.list-manage.com/subscribe/post",
     "u": "d16ebe6ee210f90bc2f6cae66",
