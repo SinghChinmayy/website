@@ -23,6 +23,8 @@ import { defineConfig, envField } from 'astro/config';
 import { loadEnv } from 'vite';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
+import react from '@astrojs/react';
+import keystatic from '@keystatic/astro';
 
 /**
  * Load environment variables from .env file
@@ -47,7 +49,7 @@ export default defineConfig({
    * and hosting flexibility. All pages are pre-rendered.
    */
   output: 'static',
-  
+
   /**
    * Astro integrations
    * 
@@ -57,8 +59,10 @@ export default defineConfig({
   integrations: [
     mdx(),
     sitemap(),
+    react(),
+    keystatic(),
   ],
-  
+
   /**
    * Site URL
    * 
@@ -72,7 +76,7 @@ export default defineConfig({
    * Set SITE_URL in your .env file (e.g., https://example.com)
    */
   site: SITE_URL || 'https://example.com',
-  
+
   /**
    * Environment variables schema (Astro v5+)
    * 
@@ -91,14 +95,14 @@ export default defineConfig({
       SITE_LANGUAGE: envField.string({ context: 'client', access: 'public', default: 'en' }),
       SITE_TITLE: envField.string({ context: 'client', access: 'public', default: 'Professional Portfolio' }),
       SITE_DESCRIPTION: envField.string({ context: 'client', access: 'public', default: 'Engineering leader specializing in system architecture, technical decision-making, and delivering measurable business impact.' }),
-      
+
       // Author information
       SITE_AUTHOR_NAME: envField.string({ context: 'client', access: 'public', default: 'Your Name' }),
       SITE_AUTHOR_TITLE: envField.string({ context: 'client', access: 'public', default: 'Senior Software Engineer' }),
       SITE_AUTHOR_BIO: envField.string({ context: 'client', access: 'public', default: 'Engineering leader focused on solving complex technical challenges through thoughtful architecture and pragmatic trade-off analysis.' }),
       SITE_AUTHOR_EMAIL: envField.string({ context: 'client', access: 'public', default: 'hello@example.com' }),
       SITE_AUTHOR_LOCATION: envField.string({ context: 'client', access: 'public', default: '' }),
-      
+
       // Social media links (empty string = hidden)
       SOCIAL_GITHUB: envField.string({ context: 'client', access: 'public', default: '' }),
       SOCIAL_LINKEDIN: envField.string({ context: 'client', access: 'public', default: '' }),
@@ -107,7 +111,7 @@ export default defineConfig({
       SOCIAL_BLUESKY: envField.string({ context: 'client', access: 'public', default: '' }),
     },
   },
-  
+
   /**
    * Image optimization configuration
    * 
@@ -133,7 +137,7 @@ export default defineConfig({
     // Remote image patterns (currently empty - add patterns as needed)
     remotePatterns: [],
   },
-  
+
   /**
    * Markdown configuration
    * 
