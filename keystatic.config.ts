@@ -1,8 +1,18 @@
 import { config, fields, collection, singleton } from '@keystatic/core';
+import settingsData from './src/content/settings.json';
 
 export default config({
     storage: {
         kind: 'local',
+    },
+    ui: {
+        brand: {
+            name: settingsData.cms.brandName || 'Chinmay Singh'
+        },
+        navigation: {
+            'Editorial': ['writing', 'projects', 'decisions'],
+            'Configuration': ['settings', 'journey', 'testimonials'],
+        },
     },
     singletons: {
         settings: singleton({
@@ -15,6 +25,16 @@ export default config({
                     language: fields.text({ label: 'Language (ISO code)' }),
                     title: fields.text({ label: 'Site Title' }),
                     description: fields.text({ label: 'Site Description', multiline: true }),
+                    logo: fields.image({
+                        label: 'Site Logo',
+                        directory: 'public/images',
+                        publicPath: '/images/',
+                    }),
+                    favicon: fields.image({
+                        label: 'Site Favicon',
+                        directory: 'src/assets/images',
+                        publicPath: '~/assets/images/',
+                    }),
                 }, { label: 'Site Metadata' }),
                 author: fields.object({
                     name: fields.text({ label: 'Name' }),
@@ -23,6 +43,14 @@ export default config({
                     email: fields.text({ label: 'Email' }),
                     location: fields.text({ label: 'Location' }),
                 }, { label: 'Author Information' }),
+                cms: fields.object({
+                    brandName: fields.text({ label: 'CMS Brand Name' }),
+                    brandLogo: fields.image({
+                        label: 'CMS Brand Logo',
+                        directory: 'public/images',
+                        publicPath: '/images/',
+                    }),
+                }, { label: 'CMS Dashboard Configuration' }),
                 social: fields.array(
                     fields.object({
                         platform: fields.select({

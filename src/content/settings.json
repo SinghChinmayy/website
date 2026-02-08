@@ -3,7 +3,8 @@
     "url": "https://chinmaysingh.me",
     "language": "en",
     "title": "Chinmay Singh - Portfolio",
-    "description": "Computer Science undergraduate specializing in systems engineering, cloud infrastructure, and backend development. Building real-world systems with a focus on reliability, security, and performance."
+    "description": "Computer Science undergraduate specializing in systems engineering, cloud infrastructure, and backend development. Building real-world systems with a focus on reliability, security, and performance.",
+    "favicon": "~/assets/images/site/favicon.png"
   },
   "author": {
     "name": "Chinmay Singh",
@@ -11,6 +12,9 @@
     "bio": "Computer Science undergraduate with a strong interest in low-level systems, cloud infrastructure, and backend engineering. I enjoy building and operating real-world systems — from self-hosted server platforms to C++ command-line tools — with a focus on reliability, security, and performance.",
     "email": "hello@chinmaysingh.me",
     "location": "BLR, India"
+  },
+  "cms": {
+    "brandName": "Chinmay Singh"
   },
   "social": [
     {

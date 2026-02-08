@@ -51,9 +51,24 @@ export const siteConfig = {
   description: settings.site.description,
 
   /**
+   * Site logo
+   */
+  logo: settings.site.logo,
+
+  /**
+   * Site favicon
+   */
+  favicon: 'favicon' in settings.site ? settings.site.favicon : undefined,
+
+  /**
    * Author information
    */
   author: settings.author,
+
+  /**
+   * CMS configuration
+   */
+  cms: settings.cms,
 
   /**
    * Social media links
