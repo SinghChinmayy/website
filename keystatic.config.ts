@@ -137,6 +137,7 @@ export default config({
             slugField: 'title',
             path: 'src/content/writing/*',
             format: { contentField: 'content' },
+            columns: ['title', 'publishDate'],
             schema: {
                 title: fields.slug({ name: { label: 'Title' } }),
                 description: fields.text({ label: 'Description', multiline: true }),
@@ -144,7 +145,7 @@ export default config({
                 updatedDate: fields.date({ label: 'Updated Date' }),
                 tags: fields.array(fields.text({ label: 'Tag' }), {
                     label: 'Tags',
-                    itemLabel: (props) => props.value,
+                    itemLabel: (props) => props.value || 'New Tag',
                 }),
                 draft: fields.checkbox({ label: 'Draft', defaultValue: false }),
                 content: fields.mdx({
@@ -163,6 +164,7 @@ export default config({
             slugField: 'title',
             path: 'src/content/projects/*',
             format: { contentField: 'content' },
+            columns: ['title', 'year', 'role', 'status'],
             schema: {
                 title: fields.slug({ name: { label: 'Title' } }),
                 role: fields.text({ label: 'Role' }),
@@ -174,6 +176,7 @@ export default config({
                 problem: fields.text({ label: 'Problem', multiline: true }),
                 constraints: fields.array(fields.text({ label: 'Constraint' }), {
                     label: 'Constraints',
+                    itemLabel: (props) => props.value || 'New Constraint',
                 }),
                 approach: fields.text({ label: 'Approach', multiline: true }),
                 keyDecisions: fields.array(
@@ -182,12 +185,17 @@ export default config({
                         reasoning: fields.text({ label: 'Reasoning', multiline: true }),
                         alternatives: fields.array(fields.text({ label: 'Alternative' }), {
                             label: 'Alternatives',
+                            itemLabel: (props) => props.value || 'New Alternative',
                         }),
                     }),
-                    { label: 'Key Decisions' }
+                    {
+                        label: 'Key Decisions',
+                        itemLabel: (props) => props.fields.decision.value || 'New Decision'
+                    }
                 ),
                 techStack: fields.array(fields.text({ label: 'Tech' }), {
                     label: 'Tech Stack',
+                    itemLabel: (props) => props.value || 'New Tech',
                 }),
                 impact: fields.object({
                     metrics: fields.array(
@@ -195,12 +203,16 @@ export default config({
                             label: fields.text({ label: 'Label' }),
                             value: fields.text({ label: 'Value' }),
                         }),
-                        { label: 'Metrics' }
+                        {
+                            label: 'Metrics',
+                            itemLabel: (props) => `${props.fields.label.value}${props.fields.value.value ? ': ' + props.fields.value.value : ''}` || 'New Metric'
+                        }
                     ),
                     qualitative: fields.text({ label: 'Qualitative Impact', multiline: true }),
                 }),
                 learnings: fields.array(fields.text({ label: 'Learning' }), {
                     label: 'Learnings',
+                    itemLabel: (props) => props.value || 'New Learning',
                 }),
                 featured: fields.checkbox({ label: 'Featured', defaultValue: false }),
                 status: fields.select({
@@ -215,9 +227,11 @@ export default config({
                 order: fields.number({ label: 'Order' }),
                 relatedProjects: fields.array(fields.text({ label: 'Related Project Slug' }), {
                     label: 'Related Projects',
+                    itemLabel: (props) => props.value || 'New Project Slug',
                 }),
                 relatedDecisions: fields.array(fields.text({ label: 'Related Decision Slug' }), {
                     label: 'Related Decisions',
+                    itemLabel: (props) => props.value || 'New Decision Slug',
                 }),
                 content: fields.mdx({ label: 'Content' }),
             },
@@ -227,6 +241,7 @@ export default config({
             slugField: 'title',
             path: 'src/content/decisions/*',
             format: { contentField: 'content' },
+            columns: ['title', 'date'],
             schema: {
                 title: fields.slug({ name: { label: 'Title' } }),
                 date: fields.date({ label: 'Date' }),
@@ -235,15 +250,33 @@ export default config({
                 alternatives: fields.array(
                     fields.object({
                         option: fields.text({ label: 'Option' }),
-                        pros: fields.array(fields.text({ label: 'Pro' }), { label: 'Pros' }),
-                        cons: fields.array(fields.text({ label: 'Con' }), { label: 'Cons' }),
+                        pros: fields.array(fields.text({ label: 'Pro' }), {
+                            label: 'Pros',
+                            itemLabel: (props) => props.value || 'New Pro',
+                        }),
+                        cons: fields.array(fields.text({ label: 'Con' }), {
+                            label: 'Cons',
+                            itemLabel: (props) => props.value || 'New Con',
+                        }),
                     }),
-                    { label: 'Alternatives' }
+                    {
+                        label: 'Alternatives',
+                        itemLabel: (props) => props.fields.option.value || 'New Alternative'
+                    }
                 ),
                 reasoning: fields.text({ label: 'Reasoning', multiline: true }),
-                tags: fields.array(fields.text({ label: 'Tag' }), { label: 'Tags' }),
-                relatedProjects: fields.array(fields.text({ label: 'Related Project Slug' }), { label: 'Related Projects' }),
-                relatedDecisions: fields.array(fields.text({ label: 'Related Decision Slug' }), { label: 'Related Decisions' }),
+                tags: fields.array(fields.text({ label: 'Tag' }), {
+                    label: 'Tags',
+                    itemLabel: (props) => props.value || 'New Tag',
+                }),
+                relatedProjects: fields.array(fields.text({ label: 'Related Project Slug' }), {
+                    label: 'Related Projects',
+                    itemLabel: (props) => props.value || 'New Project Slug',
+                }),
+                relatedDecisions: fields.array(fields.text({ label: 'Related Decision Slug' }), {
+                    label: 'Related Decisions',
+                    itemLabel: (props) => props.value || 'New Decision Slug',
+                }),
                 content: fields.mdx({ label: 'Content' }),
             },
         }),
@@ -252,6 +285,7 @@ export default config({
             slugField: 'title',
             path: 'src/content/journey/*',
             format: { contentField: 'content' },
+            columns: ['title', 'date', 'type'],
             schema: {
                 title: fields.slug({ name: { label: 'Title' } }),
                 date: fields.date({ label: 'Date' }),
@@ -265,7 +299,10 @@ export default config({
                     defaultValue: 'milestone',
                 }),
                 description: fields.text({ label: 'Description', multiline: true }),
-                skills: fields.array(fields.text({ label: 'Skill' }), { label: 'Skills' }),
+                skills: fields.array(fields.text({ label: 'Skill' }), {
+                    label: 'Skills',
+                    itemLabel: (props) => props.value || 'New Skill',
+                }),
                 content: fields.mdx({ label: 'Content' }),
             }
         }),
@@ -274,6 +311,7 @@ export default config({
             slugField: 'name',
             path: 'src/content/testimonials/*',
             format: { contentField: 'content' },
+            columns: ['name', 'company', 'date'],
             schema: {
                 name: fields.slug({ name: { label: 'Name' } }),
                 role: fields.text({ label: 'Role' }),

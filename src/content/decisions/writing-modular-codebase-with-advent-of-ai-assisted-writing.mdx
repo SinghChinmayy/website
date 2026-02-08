@@ -1,0 +1,44 @@
+---
+title: Writing modular codebase with advent of ai assisted writing
+date: 2026-02-08
+context: >-
+  With LLMs and AI coding assistants (like Copilot/Cursor) basically becoming
+  the new standard, the way we structure repos is changing. It’s no longer just
+  about human readability; it’s about making the codebase "AI-digestible" so the
+  model doesn't hallucinate or lose context in a giant monolith.
+decision: >-
+  Maintain a highly modular code structure with single-purpose modules to
+  prevent overlapping responsibilities, which complicates troubleshooting.
+  Configure AI agents to modify individual modules rather than making sweeping
+  changes across the entire codebase. Additionally, create Git commits after
+  each minor modification or milestone, using descriptive commit messages that
+  enable easy rollback to earlier working versions if issues arise.
+alternatives:
+  - option: Use AI only for snippets and utilities
+    pros:
+      - Low risk
+      - easy to review
+    cons:
+      - Underutilizes AI’s strengths in reasoning and structure
+reasoning: >-
+  Modularity is like a guardrail for AI - when you set clear boundaries (like
+  cursor rules), the AI is way less likely to make up fake dependencies. Keeping
+  things small and focused means the AI does better work (though you still need
+  to keep the bigger picture in mind for quality). Plus, code reviews get easier
+  since changes stay in one spot, and refactoring becomes less scary because you
+  can do it bit by bit.
+tags: []
+relatedProjects: []
+relatedDecisions: []
+---
+#### **1. Interface First**
+
+Define the `input` and `output` of a module before writing a single line of logic. This gives the AI a "contract" to follow.
+
+#### **2. Dependency Isolation**
+
+Keep the `utils` clean. No circular imports. If a module needs something, it should be explicitly passed or imported from a dedicated `core` layer.
+
+#### **3. AI-Friendly Documentation**
+
+Use JSDoc or Python Type Hints religiously. It’s not just for us anymore; it’s for the LLM to understand the types without having to "guess" the schema.
