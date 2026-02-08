@@ -5,6 +5,9 @@
  * A clean, simple newsletter signup form that encourages users to subscribe.
  * Currently serves as a UI implementation that can be connected to a provider later.
  */
+import { siteConfig } from '../config';
+
+const { newsletter } = siteConfig;
 ---
 
 <div class="newsletter-signup">
@@ -16,14 +19,15 @@
     
     <form 
       class="signup-form" 
-      action="https://chinmaysingh.us16.list-manage.com/subscribe/post" 
+      action={newsletter.action}
       method="POST" 
       target="_blank"
       novalidate
     >
-      <input type="hidden" name="u" value="d16ebe6ee210f90bc2f6cae66" />
-      <input type="hidden" name="id" value="678ed84f8c" />
-      <input type="hidden" name="f_id" value="002f1ee1f0" />
+      <input type="hidden" name="u" value={newsletter.u} />
+      <input type="hidden" name="id" value={newsletter.id} />
+      <input type="hidden" name="f_id" value={newsletter.f_id} />
+
 
       <div class="input-group">
         <input 
@@ -38,7 +42,7 @@
         <div style="position: absolute; left: -5000px;" aria-hidden="true">
           <input
             type="text"
-            name="b_d16ebe6ee210f90bc2f6cae66_678ed84f8c"
+            name={`b_${newsletter.u}_${newsletter.id}`}
             tabindex="-1"
           />
         </div>

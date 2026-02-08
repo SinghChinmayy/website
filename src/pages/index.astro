@@ -70,9 +70,9 @@ const caseSnapshots = featuredProjects.slice(0, 3);
  * top 2 for the homepage preview.
  */
 const allDecisions = await getCollection('decisions');
-const recentDecisions = allDecisions
-  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
-  .slice(0, 2);
+// const recentDecisions = allDecisions
+//   .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+//   .slice(0, 2);
 
 /**
  * Queries and filters writing for recent posts section
@@ -114,11 +114,11 @@ const recentPosts = allPosts
 
           <h1 class="hero-title">
             Hi, I'm {siteConfig.author.name}.<br/>
-            <span class="hero-title-emphasis">Computer Science Undergraduate | Systems, Cloud & C++</span>
+            <span class="hero-title-emphasis">{siteConfig.author.title}</span>
           </h1>
           
           <p class="hero-sub">
-            Computer Science undergraduate focused on systems engineering, cloud infrastructure, and low-level software. I document the reasoning behind my work through case studies and decision logs—because good engineering is about constraints, not just code.
+            {siteConfig.author.bio}
           </p>
           
           <div class="hero-cta">

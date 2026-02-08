@@ -1,8 +1,53 @@
-import { config, fields, collection } from '@keystatic/core';
+import { config, fields, collection, singleton } from '@keystatic/core';
 
 export default config({
     storage: {
         kind: 'local',
+    },
+    singletons: {
+        settings: singleton({
+            label: 'Settings',
+            path: 'src/content/settings',
+            format: { data: 'json' },
+            schema: {
+                site: fields.object({
+                    url: fields.text({ label: 'Site URL' }),
+                    language: fields.text({ label: 'Language (ISO code)' }),
+                    title: fields.text({ label: 'Site Title' }),
+                    description: fields.text({ label: 'Site Description', multiline: true }),
+                }, { label: 'Site Metadata' }),
+                author: fields.object({
+                    name: fields.text({ label: 'Name' }),
+                    title: fields.text({ label: 'Title / Role' }),
+                    bio: fields.text({ label: 'Bio', multiline: true }),
+                    email: fields.text({ label: 'Email' }),
+                    location: fields.text({ label: 'Location' }),
+                }, { label: 'Author Information' }),
+                social: fields.object({
+                    github: fields.text({ label: 'GitHub URL' }),
+                    linkedin: fields.text({ label: 'LinkedIn URL' }),
+                    twitter: fields.text({ label: 'Twitter URL' }),
+                    mastodon: fields.text({ label: 'Mastodon URL' }),
+                    bluesky: fields.text({ label: 'Bluesky URL' }),
+                }, { label: 'Social Links' }),
+                newsletter: fields.object({
+                    action: fields.text({ label: 'Form Action URL' }),
+                    u: fields.text({ label: 'User ID (u)' }),
+                    id: fields.text({ label: 'List ID (id)' }),
+                    f_id: fields.text({ label: 'Field ID (f_id)' }),
+                }, { label: 'Newsletter Configuration' }),
+                nav: fields.array(
+                    fields.object({
+                        label: fields.text({ label: 'Label' }),
+                        href: fields.text({ label: 'Href' }),
+                    }),
+                    {
+                        label: 'Navigation Items',
+                        itemLabel: (props) => props.fields.label.value,
+                    }
+                ),
+            },
+        }),
     },
     collections: {
         writing: collection({
