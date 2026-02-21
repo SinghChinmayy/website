@@ -63,16 +63,7 @@ const featuredProjects = allProjects
  */
 const caseSnapshots = featuredProjects.slice(0, 3);
 
-/**
- * Queries recent decisions for preview section
- * 
- * Retrieves all decisions, sorts by date (newest first), and limits to
- * top 2 for the homepage preview.
- */
-const allDecisions = await getCollection('decisions');
-const recentDecisions = allDecisions
-  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
-  .slice(0, 2);
+
 
 /**
  * Queries and filters writing for recent posts section
@@ -122,8 +113,8 @@ const recentPosts = allPosts
           </p>
           
           <div class="hero-cta">
-            <a href="/projects" class="btn-primary">Explore Case Studies</a>
-            <a href="/journey" class="btn-secondary">Read My Journey</a>
+            <a href="/projects" class="btn-primary">View Projects</a>
+            <a href="/journey" class="btn-secondary">My Journey</a>
           </div>
 
           <SocialLinks />
@@ -146,48 +137,6 @@ const recentPosts = allPosts
         </div>
       </div>
     </section>
-
-
-
-
-
-
-
-    <!-- Recent Decisions -->
-    {recentDecisions.length > 0 && (
-      <section class="recent-decisions">
-        <div class="section-header">
-          <h2>Recent Decisions</h2>
-          <ForwardLink href="/decisions" text="View all" variant="muted" />
-        </div>
-        
-        <div class="decisions-list">
-          {recentDecisions.map((decision) => {
-            const date = new Date(decision.data.date);
-            const formattedDate = date.toLocaleDateString('en-US', { 
-              month: 'short', 
-              year: 'numeric' 
-            });
-            
-            return (
-              <a href={`/decisions/${decision.id}`} class="decision-item">
-                <div class="decision-meta">
-                  <time class="decision-date" datetime={new Date(decision.data.date).toISOString()}>
-                    {formattedDate}
-                  </time>
-                </div>
-                <div class="decision-content">
-                  <h3 class="decision-title">{decision.data.title}</h3>
-                  <p class="decision-excerpt">{decision.data.context}</p>
-                </div>
-              </a>
-            );
-          })}
-        </div>
-      </section>
-    )}
-
-
 
 
     {recentPosts.length > 0 && (
@@ -242,13 +191,13 @@ const recentPosts = allPosts
     
     <!-- CTA -->
     <section class="cta">
-      <h2>Let's Work Together</h2>
+      <h2>Let's Connect</h2>
       <p>
-        Looking for technical leadership, architectural guidance, or someone who documents their thinking? Let's talk.
+        Open to internships, collaborations, and conversations about systems engineering. Always happy to chat.
       </p>
       <div class="cta-buttons">
-        <a href="/projects" class="btn-primary">View My Work</a>
-        <a href="/contact" class="btn-secondary">Get in Touch</a>
+        <a href="/projects" class="btn-primary">View Projects</a>
+        <a href="/contact" class="btn-secondary">Say Hello</a>
       </div>
     </section>
   </main>
@@ -400,78 +349,7 @@ const recentPosts = allPosts
 
     /* .introduction style block removed */
 
-    .recent-decisions {
-      margin-bottom: 5rem;
-    }
 
-    .section-header {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      margin-bottom: 2rem;
-    }
-
-    .section-header h2 {
-      font-size: 1.25rem;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-    }
-
-    .decisions-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      border-top: 1px solid var(--color-border);
-    }
-
-    .decision-item {
-      display: flex;
-      gap: 2rem;
-      padding: 1.5rem 0;
-      border-bottom: 1px solid var(--color-border);
-      text-decoration: none;
-      transition: opacity 0.2s ease;
-    }
-
-    .decision-item:hover {
-      opacity: 0.7;
-    }
-
-    .decision-meta {
-      flex-shrink: 0;
-      width: 80px;
-    }
-
-    .decision-date {
-      display: block;
-      font-size: 0.8125rem;
-      font-weight: 500;
-      color: var(--color-text-muted);
-    }
-
-    .decision-content {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .decision-title {
-      font-size: 1rem;
-      font-weight: 600;
-      line-height: 1.4;
-      color: var(--color-text);
-      margin: 0 0 0.5rem 0;
-    }
-
-    .decision-excerpt {
-      font-size: 0.9375rem;
-      line-height: 1.6;
-      color: var(--color-text-secondary);
-      margin: 0;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
 
     .recent-writing {
       margin-bottom: 5rem;
@@ -622,29 +500,6 @@ const recentPosts = allPosts
         font-size: 1rem;
       }
 
-      .section-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-      }
-
-      .decision-item {
-        flex-direction: column;
-        gap: 0.75rem;
-        padding: 1.25rem 0;
-      }
-
-      .decision-meta {
-        width: auto;
-      }
-
-      .decision-title {
-        font-size: 0.9375rem;
-      }
-
-      .decision-excerpt {
-        font-size: 0.875rem;
-      }
 
       .writing-grid {
         grid-template-columns: 1fr;

@@ -55,47 +55,47 @@ export const pagesConfig = {
    */
   home: {
     title: 'Home',
-    description: 'Engineering leader specializing in system architecture, technical decision-making, and delivering measurable business impact.',
+    description: 'CS undergrad exploring systems engineering, cloud infrastructure, and backend development. Projects, writing, and things I\'m learning along the way.',
   },
 
   /**
    * Projects listing page (/projects)
    */
   projects: {
-    title: 'Projects - Case Studies',
-    description: 'Detailed case studies showcasing problem-solving approach, technical decisions, and measurable impact across various engineering projects.',
+    title: 'Projects',
+    description: 'Projects and case studies showing how I approach problems, make technical decisions, and build working systems.',
     heading: 'Projects',
-    intro: 'Case studies that demonstrate how I approach complex problems, make technical decisions, and deliver measurable impact. Each project tells the story of the challenge, the constraints, the decisions made, and the outcomes achieved.',
+    intro: 'Things I\'ve built and worked on. Each project covers the problem, the approach, the tools I used, and what I learned.',
   },
 
   /**
    * Decisions listing page (/decisions)
    */
   decisions: {
-    title: 'Decisions - Architectural & Technical Choices',
-    description: 'A log of architectural and technical decisions, documenting the context, alternatives considered, and reasoning behind key engineering choices.',
+    title: 'Decisions',
+    description: 'A log of technical decisions I\'ve made — the context, alternatives I considered, and why I chose what I did.',
     heading: 'Decisions',
-    intro: 'A transparent log of architectural and technical decisions I\'ve made throughout my career. Each entry documents the context, alternatives considered, and the reasoning behind the choice.',
+    intro: 'A transparent log of architectural and technical decisions I\'ve made across my projects. Each entry documents the context, alternatives considered, and the reasoning behind the choice.',
   },
 
   /**
    * Journey timeline page (/journey)
    */
   journey: {
-    title: 'Resume & Journey - CV',
-    description: 'My professional resume, technical skills, and a chronological timeline of my career growth and learning progression.',
+    title: 'Resume & Journey',
+    description: 'My resume, technical skills, and a timeline of what I\'ve been learning and building.',
     heading: 'Resume & Journey',
-    intro: 'A comprehensive view of my professional qualifications, including my downloadable resume, technical skill set, and a chronological timeline of my career milestones.',
+    intro: 'My resume, the tools and technologies I work with, and a timeline of my learning and growth so far.',
   },
 
   /**
    * Writing/blog listing page (/writing)
    */
   writing: {
-    title: 'Writing - Technical Articles & Insights',
-    description: 'Technical articles, insights, and lessons learned from building software systems and solving engineering challenges.',
+    title: 'Writing',
+    description: 'Technical articles, notes, and things I\'ve learned from building software and studying computer science.',
     heading: 'Writing',
-    intro: 'Technical articles, insights, and lessons learned from building software systems. I write about architecture decisions, engineering practices, and the challenges of delivering reliable software at scale.',
+    intro: 'Technical articles, notes, and lessons learned from building software systems. I write about architecture decisions, engineering practices, and things I find interesting.',
   },
 
   /**
@@ -112,9 +112,9 @@ export const pagesConfig = {
    * Contact page (/contact)
    */
   contact: {
-    title: 'Contact - Get in Touch',
-    description: 'Get in touch to discuss opportunities, collaborations, or technical challenges.',
-    heading: 'Let\'s Talk',
+    title: 'Contact',
+    description: 'Get in touch — happy to chat about projects, opportunities, or anything engineering.',
+    heading: 'Say Hello',
   },
 } as const;
 

@@ -1,11 +1,11 @@
 ---
 /**
  * NewsletterSignup Component
- * 
+ *
  * A clean, simple newsletter signup form that encourages users to subscribe.
  * Currently serves as a UI implementation that can be connected to a provider later.
  */
-import { siteConfig } from '../config';
+import { siteConfig } from "../config";
 
 const { newsletter } = siteConfig;
 ---
@@ -14,13 +14,15 @@ const { newsletter } = siteConfig;
   <div class="newsletter-content">
     <div class="newsletter-text">
       <span class="newsletter-label">Subscribe to updates</span>
-      <p class="newsletter-sub">Get insights on software architecture and engineering leadership.</p>
+      <p class="newsletter-sub">
+        Notes on systems, cloud, and what I'm learning in engineering.
+      </p>
     </div>
-    
-    <form 
-      class="signup-form" 
+
+    <form
+      class="signup-form"
       action={newsletter.action}
-      method="POST" 
+      method="POST"
       target="_blank"
       novalidate
     >
@@ -28,16 +30,15 @@ const { newsletter } = siteConfig;
       <input type="hidden" name="id" value={newsletter.id} />
       <input type="hidden" name="f_id" value={newsletter.f_id} />
 
-
       <div class="input-group">
-        <input 
-          type="email" 
+        <input
+          type="email"
           name="EMAIL"
-          placeholder="your@email.com" 
+          placeholder="your@email.com"
           aria-label="Email address"
           required
         />
-        
+
         <!-- Bot trap (do not remove) -->
         <div style="position: absolute; left: -5000px;" aria-hidden="true">
           <input
@@ -48,7 +49,19 @@ const { newsletter } = siteConfig;
         </div>
 
         <button type="submit" aria-label="Subscribe">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            ><line x1="22" y1="2" x2="11" y2="13"></line><polygon
+              points="22 2 15 22 11 13 2 9 22 2"></polygon></svg
+          >
         </button>
       </div>
     </form>
@@ -151,7 +164,7 @@ const { newsletter } = siteConfig;
       align-items: stretch;
       gap: 1.5rem;
     }
-    
+
     .newsletter-text {
       max-width: 100%;
     }

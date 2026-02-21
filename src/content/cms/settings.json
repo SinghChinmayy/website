@@ -7,6 +7,24 @@
       "children": []
     },
     {
+      "label": "Projects",
+      "href": "/projects",
+      "show": true,
+      "children": []
+    },
+    {
+      "label": "Writing",
+      "href": "/writing",
+      "show": true,
+      "children": []
+    },
+    {
+      "label": "CV",
+      "href": "/journey",
+      "show": true,
+      "children": []
+    },
+    {
       "label": "Contact",
       "href": "/contact",
       "show": true,
@@ -15,43 +33,27 @@
     {
       "label": "Editorial",
       "href": "#",
-      "show": true,
+      "show": false,
       "children": [
-        {
-          "label": "Projects",
-          "href": "/projects",
-          "show": true
-        },
-        {
-          "label": "Writing",
-          "href": "/writing",
-          "show": true
-        },
         {
           "label": "Decisions",
           "href": "/decisions",
-          "show": true
+          "show": false
         }
       ]
-    },
-    {
-      "label": "CV",
-      "href": "/journey",
-      "show": true,
-      "children": []
     }
   ],
   "site": {
     "url": "https://chinmaysingh.me",
     "language": "en",
     "title": "Chinmay Singh - Portfolio",
-    "description": "Computer Science undergraduate specializing in systems engineering, cloud infrastructure, and backend development. Building real-world systems with a focus on reliability, security, and performance.",
+    "description": "CS undergrad exploring systems engineering, cloud infrastructure, and backend development. Projects, writing, and things I'm learning along the way.",
     "favicon": "~/assets/images/site/favicon.png"
   },
   "author": {
     "name": "Chinmay Singh",
-    "title": "Computer Science Undergraduate | Systems, Cloud & C++",
-    "bio": "Computer Science undergraduate with a strong interest in low-level systems, cloud infrastructure, and backend engineering. I enjoy building and operating real-world systems — from self-hosted server platforms to C++ command-line tools — with a focus on reliability, security, and performance.",
+    "title": "Engineering Undergrad.",
+    "bio": "CS undergrad focused on systems, cloud, and backend engineering. Building reliable and high performance systems.",
     "location": "BLR, India"
   },
   "cms": {
