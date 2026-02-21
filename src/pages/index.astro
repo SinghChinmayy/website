@@ -331,38 +331,6 @@ const recentPosts = allPosts
       margin-bottom: 2rem;
     }
 
-    .btn-primary {
-      display: inline-block;
-      padding: 0.75rem 1.5rem;
-      background: var(--color-text);
-      color: var(--color-bg);
-      font-weight: 600;
-      font-size: 0.9375rem;
-      text-decoration: none;
-      border-radius: 6px;
-      transition: opacity 0.2s ease;
-    }
-
-    .btn-primary:hover {
-      opacity: 0.85;
-    }
-
-    .btn-secondary {
-      display: inline-block;
-      padding: 0.75rem 1.5rem;
-      background: transparent;
-      color: var(--color-text);
-      font-weight: 500;
-      font-size: 0.9375rem;
-      text-decoration: none;
-      border: 1px solid var(--color-border);
-      border-radius: 6px;
-      transition: border-color 0.2s ease;
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--color-text-secondary);
-    }
 
     .hero-right {
       padding-top: 0.5rem;
@@ -640,8 +608,8 @@ const recentPosts = allPosts
         flex-direction: column;
       }
 
-      .btn-primary,
-      .btn-secondary {
+      .hero-cta :global(.btn-primary),
+      .hero-cta :global(.btn-secondary) {
         text-align: center;
         width: 100%;
       }
@@ -699,8 +667,8 @@ const recentPosts = allPosts
         flex-direction: column;
       }
 
-      .cta-buttons .btn-primary,
-      .cta-buttons .btn-secondary {
+      .cta-buttons :global(.btn-primary),
+      .cta-buttons :global(.btn-secondary) {
         width: 100%;
       }
     }

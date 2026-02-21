@@ -73,6 +73,73 @@
 }
 
 /* ============================================
+   BUTTON COMPONENTS
+   ============================================ */
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--color-text);
+  color: var(--color-bg);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  text-decoration: none;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  opacity: 0.9;
+  box-shadow: 0 6px 16px -6px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .btn-primary:hover {
+  box-shadow: 0 6px 16px -6px rgba(255, 255, 255, 0.08);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  padding: 0.75rem 1.5rem;
+  background: transparent;
+  color: var(--color-text);
+  font-weight: 500;
+  font-size: 0.9375rem;
+  text-decoration: none;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-secondary:hover {
+  border-color: var(--color-text-secondary);
+  background: var(--color-bg-secondary);
+  transform: translateY(-1px);
+}
+
+.btn-secondary svg {
+  transition: transform 0.25s ease;
+}
+
+/* Pill variant for special contexts (e.g., resume buttons) */
+.btn-primary.btn-pill,
+.btn-secondary.btn-pill {
+  border-radius: 9999px;
+  padding: 0.875rem 1.75rem;
+}
+
+/* ============================================
    RESPONSIVE
    ============================================ */
 
