@@ -76,6 +76,18 @@ export default defineConfig({
   ],
 
   /**
+   * Vite Configuration
+   * 
+   * Force Vite to pre-bundle Keystatic's CJS dependencies to avoid
+   * stale chunk errors and ESM/CJS compatibility issues.
+   */
+  vite: {
+    optimizeDeps: {
+      include: ['@keystatic/core', '@keystatic/astro'],
+    },
+  },
+
+  /**
    * Site URL
    * 
    * Base URL for the site, loaded from SITE_URL environment variable.
