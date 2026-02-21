@@ -21,13 +21,13 @@
     {
       "label": "CV",
       "href": "/journey",
-      "show": true,
+      "show": false,
       "children": []
     },
     {
       "label": "Contact",
       "href": "/contact",
-      "show": true,
+      "show": false,
       "children": []
     },
     {
