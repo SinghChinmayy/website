@@ -2,31 +2,19 @@
 /**
  * Home Page
  * 
- * Case-study-first portfolio homepage that immediately showcases real impact and outcomes
- * rather than generic taglines. Features a hero section with featured project snapshots,
- * recent decisions, testimonials, and clear calls-to-action.
- * 
- * Design Philosophy:
- * - Lead with tangible results and case studies
- * - Document decision-making process transparently
- * - Demonstrate value through real project outcomes
- * - Provide multiple entry points (projects, decisions, journey)
+ * Portfolio homepage showcasing projects, writing, and a clear call-to-action.
+ * Features a hero section with featured project snapshots and recent posts.
  * 
  * Sections:
- * 1. Hero - Value statement with featured case study snapshots
- * 2. Introduction - Brief personal introduction with journey link
- * 3. Recent Decisions - Latest architectural/technical decisions
- * 4. Testimonials - Social proof from colleagues and clients
- * 5. Thinking - Problems and topics of interest
- * 6. CTA - Call-to-action for work opportunities
+ * 1. Hero - Bio, CTAs, and featured case study snapshots
+ * 2. Recent Writing - Latest published articles
+ * 3. CTA - Call-to-action for collaboration/contact
  * 
  * Features:
  * - Featured projects showcase (top 2-3)
- * - Recent decisions preview (top 2)
- * - Testimonials integration
+ * - Recent writing preview (top 3)
  * - Structured data for SEO (WebSite and Person)
  * - Responsive grid layout
- * - Multiple CTAs for different user intents
  * 
  * Route: /
  * 
@@ -37,8 +25,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import SEO from '../components/SEO.astro';
 import StructuredData from '../components/StructuredData.astro';
 import ForwardLink from '../components/ForwardLink.astro';
-
-
 import SocialLinks from '../components/SocialLinks.astro';
 import { getCollection } from 'astro:content';
 import { siteConfig } from '../config';
@@ -245,7 +231,6 @@ const recentPosts = allPosts
       color: var(--color-text-secondary);
       margin-bottom: 2rem;
       line-height: 1.6;
-      line-height: 1.6;
       max-width: 600px;
     }
 
@@ -263,16 +248,6 @@ const recentPosts = allPosts
       object-fit: cover;
       border: 2px solid var(--color-border);
     }
-
-    .profile-pic {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid var(--color-border);
-    }
-
-    /* .hero-meta removed as it's now redundant with the profile header */
 
     .hero-cta {
       display: flex;
@@ -347,10 +322,6 @@ const recentPosts = allPosts
         color: var(--color-text-muted);
     }
 
-    /* .introduction style block removed */
-
-
-
     .recent-writing {
       margin-bottom: 5rem;
     }
@@ -416,25 +387,6 @@ const recentPosts = allPosts
       border-radius: 3px;
     }
 
-
-    .thinking {
-      margin-bottom: 5rem;
-    }
-
-    .thinking h2 {
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin-bottom: 1.25rem;
-      letter-spacing: -0.01em;
-    }
-
-    .thinking-list {
-      font-size: 1.0625rem;
-      line-height: 1.9;
-      color: var(--color-text-secondary);
-      max-width: 680px;
-    }
-
     .cta {
       padding: 3rem 0;
       border-top: 1px solid var(--color-border);
@@ -495,11 +447,6 @@ const recentPosts = allPosts
       .case-snapshot {
         padding: 1rem 1.25rem;
       }
-
-      .introduction {
-        font-size: 1rem;
-      }
-
 
       .writing-grid {
         grid-template-columns: 1fr;
