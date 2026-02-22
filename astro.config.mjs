@@ -157,7 +157,11 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [remarkAlert, remarkGfm],
     shikiConfig: {
-      theme: 'github-dark',
+      themes: {
+        light: 'github-light',
+        dark: 'github-dark',
+      },
+      defaultColor: false,
       wrap: true
     }
   }

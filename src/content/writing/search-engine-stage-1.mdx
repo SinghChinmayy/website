@@ -282,29 +282,30 @@ We are not just parsing text anymore. We are building a search engine foundation
 # Implementation Checklist
 
 ### Done in this phase
-
-* \[x] Pipeline architecture designed with clear separation of concerns
-* \[x] Text file loader (`TxtLoader`) with UTF-8 encoding support
-* \[x] Text normalization with Unicode NFKC, line ending normalization, lowercasing, and whitespace stripping
-* \[x] Regex based tokenizer that handles hyphenated words and contractions
-* \[x] Pipeline manager that orchestrates loader, normalizer, and tokenizer
-* \[x] Main entry point using `pathlib` for file iteration
-* \[x] Document ID assignment and document table creation
-* \[x] Inverted index construction (term to set of doc IDs)
-* \[x] Basic single keyword lookup
+```mdx
+- [x] Pipeline architecture designed with clear separation of concerns
+- [x] Text file loader (`TxtLoader`) with UTF-8 encoding support
+- [x] Text normalization with Unicode NFKC, line ending normalization, lowercasing, and whitespace stripping
+- [x] Regex-based tokenizer that handles hyphenated words and contractions
+- [x] Pipeline manager that orchestrates loader, normalizer, and tokenizer
+- [x] Main entry point using `pathlib` for file iteration
+- [x] Document ID assignment and document table creation
+- [x] Inverted index construction (term to set of doc IDs)
+- [x] Basic single keyword lookup
 
 ### Possible future implementations
 
-* \[ ] Stopword removal
-* \[ ] Stemming and lemmatization
-* \[ ] Punctuation handling in normalizer
-* \[ ] TF-IDF or BM25 ranking
-* \[ ] Boolean query support (AND, OR, NOT)
-* \[ ] Multi word query processing
-* \[ ] Sorted file paths for consistent document IDs across runs
-* \[ ] Support for additional file formats (PDF, HTML, JSON)
-* \[ ] Wikipedia dump ingestion via web crawler
-* \[ ] CLI search interface
-* \[ ] Web UI for search
-* \[ ] Semantic search with embeddings
-* \[ ] Hybrid search (keyword + semantic)
+- [ ] Stopword removal
+- [ ] Stemming and lemmatization
+- [ ] Punctuation handling in normalizer
+- [ ] TF-IDF or BM25 ranking
+- [ ] Boolean query support (AND, OR, NOT)
+- [ ] Multi-word query processing
+- [ ] Sorted file paths for consistent document IDs across runs
+- [ ] Support for additional file formats (PDF, HTML, JSON)
+- [ ] Wikipedia dump ingestion via web crawler
+- [ ] CLI search interface
+- [ ] Web UI for search
+- [ ] Semantic search with embeddings
+- [ ] Hybrid search (keyword + semantic)
+```
