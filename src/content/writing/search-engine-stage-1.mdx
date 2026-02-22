@@ -1,5 +1,5 @@
 ---
-title: NLP Search Engine Pipeline (Stage 1)
+title: Building the Core of a Search Engine Step by Step [Stage 1]
 description: >-
   This article guides you through building a modular NLP search pipeline by
   first designing a clean architecture with distinct layers for ingestion,
@@ -14,7 +14,7 @@ draft: false
 
 Built a modular NLP search pipeline with clear separation between ingestion, preprocessing, and indexing. After designing the internal pipeline structure, I wired everything together through a main entry point that assigns document IDs and constructs a working inverted index. We now have a clean architecture and a basic keyword lookup system ready to grow.
 
-🔗 **[View the source code on GitHub](https://github.com/SinghChinmayy/search-engine)**
+🔗 [**View the source code on GitHub**](https://github.com/SinghChinmayy/search-engine)
 
 ---
 
@@ -283,29 +283,28 @@ We are not just parsing text anymore. We are building a search engine foundation
 
 ### Done in this phase
 
-- [x] Pipeline architecture designed with clear separation of concerns
-- [x] Text file loader (`TxtLoader`) with UTF-8 encoding support
-- [x] Text normalization with Unicode NFKC, line ending normalization, lowercasing, and whitespace stripping
-- [x] Regex-based tokenizer that handles hyphenated words and contractions
-- [x] Pipeline manager that orchestrates loader, normalizer, and tokenizer
-- [x] Main entry point using `pathlib` for file iteration
-- [x] Document ID assignment and document table creation
-- [x] Inverted index construction (term to set of doc IDs)
-- [x] Basic single keyword lookup
+* \[x] Pipeline architecture designed with clear separation of concerns
+* \[x] Text file loader (`TxtLoader`) with UTF-8 encoding support
+* \[x] Text normalization with Unicode NFKC, line ending normalization, lowercasing, and whitespace stripping
+* \[x] Regex-based tokenizer that handles hyphenated words and contractions
+* \[x] Pipeline manager that orchestrates loader, normalizer, and tokenizer
+* \[x] Main entry point using `pathlib` for file iteration
+* \[x] Document ID assignment and document table creation
+* \[x] Inverted index construction (term to set of doc IDs)
+* \[x] Basic single keyword lookup
 
 ### Possible future implementations
 
-- [ ] Stopword removal
-- [ ] Stemming and lemmatization
-- [ ] Punctuation handling in normalizer
-- [ ] TF-IDF or BM25 ranking
-- [ ] Boolean query support (AND, OR, NOT)
-- [ ] Multi-word query processing
-- [ ] Sorted file paths for consistent document IDs across runs
-- [ ] Support for additional file formats (PDF, HTML, JSON)
-- [ ] Wikipedia dump ingestion via web crawler
-- [ ] CLI search interface
-- [ ] Web UI for search
-- [ ] Semantic search with embeddings
-- [ ] Hybrid search (keyword + semantic)
-```
+* \[ ] Stopword removal
+* \[ ] Stemming and lemmatization
+* \[ ] Punctuation handling in normalizer
+* \[ ] TF-IDF or BM25 ranking
+* \[ ] Boolean query support (AND, OR, NOT)
+* \[ ] Multi-word query processing
+* \[ ] Sorted file paths for consistent document IDs across runs
+* \[ ] Support for additional file formats (PDF, HTML, JSON)
+* \[ ] Wikipedia dump ingestion via web crawler
+* \[ ] CLI search interface
+* \[ ] Web UI for search
+* \[ ] Semantic search with embeddings
+* \[ ] Hybrid search (keyword + semantic)
