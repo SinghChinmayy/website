@@ -284,6 +284,50 @@ function formatDate(date: Date): string {
       line-height: 1.7;
     }
 
+    /* Task list / checklist styles */
+    .article-content :global(.contains-task-list) {
+      list-style: none;
+      padding-left: 0.25rem;
+    }
+
+    .article-content :global(.task-list-item) {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .article-content :global(.task-list-item input[type="checkbox"]) {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 1.15em;
+      height: 1.15em;
+      margin-top: 0.3em;
+      border: 2px solid var(--color-text-muted, #666);
+      border-radius: 3px;
+      flex-shrink: 0;
+      cursor: default;
+      position: relative;
+      background: transparent;
+    }
+
+    .article-content :global(.task-list-item input[type="checkbox"]:checked) {
+      background: var(--color-accent, #4493f8);
+      border-color: var(--color-accent, #4493f8);
+    }
+
+    .article-content
+      :global(.task-list-item input[type="checkbox"]:checked::after) {
+      content: "";
+      position: absolute;
+      left: 3px;
+      top: 0px;
+      width: 5px;
+      height: 9px;
+      border: solid #fff;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+
     .article-content :global(blockquote) {
       margin: 2.5rem 0;
       padding: 1.5rem 2rem;
@@ -292,6 +336,75 @@ function formatDate(date: Date): string {
       font-style: italic;
       color: var(--color-text-secondary);
       border-radius: 0 8px 8px 0;
+    }
+
+    /* GitHub-style callout/alert overrides */
+    .article-content :global(.markdown-alert) {
+      font-style: normal;
+      padding: 1rem 1.25rem;
+      margin: 2rem 0;
+      border-radius: 0 8px 8px 0;
+      background: var(--color-bg-secondary);
+    }
+
+    .article-content :global(.markdown-alert-title) {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
+      font-size: 0.9375rem;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .article-content :global(.markdown-alert p) {
+      margin-bottom: 0.5rem;
+      font-style: normal;
+    }
+
+    .article-content :global(.markdown-alert p:last-child) {
+      margin-bottom: 0;
+    }
+
+    /* Note - blue */
+    .article-content :global(.markdown-alert-note) {
+      border-left: 4px solid #4493f8;
+    }
+    .article-content :global(.markdown-alert-note .markdown-alert-title) {
+      color: #4493f8;
+    }
+
+    /* Tip - green */
+    .article-content :global(.markdown-alert-tip) {
+      border-left: 4px solid #3fb950;
+    }
+    .article-content :global(.markdown-alert-tip .markdown-alert-title) {
+      color: #3fb950;
+    }
+
+    /* Important - purple */
+    .article-content :global(.markdown-alert-important) {
+      border-left: 4px solid #a371f7;
+    }
+    .article-content :global(.markdown-alert-important .markdown-alert-title) {
+      color: #a371f7;
+    }
+
+    /* Warning - yellow/orange */
+    .article-content :global(.markdown-alert-warning) {
+      border-left: 4px solid #d29922;
+    }
+    .article-content :global(.markdown-alert-warning .markdown-alert-title) {
+      color: #d29922;
+    }
+
+    /* Caution - red */
+    .article-content :global(.markdown-alert-caution) {
+      border-left: 4px solid #f85149;
+    }
+    .article-content :global(.markdown-alert-caution .markdown-alert-title) {
+      color: #f85149;
     }
 
     .article-content :global(code) {

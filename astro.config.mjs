@@ -26,6 +26,8 @@ import sitemap from '@astrojs/sitemap';
 import react from '@astrojs/react';
 import keystatic from '@keystatic/astro';
 import cloudflare from '@astrojs/cloudflare';
+import { remarkAlert } from 'remark-github-blockquote-alert';
+import remarkGfm from 'remark-gfm';
 
 /**
  * Load environment variables from .env file
@@ -153,6 +155,7 @@ export default defineConfig({
    * - Wrap: Enables line wrapping for long code lines
    */
   markdown: {
+    remarkPlugins: [remarkAlert, remarkGfm],
     shikiConfig: {
       theme: 'github-dark',
       wrap: true
