@@ -1,0 +1,333 @@
+---
+title: "Search Engine: Modular Pipeline & Inverted Index (Stage 1)"
+description: "Building a modular NLP search pipeline with pathlib, Unicode normalization, regex tokenization, and a functional inverted index."
+publishDate: 2026-02-23
+tags:
+  - search-engine
+draft: false
+---
+
+# tldr;
+Built a modular NLP search pipeline that reads text files, normalizes and tokenizes them, assigns document IDs, and constructs a working inverted index. We now have a clean architecture and a basic keyword lookup system that can evolve into a full search engine.
+
+# Stage 1: Designing the Pipeline Before Writing Code
+
+**Potential photo that can be added**  
+A simple diagram showing flow from Sources → Ingestion → Preprocessing → Representation → Output.
+
+## Description
+
+I did not want to write just another script that reads files and prints words. That works for five minutes. Then it becomes chaos.
+
+So I started with structure.
+
+Sources feed into ingestion.  
+Ingestion feeds preprocessing.  
+Preprocessing produces tokens.  
+Representation will come later.
+
+If you separate concerns early, future upgrades hurt less. You do not end up rewriting everything when you add ranking or crawling later.
+
+The folder structure reflects that thinking.
+
+## Code Snippet
+
+```text
+pipeline/
+    loaders/
+    processor/
+    pipeline_manager.py
+```
+
+## Key Takeaways
+
+This separation matters. Real systems do not mix file reading logic with indexing logic. Once you start scaling, that discipline saves you.
+
+---
+
+# Stage 2: Reading Documents Cleanly with Pathlib
+
+**Potential photo that can be added**
+Screenshot of the dataset folder and full project tree.
+
+## Description
+
+Next question. How do I fetch documents cleanly?
+
+Instead of using older file handling patterns, I used pathlib. It keeps file system logic readable and expressive.
+
+Here is the thing. If ingestion is messy, everything downstream becomes fragile.
+
+So I defined the dataset folder and iterated through each file.
+
+## Code Snippet
+
+```python
+from pathlib import Path
+from pipeline.pipeline_manager import pipeline
+
+folder = Path("dataset/.txt_type")
+
+for file_path in folder.iterdir():
+    if file_path.is_file():
+        tokens = pipeline(file_path).tokens()
+        print(f"\n{file_path}:\n {tokens}\n")
+```
+
+## Output
+
+A screenshot of tokenized output per file works well here. It visually shows the transformation from raw text to structured tokens.
+
+## Pro-Tip
+
+If your dataset grows, consider sorting file paths before assigning document IDs. Otherwise document IDs may change between runs.
+
+---
+
+# Stage 3: Cleaning Text Like It Actually Matters
+
+**Potential photo that can be added**
+Before and after view of raw text versus normalized tokens.
+
+## Description
+
+Raw text is chaotic. Different encodings. Strange characters. Mixed line endings.
+
+Let me explain what I did.
+
+I used Unicode normalization in NFKC format. That standardizes characters across different representations.
+
+Then I normalized line endings so Windows, Mac, and Linux formats all behave the same.
+
+Then I lowercased everything. Because search should not care about case.
+
+Then I stripped whitespace.
+
+It sounds simple. But this stage is where search engines either become robust or brittle.
+
+Stemming and lemmatization are not implemented yet. Stopword removal is also pending. I wanted the core stable before adding linguistic intelligence.
+
+## Key Takeaways
+
+Look at tokens like “café”, “naïve”, and “résumé”. Unicode handling is not theoretical. It shows up immediately in real text.
+
+---
+
+# Stage 4: Tokenization Decisions That Shape Search
+
+**Potential photo that can be added**
+Visual showing how a sentence breaks into tokens.
+
+## Description
+
+I had two options. Use split. Or use regex.
+
+Split is easy. But it fails quickly.
+
+So I used:
+
+```python
+\b\w+(?:[-']\w+)*\b
+```
+
+This keeps:
+
+- Normal words
+- Hyphenated words
+- Words with apostrophes
+
+But here is the interesting part.
+
+You will notice cases like:
+
+- “google’s” becomes “google” and “s”
+- “don’t” becomes “don” and “t”
+
+That is not wrong. It is tokenizer behavior. Every search engine makes tradeoffs here.
+
+Tokenization is not about perfection. It is about consistency.
+
+## Key Takeaways
+
+This stage defines how your entire index behaves. If tokenization is flawed, ranking and querying will suffer later.
+
+---
+
+# Stage 5: Assigning Document IDs and Building a Doc Table
+
+**Potential photo that can be added**
+Screenshot of printed doc_table dictionary.
+
+## Description
+
+Once tokens were flowing correctly, I needed structure.
+
+Instead of storing file paths everywhere, I assigned each document a unique ID.
+
+This keeps the inverted index small and clean.
+
+## Code Snippet
+
+```python
+doc_id = 0
+doc_table = {}
+
+for file_path in folder.iterdir():
+    if file_path.is_file():
+        tokens = pipeline(file_path).tokens()
+        doc_id += 1
+        doc_table[doc_id] = {
+            "path": str(file_path)
+        }
+```
+
+## Output
+
+```python
+{1: {'path': 'dataset/.txt_type/t-rex.txt'}, ...}
+```
+
+## Key Takeaways
+
+This mirrors how real search engines separate document metadata from term storage.
+
+---
+
+# Stage 6: Building the Inverted Index
+
+**Potential photo that can be added**
+Diagram showing a term pointing to multiple document IDs.
+
+## Description
+
+Now comes the core of search.
+
+I built a basic inverted index.
+
+Structure:
+
+- Dictionary
+- Term maps to set of document IDs
+
+Why a set?
+
+Because I do not care how many times a word appears. I just care that it exists in a document.
+
+Using a set automatically prevents duplicates. No manual checks needed.
+
+## Code Snippet
+
+```python
+inverted_index = {}
+
+for term in tokens:
+    if term not in inverted_index:
+        inverted_index[term] = set()
+    inverted_index[term].add(doc_id)
+```
+
+## Output
+
+A large dictionary mapping terms to document IDs. Using pprint makes it readable.
+
+## Pro-Tip
+
+Notice how words like “the” and “a” appear in almost every document. That is why stopword removal becomes important later.
+
+## Key Takeaways
+
+Right now this is presence based indexing. Later we can add term frequency, positional indexing, and ranking scores.
+
+---
+
+# Stage 7: Basic Keyword Lookup
+
+**Potential photo that can be added**
+Terminal screenshot showing search result for “tall”.
+
+## Description
+
+With the inverted index ready, querying becomes simple.
+
+If the word exists in the dictionary, return the document IDs.
+
+That is it.
+
+## Code Snippet
+
+```python
+query = input("Enter Word to search: ")
+
+if query in inverted_index:
+    print("Found in doc:", inverted_index[query])
+else:
+    print("No result found")
+```
+
+## Output
+
+```text
+Enter Word to search: tall
+Found in doc: {1, 2, 4, 5, 6}
+```
+
+## Key Takeaways
+
+This is single term lookup. Next comes boolean queries, phrase search, and ranking.
+
+And that is where things start getting interesting.
+
+---
+
+# Final Summary
+
+We started with plain text files.
+
+We built:
+
+1. A modular ingestion system
+2. A normalization and tokenization layer
+3. A document ID tracking system
+4. A working inverted index
+5. A basic lookup engine
+
+This is no longer just text parsing. It is a functional search core.
+
+The architecture is clean. The foundation is stable. Now we can move toward more complex querying without rewriting everything.
+
+---
+
+# Implementations in This Phase
+
+## Checklist of Implementations
+
+* [x] Modular pipeline structure
+* [x] Txt file loader with UTF 8 support
+* [x] Unicode normalization using NFKC
+* [x] Line ending normalization
+* [x] Lowercasing and whitespace stripping
+* [x] Regex based tokenizer
+* [x] Folder iteration using pathlib
+* [x] Document ID assignment
+* [x] Document metadata table
+* [x] Inverted index using sets
+* [x] Basic single word lookup
+* [x] Pretty printing for debugging
+
+## Future Roadmap
+
+* [ ] Stopword removal
+* [ ] Stemming
+* [ ] Lemmatization
+* [ ] Term frequency tracking
+* [ ] Positional indexing
+* [ ] Ranked retrieval
+* [ ] Boolean queries
+* [ ] Phrase queries
+* [ ] Numeric normalization
+* [ ] Continuous folder monitoring
+* [ ] Wikipedia dump ingestion
+* [ ] Compression of index
+* [ ] Persistent storage of index
+
+We now have a solid base. From here, the system can evolve into something much more powerful.
