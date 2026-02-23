@@ -312,6 +312,7 @@ const shareUrls = {
                     textArea.select();
 
                     try {
+                        // @ts-ignore - Fallback for older browsers
                         document.execCommand("copy");
                         button.classList.add("copied");
                         setTimeout(() => {

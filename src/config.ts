@@ -101,17 +101,4 @@ export const siteConfig = {
   nav: settings.nav,
 } as const;
 
-/**
- * Type export for the entire site configuration
- */
-export type SiteConfig = typeof siteConfig;
 
-/**
- * Type export for social links object
- */
-export type SocialLinks = typeof siteConfig.social;
-
-/**
- * Type export for a single navigation item
- */
-export type NavItem = typeof siteConfig.nav[number];

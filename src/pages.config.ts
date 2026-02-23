@@ -25,22 +25,7 @@
  * @module pages.config
  */
 
-/**
- * Page metadata interface
- */
-interface PageMeta {
-  /** Page title (used in browser tab and SEO) */
-  title: string;
 
-  /** Page description (used in meta tags and SEO) */
-  description: string;
-
-  /** Page heading (displayed as h1, optional - defaults to title) */
-  heading?: string;
-
-  /** Page intro text (displayed below heading, optional) */
-  intro?: string;
-}
 
 /**
  * Pages configuration object
@@ -118,12 +103,4 @@ export const pagesConfig = {
   },
 } as const;
 
-/**
- * Type export for the pages configuration
- */
-export type PagesConfig = typeof pagesConfig;
 
-/**
- * Type export for a single page metadata
- */
-export type PageConfig = PageMeta;
