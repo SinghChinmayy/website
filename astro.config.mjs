@@ -65,6 +65,15 @@ export default defineConfig({
   adapter: cloudflare(),
 
   /**
+   * Redirects
+   * 
+   * Forward /rss to the actual /rss.xml feed
+   */
+  redirects: {
+    '/rss': '/rss.xml',
+  },
+
+  /**
    * Astro integrations
    * 
    * - MDX: Enables MDX support for rich content authoring with JSX components

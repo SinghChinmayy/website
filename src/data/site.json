@@ -81,7 +81,7 @@
     {
       "label": "Hello!",
       "href": "contact",
-      "show": true,
+      "show": false,
       "children": []
     }
   ]
