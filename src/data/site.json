@@ -77,6 +77,12 @@
       "href": "/cv",
       "show": true,
       "children": []
+    },
+    {
+      "label": "Hello!",
+      "href": "contact",
+      "show": true,
+      "children": []
     }
   ]
 }
