@@ -29,13 +29,15 @@ import cloudflare from '@astrojs/cloudflare';
 import { remarkAlert } from 'remark-github-blockquote-alert';
 import remarkGfm from 'remark-gfm';
 
+import { readFileSync } from 'fs';
+import { resolve } from 'path';
+
 /**
- * Load environment variables from .env file
- * 
- * Uses Vite's loadEnv to read environment variables at build time.
- * Falls back to 'production' if NODE_ENV is not set.
+ * Load site configuration from Keystatic settings instead of .env
  */
-const { SITE_URL } = loadEnv(process.env.NODE_ENV || 'production', process.cwd(), '');
+const settingsPath = resolve('./src/content/cms/settings.json');
+const settings = JSON.parse(readFileSync(settingsPath, 'utf-8'));
+const SITE_URL = settings?.site?.url || 'https://example.com';
 
 /**
  * Astro configuration object
@@ -115,7 +117,7 @@ export default defineConfig({
   env: {
     schema: {
       // Build-time configuration
-      SITE_URL: envField.string({ context: 'client', access: 'public', default: 'https://example.com' }),
+      SITE_URL: envField.string({ context: 'client', access: 'public', default: SITE_URL }),
     },
   },
 
