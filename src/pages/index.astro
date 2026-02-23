@@ -100,7 +100,7 @@ const recentPosts = allPosts
           
           <div class="hero-cta">
             <a href="/projects" class="btn-primary">View Projects</a>
-            <a href="/journey" class="btn-secondary">My Journey</a>
+            <a href="/cv" class="btn-secondary">CV</a>
           </div>
 
           <SocialLinks />
@@ -435,13 +435,15 @@ const recentPosts = allPosts
       }
 
       .hero-cta {
-        flex-direction: column;
+        flex-direction: row;
       }
 
       .hero-cta :global(.btn-primary),
       .hero-cta :global(.btn-secondary) {
         text-align: center;
-        width: 100%;
+        flex: 1;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
       }
 
       .case-snapshot {
