@@ -95,7 +95,7 @@ if (siteConfig.favicon) {
 ---
 
 <!doctype html>
-<html lang={siteConfig.language} data-theme="dark">
+<html lang={siteConfig.language} data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -172,11 +172,7 @@ if (siteConfig.favicon) {
     <script is:inline>
       (function () {
         const stored = localStorage.getItem("theme");
-        const theme =
-          stored ||
-          (window.matchMedia("(prefers-color-scheme: light)").matches
-            ? "light"
-            : "dark");
+        const theme = stored || "light";
         document.documentElement.setAttribute("data-theme", theme);
       })();
     </script>

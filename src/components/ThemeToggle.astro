@@ -111,13 +111,11 @@
 </style>
 
 <script>
-  // Get theme from storage or system preference
+  // Get theme from storage or default to light
   const getTheme = (): "light" | "dark" => {
     const stored = localStorage.getItem("theme");
     if (stored === "light" || stored === "dark") return stored;
-    return window.matchMedia("(prefers-color-scheme: light)").matches
-      ? "light"
-      : "dark";
+    return "light";
   };
 
   // Apply theme to document
@@ -140,15 +138,6 @@
       toggleTheme();
     }
   });
-
-  // Listen for system preference changes (only once)
-  window
-    .matchMedia("(prefers-color-scheme: light)")
-    .addEventListener("change", (e) => {
-      if (!localStorage.getItem("theme")) {
-        setTheme(e.matches ? "light" : "dark");
-      }
-    });
 
   // Set initial theme
   setTheme(getTheme());
