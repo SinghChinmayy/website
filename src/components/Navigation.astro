@@ -346,28 +346,23 @@ const isActive = (href: string) => {
   }
 
   @media (max-width: 768px) {
+    .site-nav {
+      padding: var(--space-md) 1rem;
+    }
+
     .nav-scroll {
       overflow-x: auto;
       overflow-y: visible; /* Allow vertical overflow for dropdowns if they exist */
     }
 
     .nav-list {
-      justify-content: flex-start;
+      justify-content: center;
       gap: 1.5rem;
-      padding: 0.5rem 1rem;
+      padding: 0.5rem 0;
     }
 
     .nav-link {
-      font-size: 0.75rem;
-    }
-
-    .nav-end {
-      padding: 0 0.5rem;
-    }
-
-    .nav-end::before {
-      left: -16px;
-      width: 16px;
+      font-size: 0.8125rem;
     }
   }
 </style>
