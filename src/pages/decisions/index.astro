@@ -1,11 +1,11 @@
 ---
 /**
  * Decisions Index Page
- * 
+ *
  * Lists all decision log entries in reverse chronological order (most recent first).
  * Provides a transparent view of architectural and technical decisions made throughout
  * the career, with each entry linking to its detailed decision record.
- * 
+ *
  * Features:
  * - Queries all decisions from content collection
  * - Sorts by date (descending - newest first)
@@ -13,27 +13,27 @@
  * - Uses DecisionCard component for consistent presentation
  * - SEO optimization
  * - Empty state handling
- * 
+ *
  * Route: /decisions
- * 
+ *
  * @page
  */
 
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import SEO from '../../components/SEO.astro';
-import DecisionCard from '../../components/DecisionCard.astro';
-import PageStats from '../../components/PageStats.astro';
-import { getCollection } from 'astro:content';
-import { pagesConfig } from '../../pages.config';
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SEO from "../../components/SEO.astro";
+import DecisionCard from "../../components/DecisionCard.astro";
+import PageStats from "../../components/PageStats.astro";
+import { getCollection } from "astro:content";
+import { pagesConfig } from "../../pages.config";
 
 /**
  * Queries all decisions from the content collection
  */
-const allDecisions = await getCollection('decisions');
+const allDecisions = await getCollection("decisions").catch(() => []);
 
 /**
  * Sorts decisions by date in descending order (most recent first)
- * 
+ *
  * Ensures the latest decisions appear at the top of the list for
  * easy access to recent architectural choices.
  */
@@ -48,7 +48,7 @@ const totalDecisions = sortedDecisions.length;
 ---
 
 <BaseLayout>
-  <SEO 
+  <SEO
     slot="head"
     title={pagesConfig.decisions.title}
     description={pagesConfig.decisions.description}
@@ -64,20 +64,22 @@ const totalDecisions = sortedDecisions.length;
       <PageStats text={`${totalDecisions} decisions documented`} />
     </header>
 
-    {sortedDecisions.length > 0 ? (
-      <div class="card-list card-list--compact">
-        {sortedDecisions.map((decision) => (
-          <DecisionCard
-            title={decision.data.title}
-            slug={decision.id}
-            context={decision.data.context}
-            date={decision.data.date}
-            tags={decision.data.tags}
-          />
-        ))}
-      </div>
-    ) : (
-      <p class="empty-state">No decisions documented yet.</p>
-    )}
+    {
+      sortedDecisions.length > 0 ? (
+        <div class="card-list card-list--compact">
+          {sortedDecisions.map((decision) => (
+            <DecisionCard
+              title={decision.data.title}
+              slug={decision.id}
+              context={decision.data.context}
+              date={decision.data.date}
+              tags={decision.data.tags}
+            />
+          ))}
+        </div>
+      ) : (
+        <p class="empty-state">No decisions documented yet.</p>
+      )
+    }
   </main>
 </BaseLayout>

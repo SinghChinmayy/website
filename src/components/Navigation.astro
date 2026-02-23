@@ -1,32 +1,32 @@
 ---
 /**
  * Navigation Component
- * 
+ *
  * Main site navigation with responsive behavior and theme toggle. Features centered
  * navigation on desktop and horizontal scrolling on mobile. The theme toggle is fixed
  * at the right edge with a gradient fade effect.
- * 
+ *
  * Navigation items are configured in src/config.ts and automatically include a "Home"
  * link at the beginning. Active page highlighting is handled both server-side and
  * client-side for View Transitions support.
- * 
+ *
  * @component
- * 
+ *
  * @example
  * ```astro
  * <Navigation />
  * ```
  */
-import { getCollection } from 'astro:content';
-import { siteConfig } from '../config';
-import ThemeToggle from './ThemeToggle.astro';
+import { getCollection } from "astro:content";
+import { siteConfig } from "../data/index";
+import ThemeToggle from "./ThemeToggle.astro";
 
 const currentPath = Astro.url.pathname;
 
 /**
  * Fetch writing articles to check for published content
  */
-const writingArticles = await getCollection('writing', ({ data }) => {
+const writingArticles = await getCollection("writing", ({ data }) => {
   return data.draft !== true;
 });
 
@@ -35,13 +35,13 @@ const hasWriting = writingArticles.length > 0;
 /**
  * Navigation items managed via CMS
  */
-const navItems = siteConfig.nav.filter(item => {
+const navItems = siteConfig.nav.filter((item) => {
   // Filter out items explicitly marked as hidden
-  if ('show' in item && item.show === false) {
+  if ("show" in item && item.show === false) {
     return false;
   }
-  
-  if (item.label === 'Writing') {
+
+  if (item.label === "Writing") {
     return hasWriting;
   }
   return true;
@@ -49,17 +49,17 @@ const navItems = siteConfig.nav.filter(item => {
 
 /**
  * Determines if a navigation item should be marked as active
- * 
+ *
  * Home link is only active on the exact root path. Other links are active
  * if the current path starts with their href, allowing child pages to
  * highlight their parent navigation item.
- * 
+ *
  * @param href - The navigation item's URL
  * @returns True if the navigation item should be marked as active
  */
 const isActive = (href: string) => {
-  if (href === '/') {
-    return currentPath === '/';
+  if (href === "/") {
+    return currentPath === "/";
   }
   return currentPath.startsWith(href);
 };
@@ -68,38 +68,69 @@ const isActive = (href: string) => {
 <nav class="site-nav" aria-label="Main navigation">
   <div class="nav-scroll">
     <ul class="nav-list">
-      {navItems.map((item) => (
-        <li class:list={['nav-item', { 'nav-item--has-dropdown': item.children && item.children.length > 0 }]}>
-          <a 
-            href={item.href} 
-            class:list={['nav-link', { 'nav-link--active': isActive(item.href) }]}
-            aria-current={isActive(item.href) ? 'page' : undefined}
+      {
+        navItems.map((item) => (
+          <li
+            class:list={[
+              "nav-item",
+              {
+                "nav-item--has-dropdown":
+                  item.children && item.children.length > 0,
+              },
+            ]}
           >
-            {item.label}
+            <a
+              href={item.href}
+              class:list={[
+                "nav-link",
+                { "nav-link--active": isActive(item.href) },
+              ]}
+              aria-current={isActive(item.href) ? "page" : undefined}
+            >
+              {item.label}
+              {item.children && item.children.length > 0 && (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="dropdown-icon"
+                >
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              )}
+            </a>
             {item.children && item.children.length > 0 && (
-              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="dropdown-icon"><path d="m6 9 6 6 6-6"/></svg>
+              <ul class="dropdown-menu">
+                {item.children
+                  .filter((child) => {
+                    if (child.show === false) return false;
+                    if (child.label === "Writing") return hasWriting;
+                    return true;
+                  })
+                  .map((child) => (
+                    <li class="dropdown-item">
+                      <a
+                        href={child.href}
+                        class:list={[
+                          "dropdown-link",
+                          { "dropdown-link--active": isActive(child.href) },
+                        ]}
+                      >
+                        {child.label}
+                      </a>
+                    </li>
+                  ))}
+              </ul>
             )}
-          </a>
-          {item.children && item.children.length > 0 && (
-            <ul class="dropdown-menu">
-              {item.children.filter(child => {
-                if (child.show === false) return false;
-                if (child.label === 'Writing') return hasWriting;
-                return true;
-              }).map((child) => (
-                <li class="dropdown-item">
-                  <a 
-                    href={child.href} 
-                    class:list={['dropdown-link', { 'dropdown-link--active': isActive(child.href) }]}
-                  >
-                    {child.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          )}
-        </li>
-      ))}
+          </li>
+        ))
+      }
     </ul>
   </div>
   <div class="nav-end">
@@ -110,29 +141,29 @@ const isActive = (href: string) => {
 <script>
   function updateActiveNav() {
     const currentPath = window.location.pathname;
-    const navLinks = document.querySelectorAll('.nav-link');
-    
+    const navLinks = document.querySelectorAll(".nav-link");
+
     navLinks.forEach((link) => {
-      const href = link.getAttribute('href');
+      const href = link.getAttribute("href");
       let isActive = false;
-      
-      if (href === '/') {
-        isActive = currentPath === '/';
+
+      if (href === "/") {
+        isActive = currentPath === "/";
       } else if (href) {
         isActive = currentPath.startsWith(href);
       }
-      
-      link.classList.toggle('nav-link--active', isActive);
+
+      link.classList.toggle("nav-link--active", isActive);
       if (isActive) {
-        link.setAttribute('aria-current', 'page');
+        link.setAttribute("aria-current", "page");
       } else {
-        link.removeAttribute('aria-current');
+        link.removeAttribute("aria-current");
       }
     });
   }
 
   // Run on initial load and after each navigation
-  document.addEventListener('astro:page-load', updateActiveNav);
+  document.addEventListener("astro:page-load", updateActiveNav);
 </script>
 
 <style>
@@ -257,7 +288,7 @@ const isActive = (href: string) => {
   }
 
   .dropdown-menu::before {
-    content: '';
+    content: "";
     position: absolute;
     top: -10px;
     left: 0;
@@ -302,7 +333,7 @@ const isActive = (href: string) => {
   }
 
   .nav-end::before {
-    content: '';
+    content: "";
     position: absolute;
     left: -24px;
     top: 0;

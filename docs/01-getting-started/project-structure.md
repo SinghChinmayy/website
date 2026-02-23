@@ -9,9 +9,7 @@ Overview of the codebase organization.
 ├── src/
 │   ├── components/       # Reusable Astro components
 │   ├── content/          # MDX content files
-│   │   ├── projects/     # Case studies
 │   │   ├── decisions/    # Decision logs
-│   │   ├── journey/      # Career timeline
 │   │   ├── writing/      # Blog posts
 │   │   ├── uses/         # Tools & setup
 │   │   └── testimonials/ # Recommendations
@@ -75,7 +73,6 @@ Each content type has its own folder in `src/content/` with schema validation de
 |------------|----------|-------------|
 | projects | `src/content/projects/` | Case studies |
 | decisions | `src/content/decisions/` | Technical decisions |
-| journey | `src/content/journey/` | Career timeline |
 | writing | `src/content/writing/` | Blog posts |
 | uses | `src/content/uses/` | Tools & setup |
 | testimonials | `src/content/testimonials/` | Recommendations |

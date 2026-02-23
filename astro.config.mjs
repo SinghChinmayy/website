@@ -35,9 +35,9 @@ import { resolve } from 'path';
 /**
  * Load site configuration from Keystatic settings instead of .env
  */
-const settingsPath = resolve('./src/content/cms/settings.json');
+const settingsPath = resolve('./src/data/site.json');
 const settings = JSON.parse(readFileSync(settingsPath, 'utf-8'));
-const SITE_URL = settings?.site?.url || 'https://example.com';
+const SITE_URL = settings?.site?.url || 'https://chinmaysingh.me';
 
 /**
  * Astro configuration object

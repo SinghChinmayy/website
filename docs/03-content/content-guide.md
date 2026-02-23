@@ -115,30 +115,6 @@ relatedDecisions:  # Optional - slugs of related decisions
 
 ---
 
-## Journey
-
-Location: `src/content/journey/`
-
-Career timeline entries showing milestones, learnings, and transitions.
-
-```yaml
----
-date: 2024-01-15
-title: "Entry Title"
-type: "milestone"  # Options: milestone, learning, transition
-description: "What happened and what you learned"
-skills:            # Optional
-  - "Skill 1"
----
-```
-
-**Entry Types:**
-- `milestone` — Career achievements, promotions
-- `learning` — Skills learned, certifications
-- `transition` — Role changes, career pivots
-
----
-
 ## Writing (Blog)
 
 Location: `src/content/writing/`

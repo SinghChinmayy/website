@@ -1,0 +1,180 @@
+{
+  "work": [],
+  "projects": [
+    {
+      "name": "VPS Infrastructure & Self-Hosted Services Platform",
+      "description": "Designed, deployed, and maintained a self-managed VPS and ARM-based Linux infrastructure using Docker to run and operate self-hosted services with focus on reliability, security, and full lifecycle management.",
+      "startDate": "2024",
+      "endDate": "Present",
+      "url": "https://github.com/SinghChinmayy",
+      "highlights": [
+        {
+          "value": "Implemented secure remote access using WireGuard and Tailscale for private network connectivity."
+        },
+        {
+          "value": "Configured Caddy reverse proxy with domain-based routing and automated HTTPS certificate management."
+        },
+        {
+          "value": "Deployed and managed containerized services using Docker and Docker Compose with Portainer for orchestration."
+        },
+        {
+          "value": "Integrated AdGuard DNS filtering solutions for network-wide ad blocking and privacy."
+        },
+        {
+          "value": "Managed DNS configuration through Cloudflare for custom domain exposure."
+        }
+      ],
+      "keywords": [
+        {
+          "value": "Docker"
+        },
+        {
+          "value": "Docker Compose"
+        },
+        {
+          "value": "Linux"
+        },
+        {
+          "value": "Caddy"
+        },
+        {
+          "value": "Tailscale"
+        },
+        {
+          "value": "WireGuard"
+        },
+        {
+          "value": "Cloudflare"
+        },
+        {
+          "value": "Portainer"
+        },
+        {
+          "value": "AWS EC2"
+        }
+      ]
+    },
+    {
+      "name": "Modular NLP Search Engine",
+      "description": "Designing a modular pipeline for document ingestion, normalization, tokenization, and indexing with clean architecture and separation of concerns.",
+      "startDate": "2025",
+      "endDate": "Present",
+      "url": "https://github.com/SinghChinmayy/search-engine",
+      "highlights": [
+        {
+          "value": "Implemented inverted index-based keyword search for efficient document retrieval."
+        },
+        {
+          "value": "Built modular pipeline architecture with pluggable components for extensibility."
+        },
+        {
+          "value": "Focused on clean architecture with separation of concerns for scalability."
+        }
+      ],
+      "keywords": [
+        {
+          "value": "Python"
+        },
+        {
+          "value": "NLP"
+        },
+        {
+          "value": "Data Structures"
+        }
+      ]
+    },
+    {
+      "name": "C++ CLI Tool – FFmpeg Wrapper",
+      "description": "Developed a modular C++ command-line application to abstract and orchestrate FFmpeg media workflows in a Linux system environment.",
+      "startDate": "2024",
+      "endDate": "Present",
+      "url": "https://github.com/SinghChinmayy",
+      "highlights": [
+        {
+          "value": "Implemented argument parsing, external process execution, and structured error handling."
+        },
+        {
+          "value": "Designed with focus on maintainability and extensibility for future GUI transition."
+        },
+        {
+          "value": "Built in C++ for performance and learning systems programming fundamentals."
+        }
+      ],
+      "keywords": [
+        {
+          "value": "C++"
+        },
+        {
+          "value": "Linux"
+        },
+        {
+          "value": "FFmpeg"
+        },
+        {
+          "value": "CLI"
+        }
+      ]
+    },
+    {
+      "name": "Multi-Model Agentic AI Prototype",
+      "description": "Collaborated in a team to integrate multiple AI components into a cohesive system under competitive time constraints.",
+      "startDate": "2024",
+      "endDate": "2024",
+      "url": "https://github.com/SinghChinmayy",
+      "highlights": [
+        {
+          "value": "Contributed to coding, debugging, and subsystem integration across the full stack."
+        },
+        {
+          "value": "Advanced to the penultimate round of the competition."
+        }
+      ],
+      "keywords": [
+        {
+          "value": "Python"
+        },
+        {
+          "value": "AI"
+        },
+        {
+          "value": "Teamwork"
+        }
+      ]
+    },
+    {
+      "name": "Identity & Access Management System",
+      "description": "Designed and implemented backend logic and database schema for user authentication and role-based access control.",
+      "startDate": "2024",
+      "endDate": "2024",
+      "url": "https://github.com/SinghChinmayy",
+      "highlights": [
+        {
+          "value": "Built authentication logic and role-based access concepts with a MySQL backend."
+        },
+        {
+          "value": "Developed frontend using HTML, CSS, and JavaScript for the admin interface."
+        },
+        {
+          "value": "Supported the complete software lifecycle including development, testing, debugging, and issue resolution."
+        }
+      ],
+      "keywords": [
+        {
+          "value": "Python"
+        },
+        {
+          "value": "MySQL"
+        },
+        {
+          "value": "HTML"
+        },
+        {
+          "value": "CSS"
+        },
+        {
+          "value": "JavaScript"
+        }
+      ]
+    }
+  ]
+}

@@ -69,24 +69,6 @@ tags:
 Optional additional context.
 ```
 
-## Journey Entry Template
-
-`src/content/journey/your-entry-name.mdx`
-
-```yaml
----
-date: 2024-01-15
-title: "Entry Title"
-type: "milestone"
-description: "What happened and what you learned. 2-4 sentences."
-skills:
-  - "Skill 1"
-  - "Skill 2"
----
-```
-
-**Type options:** `milestone`, `learning`, `transition`
-
 ## Writing (Blog) Template
 
 `src/content/writing/your-article-name.mdx`
@@ -155,7 +137,6 @@ Optional additional notes.
 |--------------|----------|---------------------|
 | Project | `projects/` | title, role, year, outcomeSummary, problem, keyDecisions, impact |
 | Decision | `decisions/` | title, date, context, decision, alternatives, reasoning |
-| Journey | `journey/` | date, title, type, description |
 | Writing | `writing/` | title, description, publishDate |
 | Testimonial | `testimonials/` | name, role, company, quote, date |
 | Uses | `uses/` | category, items, order |

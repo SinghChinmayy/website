@@ -62,8 +62,6 @@ Navigation links are configured in `src/config.ts`:
 ```typescript
 nav: [
   { label: 'Projects', href: '/projects' },
-  { label: 'Decisions', href: '/decisions' },
-  { label: 'Journey', href: '/journey' },
   { label: 'Writing', href: '/writing' },
   { label: 'Uses', href: '/uses' },
   { label: 'Contact', href: '/contact' },
@@ -89,7 +87,7 @@ export const pagesConfig = {
 }
 ```
 
-**Available pages:** `home`, `projects`, `decisions`, `journey`, `writing`, `uses`, `contact`
+**Available pages:** `home`, `projects`, `decisions`, `writing`, `uses`, `contact`
 
 **Fields:**
 - `title` — Browser tab and SEO title

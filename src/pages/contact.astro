@@ -1,48 +1,50 @@
 ---
 /**
  * Contact Page
- * 
+ *
  * Minimal, intentional contact page with clear visual hierarchy and zone-based layout.
  * Prioritizes email as the primary contact method while providing secondary social links.
- * 
+ *
  * Layout Structure:
  * - Zone 1 (Primary): Email address with context about response time
  * - Zone 2 (Secondary): Social media links (only shown if configured)
- * 
+ *
  * Features:
  * - Clean, distraction-free design
  * - Large, prominent email link
  * - Automatic filtering of configured social links
  * - Responsive layout
  * - Clear visual hierarchy
- * 
+ *
  * Route: /contact
- * 
+ *
  * @page
  */
 
-import BaseLayout from '../layouts/BaseLayout.astro';
-import SEO from '../components/SEO.astro';
-import { siteConfig } from '../config';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SEO from "../components/SEO.astro";
+import { siteConfig } from "../data/index";
 
 /**
  * Filters and formats social links from site configuration
- * 
+ *
  * Only includes platforms that have a URL configured (non-empty values).
  * Capitalizes platform names for display (e.g., "github" becomes "Github").
- * 
+ *
  * @returns Array of social link objects with platform name and URL
  */
 const socialLinks = siteConfig.social
   .filter((link) => !!link.url)
   .map((link) => ({
-    label: link.label || link.platform.charAt(0).toUpperCase() + link.platform.slice(1),
-    url: link.url
+    label:
+      link.label ||
+      link.platform.charAt(0).toUpperCase() + link.platform.slice(1),
+    url: link.url,
   }));
 ---
 
 <BaseLayout>
-  <SEO 
+  <SEO
     slot="head"
     title={siteConfig.contactPage.title}
     description={siteConfig.contactPage.description}
@@ -62,21 +64,25 @@ const socialLinks = siteConfig.social
     </section>
 
     <!-- Zone 2: Secondary (Social) -->
-    {socialLinks.length > 0 && (
-      <section class="secondary-zone">
-        <h2>Elsewhere</h2>
-        <div class="social-links">
-          {socialLinks.map((link, index) => (
-            <>
-              <a href={link.url} target="_blank" rel="noopener noreferrer">
-                {link.label}
-              </a>
-              {index < socialLinks.length - 1 && <span class="separator">·</span>}
-            </>
-          ))}
-        </div>
-      </section>
-    )}
+    {
+      socialLinks.length > 0 && (
+        <section class="secondary-zone">
+          <h2>Elsewhere</h2>
+          <div class="social-links">
+            {socialLinks.map((link, index) => (
+              <>
+                <a href={link.url} target="_blank" rel="noopener noreferrer">
+                  {link.label}
+                </a>
+                {index < socialLinks.length - 1 && (
+                  <span class="separator">·</span>
+                )}
+              </>
+            ))}
+          </div>
+        </section>
+      )
+    }
   </main>
 
   <style>

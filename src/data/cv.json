@@ -1,0 +1,126 @@
+{
+  "basics": {
+    "label": "Systems & Backend Engineering",
+    "summary": "Systems-oriented computer science student with hands-on experience in backend development, networking, and self-hosted infrastructure. Passionate about building reliable systems end-to-end — from servers and networking to applications and data pipelines. Seeking a technical internship in backend, infrastructure, or platform engineering.",
+    "about": "Systems-oriented CS student passionate about backend development, networking, and self-hosted infrastructure."
+  },
+  "education": [
+    {
+      "institution": "Manipal Academy of Higher Education",
+      "url": "",
+      "area": "Bachelor of Technology — Computer Science",
+      "studyType": "",
+      "startDate": "2023",
+      "endDate": "2027",
+      "score": "",
+      "courses": [
+        {
+          "name": "Data Structures & Algorithms"
+        },
+        {
+          "name": "Databases"
+        },
+        {
+          "name": "Computer Networks"
+        },
+        {
+          "name": "Operating Systems"
+        }
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "name": "Core Skills",
+      "level": "",
+      "keywords": [
+        {
+          "name": "C++"
+        },
+        {
+          "name": "C"
+        },
+        {
+          "name": "Python"
+        },
+        {
+          "name": "Docker"
+        },
+        {
+          "name": "Docker Compose"
+        },
+        {
+          "name": "Linux"
+        },
+        {
+          "name": "Git"
+        },
+        {
+          "name": "AWS (EC2, S3)"
+        },
+        {
+          "name": "PostgreSQL"
+        },
+        {
+          "name": "MySQL"
+        },
+        {
+          "name": "WireGuard"
+        },
+        {
+          "name": "Tailscale"
+        },
+        {
+          "name": "Caddy"
+        },
+        {
+          "name": "Cloudflare"
+        },
+        {
+          "name": "HTML"
+        },
+        {
+          "name": "CSS"
+        },
+        {
+          "name": "Bash"
+        },
+        {
+          "name": "Networking Fundamentals"
+        }
+      ]
+    }
+  ],
+  "certificates": [
+    {
+      "name": "Learn Fundamentals Of Computer Programming With C Language",
+      "date": "",
+      "issuer": "",
+      "url": ""
+    },
+    {
+      "name": "Digital Systems: From Logic Gates to Processors",
+      "date": "",
+      "issuer": "",
+      "url": ""
+    },
+    {
+      "name": "Introduction to Java and Object-Oriented Programming",
+      "date": "",
+      "issuer": "",
+      "url": ""
+    },
+    {
+      "name": "Docker for Absolute Beginners",
+      "date": "",
+      "issuer": "",
+      "url": ""
+    },
+    {
+      "name": "Ordered Data Structures",
+      "date": "",
+      "issuer": "",
+      "url": ""
+    }
+  ]
+}

@@ -1,23 +1,23 @@
 ---
 /**
  * Footer Component
- * 
+ *
  * Site-wide footer displaying copyright information and social media links.
  * Automatically filters and displays only configured social links from site config.
  * Responsive layout that stacks vertically on mobile devices.
- * 
+ *
  * Social links are pulled from siteConfig.social and only displayed if they have
  * a URL value configured. Links open in new tabs with proper security attributes.
- * 
+ *
  * @component
- * 
+ *
  * @example
  * ```astro
  * <Footer />
  * ```
  */
-import { siteConfig } from '../config';
-import NewsletterSignup from './NewsletterSignup.astro';
+import { siteConfig } from "../data/index";
+import NewsletterSignup from "./NewsletterSignup.astro";
 
 /**
  * Gets the current year for copyright display
@@ -26,17 +26,19 @@ const currentYear = new Date().getFullYear();
 
 /**
  * Filters and formats social links from site configuration
- * 
+ *
  * Only includes platforms that have a URL configured (non-empty values).
  * Capitalizes platform names for display (e.g., "github" becomes "Github").
- * 
+ *
  * @returns Array of social link objects with platform name and URL
  */
 const socialLinks = siteConfig.social
   .filter((link) => !!link.url)
   .map((link) => ({
-    label: link.label || link.platform.charAt(0).toUpperCase() + link.platform.slice(1),
-    url: link.url
+    label:
+      link.label ||
+      link.platform.charAt(0).toUpperCase() + link.platform.slice(1),
+    url: link.url,
   }));
 ---
 
@@ -44,19 +46,23 @@ const socialLinks = siteConfig.social
   <NewsletterSignup />
   <div class="footer-container">
     <span class="copyright">© {currentYear} {siteConfig.author.name}</span>
-    
-    {socialLinks.length > 0 && (
-      <div class="footer-social">
-        {socialLinks.map((link, index) => (
-          <>
-            <a href={link.url} target="_blank" rel="noopener noreferrer">
-              {link.label}
-            </a>
-            {index < socialLinks.length - 1 && <span class="separator">·</span>}
-          </>
-        ))}
-      </div>
-    )}
+
+    {
+      socialLinks.length > 0 && (
+        <div class="footer-social">
+          {socialLinks.map((link, index) => (
+            <>
+              <a href={link.url} target="_blank" rel="noopener noreferrer">
+                {link.label}
+              </a>
+              {index < socialLinks.length - 1 && (
+                <span class="separator">·</span>
+              )}
+            </>
+          ))}
+        </div>
+      )
+    }
   </div>
 </footer>
 

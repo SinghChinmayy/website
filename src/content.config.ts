@@ -7,8 +7,6 @@
  * Collections:
  * - projects: Case studies with structured narrative format
  * - decisions: Architectural and technical decision records
- * - journey: Career timeline entries
- * - writing: Blog posts and articles
  * - uses: Tools, stack, and environment documentation
  * - testimonials: Endorsements and recommendations
  * 
@@ -159,37 +157,6 @@ const decisionsCollection = defineCollection({
 });
 
 /**
- * Journey Timeline Collection
- * 
- * Career growth and learning progression timeline with milestones,
- * learning experiences, and career transitions.
- * 
- * Features:
- * - Three entry types (milestone, learning, transition)
- * - Skills/technologies per entry
- * - Optional expandable content
- */
-const journeyCollection = defineCollection({
-  loader: glob({ pattern: '**/*.mdx', base: './src/content/journey' }),
-  schema: z.object({
-    /** Date of the timeline entry */
-    date: z.coerce.date(),
-
-    /** Entry title */
-    title: z.string(),
-
-    /** Type of timeline entry */
-    type: z.enum(['milestone', 'learning', 'transition']),
-
-    /** Brief description */
-    description: z.string(),
-
-    /** Skills or technologies associated with this entry */
-    skills: z.array(z.string()).optional(),
-  }),
-});
-
-/**
  * Writing (Blog) Collection
  * 
  * Blog posts and technical articles with MDX support.
@@ -274,7 +241,6 @@ const testimonialsCollection = defineCollection({
 export const collections = {
   projects: projectsCollection,
   decisions: decisionsCollection,
-  journey: journeyCollection,
   writing: writingCollection,
 
   testimonials: testimonialsCollection,

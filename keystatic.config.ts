@@ -1,5 +1,5 @@
 import { config, fields, collection, singleton } from '@keystatic/core';
-import settingsData from './src/content/cms/settings.json';
+import siteData from './src/data/site.json';
 
 export default config({
     storage: {
@@ -7,57 +7,31 @@ export default config({
     },
     ui: {
         brand: {
-            name: settingsData.cms.brandName || 'Chinmay Singh'
+            name: siteData.cms.brandName || 'Chinmay Singh'
         },
         navigation: {
-            'Editorial': ['writing', 'projects', 'decisions'],
-            'Pages': ['contactPage'],
-            'Profile': ['journey', 'testimonials'],
-            'Configuration': ['settings', 'contact', 'newsletter'],
+            'Editorial': ['writing', 'decisions'],
+            'Projects': ['projects'],
+            'CV Dashboard': ['cv', 'work'],
+            'Profile': ['testimonials'],
+            'Site Settings': ['site'],
         },
     },
     singletons: {
-        settings: singleton({
-            label: 'Settings',
-            path: 'src/content/cms/settings',
+        site: singleton({
+            label: 'Site & CV Profile',
+            path: 'src/data/site',
             format: { data: 'json' },
             schema: {
-                nav: fields.array(
-                    fields.object({
-                        label: fields.text({ label: 'Label' }),
-                        href: fields.text({ label: 'URL (e.g., /projects, https://github.com)' }),
-                        show: fields.checkbox({ label: 'Show in Navigation', defaultValue: true }),
-                        children: fields.array(
-                            fields.object({
-                                label: fields.text({ label: 'Label' }),
-                                href: fields.text({ label: 'URL' }),
-                                show: fields.checkbox({ label: 'Show in Navigation', defaultValue: true }),
-                            }),
-                            {
-                                label: 'Submenu Items',
-                                itemLabel: (props) => `${props.fields.label.value} ${props.fields.show.value ? '✅' : '❌'}`,
-                            }
-                        ),
-                    }),
-                    {
-                        label: 'Navigation Items',
-                        itemLabel: (props) => `${props.fields.label.value} ${props.fields.show.value ? '✅' : '❌'}${props.fields.children.elements.length > 0 ? ' (Dropdown)' : ''}`,
-                    }
-                ),
                 site: fields.object({
                     url: fields.text({ label: 'Site URL' }),
                     language: fields.text({ label: 'Language (ISO code)' }),
                     title: fields.text({ label: 'Site Title' }),
                     description: fields.text({ label: 'Site Description', multiline: true }),
-                    logo: fields.image({
-                        label: 'Site Logo',
-                        directory: 'public/images',
-                        publicPath: '/images/',
-                    }),
                     favicon: fields.image({
                         label: 'Site Favicon',
-                        directory: 'src/assets/images',
-                        publicPath: '~/assets/images/',
+                        directory: 'src/assets/images/site',
+                        publicPath: '~/assets/images/site/',
                     }),
                 }, { label: 'Site Metadata' }),
                 author: fields.object({
@@ -65,75 +39,156 @@ export default config({
                     title: fields.text({ label: 'Title / Role' }),
                     bio: fields.text({ label: 'Bio', multiline: true }),
                     location: fields.text({ label: 'Location' }),
+                    locationLink: fields.text({ label: 'Location Maps Link' }),
                     profilePic: fields.image({
                         label: 'Profile Picture',
-                        description: 'Profile photo displayed in the hero section of the homepage.',
+                        description: 'Profile photo',
                         directory: 'public/images/author',
                         publicPath: '/images/author/',
                     }),
                 }, { label: 'Author Information' }),
                 cms: fields.object({
                     brandName: fields.text({ label: 'CMS Brand Name' }),
-                    brandLogo: fields.image({
-                        label: 'CMS Brand Logo',
-                        directory: 'public/images',
-                        publicPath: '/images/',
-                    }),
-                }, { label: 'CMS Dashboard Configuration' }),
-            },
-        }),
-        contact: singleton({
-            label: 'Contact',
-            path: 'src/content/cms/contact',
-            format: { data: 'json' },
-            schema: {
-                email: fields.text({ label: 'Primary Contact Email' }),
-                social: fields.array(
-                    fields.object({
-                        platform: fields.select({
-                            label: 'Platform',
-                            options: [
-                                { label: 'GitHub', value: 'github' },
-                                { label: 'LinkedIn', value: 'linkedin' },
-                                { label: 'Twitter/X', value: 'twitter' },
-                                { label: 'YouTube', value: 'youtube' },
-                                { label: 'Instagram', value: 'instagram' },
-                                { label: 'Mastodon', value: 'mastodon' },
-                                { label: 'Bluesky', value: 'bluesky' },
-                                { label: 'Email', value: 'email' },
-                                { label: 'Other', value: 'other' },
-                            ],
-                            defaultValue: 'github',
+                }, { label: 'CMS Configuration' }),
+                contact: fields.object({
+                    email: fields.text({ label: 'Primary Contact Email' }),
+                    tel: fields.text({ label: 'Phone Number' }),
+                    social: fields.array(
+                        fields.object({
+                            platform: fields.select({
+                                label: 'Platform',
+                                options: [
+                                    { label: 'GitHub', value: 'github' },
+                                    { label: 'LinkedIn', value: 'linkedin' },
+                                    { label: 'Twitter/X', value: 'twitter' },
+                                    { label: 'YouTube', value: 'youtube' },
+                                    { label: 'Instagram', value: 'instagram' },
+                                    { label: 'Email', value: 'email' },
+                                    { label: 'Other', value: 'other' },
+                                ],
+                                defaultValue: 'github',
+                            }),
+                            url: fields.text({ label: 'URL' }),
+                            label: fields.text({ label: 'Label' }),
                         }),
-                        url: fields.text({ label: 'URL' }),
-                        label: fields.text({ label: 'Label (Internal use or for "Other")' }),
+                        { label: 'Social Links', itemLabel: props => props.fields.label.value || 'Link' }
+                    ),
+                }, { label: 'Contact Settings' }),
+                contactPage: fields.object({
+                    title: fields.text({ label: 'Page Title' }),
+                    description: fields.text({ label: 'Page Description', multiline: true }),
+                    heading: fields.text({ label: 'Page Heading' }),
+                }, { label: 'Contact Page Metadata' }),
+                newsletter: fields.object({
+                    action: fields.text({ label: 'Form Action URL' }),
+                    u: fields.text({ label: 'User ID (u)' }),
+                    id: fields.text({ label: 'List ID (id)' }),
+                    f_id: fields.text({ label: 'Field ID (f_id)' }),
+                }, { label: 'Mailchimp Newsletter' }),
+                nav: fields.array(
+                    fields.object({
+                        label: fields.text({ label: 'Label' }),
+                        href: fields.text({ label: 'URL' }),
+                        show: fields.checkbox({ label: 'Show in Navigation', defaultValue: true }),
+                        children: fields.array(
+                            fields.object({
+                                label: fields.text({ label: 'Label' }),
+                                href: fields.text({ label: 'URL' }),
+                                show: fields.checkbox({ label: 'Show in Navigation', defaultValue: true }),
+                            }),
+                            { label: 'Submenu Items', itemLabel: props => props.fields.label.value }
+                        ),
                     }),
-                    {
-                        label: 'Social Links',
-                        itemLabel: (props) => props.fields.label.value || props.fields.platform.value,
-                    }
+                    { label: 'Navigation Items', itemLabel: props => props.fields.label.value }
                 ),
             },
         }),
-        newsletter: singleton({
-            label: 'Newsletter',
-            path: 'src/content/cms/newsletter',
+        cv: singleton({
+            label: 'CV Profile',
+            path: 'src/data/cv',
             format: { data: 'json' },
             schema: {
-                action: fields.text({ label: 'Form Action URL' }),
-                u: fields.text({ label: 'User ID (u)' }),
-                id: fields.text({ label: 'List ID (id)' }),
-                f_id: fields.text({ label: 'Field ID (f_id)' }),
+                basics: fields.object({
+                    label: fields.text({ label: 'Professional Title/Label (e.g. Programmer)' }),
+                    summary: fields.text({ label: 'Professional Summary', multiline: true }),
+                    about: fields.text({ label: 'About Me (Longer bio/intro)', multiline: true }),
+                }, { label: 'Basics' }),
+                education: fields.array(
+                    fields.object({
+                        institution: fields.text({ label: 'Institution' }),
+                        url: fields.text({ label: 'URL' }),
+                        area: fields.text({ label: 'Area of Study' }),
+                        studyType: fields.text({ label: 'Study Type (e.g. Bachelor)' }),
+                        startDate: fields.text({ label: 'Start Date' }),
+                        endDate: fields.text({ label: 'End Date' }),
+                        score: fields.text({ label: 'Score / GPA' }),
+                        courses: fields.array(
+                            fields.object({ name: fields.text({ label: 'Course' }) }),
+                            { label: 'Courses', itemLabel: props => props.fields.name.value }
+                        ),
+                    }),
+                    { label: 'Education', itemLabel: props => props.fields.institution.value }
+                ),
+                skills: fields.array(
+                    fields.object({
+                        name: fields.text({ label: 'Skill Category/Name (e.g. Web Development)' }),
+                        level: fields.text({ label: 'Level (e.g. Master)' }),
+                        keywords: fields.array(
+                            fields.object({ name: fields.text({ label: 'Keyword' }) }),
+                            { label: 'Keywords', itemLabel: props => props.fields.name.value }
+                        ),
+                    }),
+                    { label: 'Skills', itemLabel: props => props.fields.name.value }
+                ),
+                certificates: fields.array(
+                    fields.object({
+                        name: fields.text({ label: 'Certificate Name' }),
+                        date: fields.text({ label: 'Date' }),
+                        issuer: fields.text({ label: 'Issuer' }),
+                        url: fields.text({ label: 'URL' }),
+                    }),
+                    { label: 'Certifications', itemLabel: props => props.fields.name.value }
+                ),
             },
         }),
-        contactPage: singleton({
-            label: 'Contact Page',
-            path: 'src/content/cms/pages/contact',
+        work: singleton({
+            label: 'Experience & Projects',
+            path: 'src/data/work',
             format: { data: 'json' },
             schema: {
-                title: fields.text({ label: 'Page Title' }),
-                description: fields.text({ label: 'Page Description', multiline: true }),
-                heading: fields.text({ label: 'Page Heading' }),
+                work: fields.array(
+                    fields.object({
+                        name: fields.text({ label: 'Company Name' }),
+                        position: fields.text({ label: 'Position' }),
+                        url: fields.text({ label: 'URL' }),
+                        startDate: fields.text({ label: 'Start Date' }),
+                        endDate: fields.text({ label: 'End Date' }),
+                        summary: fields.text({ label: 'Summary', multiline: true }),
+                        highlights: fields.array(
+                            fields.object({ value: fields.text({ label: 'Highlight' }) }),
+                            { label: 'Highlights', itemLabel: props => props.fields.value.value }
+                        ),
+                    }),
+                    { label: 'Work Experience', itemLabel: props => props.fields.name.value }
+                ),
+                projects: fields.array(
+                    fields.object({
+                        name: fields.text({ label: 'Project Name' }),
+                        description: fields.text({ label: 'Description', multiline: true }),
+                        startDate: fields.text({ label: 'Start Date' }),
+                        endDate: fields.text({ label: 'End Date' }),
+                        url: fields.text({ label: 'URL' }),
+                        highlights: fields.array(
+                            fields.object({ value: fields.text({ label: 'Highlight' }) }),
+                            { label: 'Highlights', itemLabel: props => props.fields.value.value }
+                        ),
+                        keywords: fields.array(
+                            fields.object({ value: fields.text({ label: 'Keyword / Tech Stack' }) }),
+                            { label: 'Keywords', itemLabel: props => props.fields.value.value }
+                        ),
+                    }),
+                    { label: 'Projects', itemLabel: props => props.fields.name.value }
+                ),
             },
         }),
     },
@@ -286,32 +341,7 @@ export default config({
                 content: fields.mdx({ label: 'Content' }),
             },
         }),
-        journey: collection({
-            label: 'Journey',
-            slugField: 'title',
-            path: 'src/content/journey/*',
-            format: { contentField: 'content' },
-            columns: ['title', 'date', 'type'],
-            schema: {
-                title: fields.slug({ name: { label: 'Title' } }),
-                date: fields.date({ label: 'Date' }),
-                type: fields.select({
-                    label: 'Type',
-                    options: [
-                        { label: 'Milestone', value: 'milestone' },
-                        { label: 'Learning', value: 'learning' },
-                        { label: 'Transition', value: 'transition' },
-                    ],
-                    defaultValue: 'milestone',
-                }),
-                description: fields.text({ label: 'Description', multiline: true }),
-                skills: fields.array(fields.text({ label: 'Skill' }), {
-                    label: 'Skills',
-                    itemLabel: (props) => props.value || 'New Skill',
-                }),
-                content: fields.mdx({ label: 'Content' }),
-            }
-        }),
+
         testimonials: collection({
             label: 'Testimonials',
             slugField: 'name',

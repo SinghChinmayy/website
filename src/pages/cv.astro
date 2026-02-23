@@ -1,0 +1,686 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SEO from "../components/SEO.astro";
+import { siteConfig } from "../data/index";
+
+const { resume, cv, author, contact } = siteConfig;
+const { name, location, locationLink } = author;
+const { about } = cv;
+const { certificates, education, projects, skills, basics } = resume;
+
+const summary = basics.summary;
+
+const resumeJsonLd = JSON.stringify(resume);
+---
+
+<BaseLayout>
+    <SEO
+        slot="head"
+        title={`${basics.name} | CV`}
+        description={basics.summary}
+        type="website"
+    />
+    <script
+        is:inline
+        slot="head"
+        type="application/ld+json"
+        set:html={resumeJsonLd}
+    />
+
+    <main class="cv-container">
+        <section class="cv-content">
+            <!-- HEADER -->
+            <header class="cv-header">
+                <div class="cv-header-info">
+                    <h1 class="cv-name">{name}</h1>
+                    <p class="cv-about">{about}</p>
+                    <a
+                        class="cv-location"
+                        href={locationLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="12"
+                            height="12"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="icon"
+                            ><circle cx="12" cy="12" r="10"></circle><path
+                                d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"
+                            ></path><path d="M2 12h20"></path></svg
+                        >
+                        {location}
+                    </a>
+
+                    <div class="cv-contact-links">
+                        <a
+                            href={basics.url}
+                            aria-label="Website"
+                            class="contact-btn"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="icon"
+                                ><circle cx="12" cy="12" r="10"></circle><path
+                                    d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"
+                                ></path><path d="M2 12h20"></path></svg
+                            >
+                        </a>
+                        <a
+                            href={`mailto:${contact.email}`}
+                            aria-label="Email"
+                            class="contact-btn"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="icon"
+                                ><path
+                                    d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"
+                                ></path><rect
+                                    x="2"
+                                    y="4"
+                                    width="20"
+                                    height="16"
+                                    rx="2"></rect></svg
+                            >
+                        </a>
+                        <a
+                            href={`tel:${contact.tel}`}
+                            aria-label="Phone"
+                            class="contact-btn"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                ><path
+                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                                ></path></svg
+                            >
+                        </a>
+                        {
+                            contact.social
+                                .filter((link: any) => !!link.url)
+                                .map((social: any) => {
+                                    const iconMap: { [key: string]: string } = {
+                                        github: `<path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>`,
+                                        linkedin: `<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>`,
+                                        twitter: `<path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>`,
+                                        youtube: `<path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>`,
+                                        instagram: `<rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>`,
+                                        mastodon: `<path d="M21 8.29h-1.95v2.6h-2.6v1.82h2.6v2.6H2.9v-2.6h2.6v-1.82h-2.6v-2.6h-1.95v2.6h2.6v1.82h-2.6v7.75c0 2.53 2.58 2.58 2.58 2.58l10.86.06c2.53 0 2.58-2.58 2.58-2.58v-2.6h-2.6v-1.82h2.6v-2.6z"/>`,
+                                        bluesky: `<path d="M12 2L2 9l10 7 10-7-10-7zm0 14L4 9l8-6 8 6-8 6z"/>`,
+                                        substack: `<path d="M22 7H2v3h20V7zM2 12v10l10-5 10 5V12H2z"></path>`,
+                                        email: `<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline>`,
+                                        other: `<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>`,
+                                    };
+                                    const icon =
+                                        iconMap[
+                                            social.platform.toLowerCase()
+                                        ] || iconMap.other;
+
+                                    return (
+                                        <a
+                                            href={social.url}
+                                            aria-label={
+                                                social.label || social.platform
+                                            }
+                                            class="contact-btn text-icon"
+                                            set:html={`<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${icon}</svg>`}
+                                        />
+                                    );
+                                })
+                        }
+                    </div>
+
+                    <div class="cv-print-contact-links">
+                        <a href={basics.url}>{basics.url}</a> |
+                        <a href={`mailto:${contact.email}`}>{contact.email}</a> |
+                        <a href={`tel:${contact.tel}`}>{contact.tel}</a><br />
+                        {
+                            contact.social.map((social: any) => (
+                                <>
+                                    <a href={social.url}>{social.url}</a> |{" "}
+                                </>
+                            ))
+                        }
+                    </div>
+                </div>
+                <img
+                    class="cv-avatar"
+                    src={siteConfig.author.profilePic ||
+                        "https://github.com/SinghChinmayy.png"}
+                    alt={name}
+                />
+            </header>
+
+            <!-- SUMMARY -->
+            <section class="cv-section">
+                <h2 class="cv-section-title">About</h2>
+                <p class="cv-summary">{summary}</p>
+            </section>
+
+            <!-- PROJECTS -->
+            <section class="cv-section">
+                <h2 class="cv-section-title">Projects</h2>
+                <div class="cv-items">
+                    {
+                        projects.map((proj: any) => (
+                            <article class="cv-item">
+                                <div class="cv-item-header">
+                                    <h3>
+                                        <a
+                                            href={proj.url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            {proj.name}
+                                        </a>
+                                    </h3>
+                                    <div class="cv-item-date">
+                                        {proj.startDate} -{" "}
+                                        {proj.endDate || "Present"}
+                                    </div>
+                                </div>
+                                <div class="cv-item-content">
+                                    <p>{proj.description}</p>
+                                    {proj.highlights &&
+                                        proj.highlights.length > 0 && (
+                                            <ul>
+                                                {proj.highlights.map(
+                                                    (ach: any) => (
+                                                        <li>
+                                                            {ach.value || ach}
+                                                        </li>
+                                                    ),
+                                                )}
+                                            </ul>
+                                        )}
+                                    {proj.keywords &&
+                                        proj.keywords.length > 0 && (
+                                            <div class="cv-tags">
+                                                {proj.keywords.map((b: any) => (
+                                                    <span class="cv-tag">
+                                                        {b.value || b}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        )}
+                                </div>
+                            </article>
+                        ))
+                    }
+                </div>
+            </section>
+
+            <!-- EDUCATION -->
+            <section class="cv-section">
+                <h2 class="cv-section-title">Education</h2>
+                <div class="cv-items">
+                    {
+                        education.map((edu: any) => (
+                            <article class="cv-item">
+                                <div class="cv-item-header">
+                                    <h3>{edu.institution}</h3>
+                                    <div class="cv-item-date">
+                                        {edu.startDate} -{" "}
+                                        {edu.endDate || "Present"}
+                                    </div>
+                                </div>
+                                <h4 class="cv-item-subtitle">
+                                    {edu.studyType} - {edu.area}
+                                </h4>
+                            </article>
+                        ))
+                    }
+                </div>
+            </section>
+
+            <!-- SKILLS -->
+            <section class="cv-section">
+                <h2 class="cv-section-title">Skills</h2>
+                <div class="cv-tags cv-tags-wrap">
+                    {
+                        skills.map((skill: any) => (
+                            <span class="cv-tag solid">
+                                {skill.name || skill.value || skill}
+                            </span>
+                        ))
+                    }
+                </div>
+            </section>
+
+            <!-- CERTIFICATIONS -->
+            <section class="cv-section">
+                <h2 class="cv-section-title">Certifications</h2>
+                <ul class="cv-list cv-cert-list">
+                    {
+                        certificates.map((cert: any) => (
+                            <li>{cert.name || cert.value || cert}</li>
+                        ))
+                    }
+                </ul>
+            </section>
+        </section>
+
+        <div class="print-instruction">
+            Press <kbd>Ctrl</kbd> + <kbd>P</kbd> (or <kbd>Cmd</kbd> + <kbd
+                >P</kbd
+            > on Mac) to print this CV.
+        </div>
+    </main>
+</BaseLayout>
+
+<style>
+    /* Base Layout Resets & Scopes for CV */
+    .cv-container {
+        max-width: 48rem; /* 768px -> max-w-2xl equivalent + padding */
+        margin: 0 auto;
+        padding: 3rem 1.5rem;
+    }
+
+    .cv-content {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        background: transparent;
+        color: var(--color-text);
+    }
+
+    /* Typography Helpers */
+    .cv-mono {
+        font-family:
+            ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+            "Liberation Mono", "Courier New", monospace;
+    }
+
+    /* Header */
+    .cv-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.5rem;
+    }
+
+    .cv-header-info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 0.375rem;
+    }
+
+    .cv-name {
+        font-size: 1.5rem;
+        font-weight: 700;
+        line-height: 1.25;
+        margin: 0;
+        color: var(--color-text);
+    }
+
+    .cv-about {
+        max-width: 28rem;
+        font-family:
+            ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+            "Liberation Mono", "Courier New", monospace;
+        font-size: 0.875rem;
+        color: var(--color-text-secondary);
+        margin: 0;
+        line-height: 1.5;
+        text-wrap: pretty;
+    }
+
+    .cv-location {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.375rem;
+        font-family:
+            ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+            "Liberation Mono", "Courier New", monospace;
+        font-size: 0.75rem;
+        color: var(--color-text-secondary);
+        text-decoration: none;
+        margin-bottom: 0.25rem;
+    }
+    .cv-location:hover {
+        text-decoration: underline;
+        color: var(--color-text);
+    }
+
+    .cv-contact-links {
+        display: flex;
+        gap: 0.375rem;
+        margin-top: 0.25rem;
+    }
+
+    .contact-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 0.375rem;
+        border: 1px solid var(--color-border);
+        color: var(--color-text-secondary);
+        background: transparent;
+        transition: all 0.2s ease;
+    }
+    .contact-btn:hover {
+        background: var(--color-bg-secondary);
+        color: var(--color-text);
+    }
+
+    .cv-print-contact-links {
+        display: none;
+        font-family:
+            ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+            "Liberation Mono", "Courier New", monospace;
+        font-size: 0.75rem;
+        color: var(--color-text-secondary);
+        line-height: 1.6;
+    }
+    .cv-print-contact-links a {
+        color: inherit;
+        text-decoration: underline;
+    }
+
+    .cv-avatar {
+        width: 7rem;
+        height: 7rem;
+        border-radius: 0.75rem;
+        object-fit: cover;
+        flex-shrink: 0;
+    }
+
+    /* Section Styles */
+    .cv-section {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .cv-section-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin: 0;
+        color: var(--color-text);
+    }
+
+    .cv-summary {
+        font-family:
+            ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+            "Liberation Mono", "Courier New", monospace;
+        font-size: 0.875rem;
+        color: var(--color-text-secondary);
+        line-height: 1.6;
+        margin: 0;
+        text-wrap: pretty;
+    }
+
+    /* Items (Work / Education) */
+    .cv-items {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+
+    .cv-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .cv-item-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+    }
+
+    .cv-item-header h3 {
+        font-size: 1rem;
+        font-weight: 600;
+        margin: 0;
+        color: var(--color-text);
+    }
+
+    .cv-item-header h3 a {
+        color: inherit;
+        text-decoration: none;
+    }
+    .cv-item-header h3 a:hover {
+        text-decoration: underline;
+    }
+
+    .cv-item-date {
+        font-size: 0.875rem;
+        font-variant-numeric: tabular-nums;
+        color: var(--color-text-muted);
+    }
+
+    .cv-item-subtitle {
+        font-family:
+            ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+            "Liberation Mono", "Courier New", monospace;
+        font-size: 0.875rem;
+        font-weight: 600;
+        margin: 0 0 0.25rem;
+        color: var(--color-text);
+    }
+
+    .cv-item-content {
+        font-family:
+            ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+            "Liberation Mono", "Courier New", monospace;
+        font-size: 0.875rem;
+        color: var(--color-text-secondary);
+        line-height: 1.5;
+    }
+
+    .cv-item-content p {
+        margin: 0 0 0.5rem;
+        text-wrap: pretty;
+    }
+
+    .cv-item-content ul {
+        margin: 0.5rem 0;
+        padding-left: 1.25rem;
+    }
+    .cv-item-content li {
+        margin-bottom: 0.25rem;
+    }
+
+    /* Tags */
+    .cv-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.375rem;
+        margin-top: 0.5rem;
+        list-style: none;
+        padding: 0;
+    }
+
+    .cv-tags-wrap {
+        margin-top: 0;
+    }
+
+    .cv-tag {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 0.375rem;
+        padding: 0.125rem 0.625rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        background: transparent;
+        color: var(--color-text-secondary);
+        border: 1px solid var(--color-border);
+        transition: all 0.2s;
+    }
+
+    .cv-tag.solid {
+        background: var(--color-text);
+        color: var(--color-bg);
+        border: none;
+    }
+
+    .cv-tag:not(.solid):hover {
+        background: var(--color-bg-secondary);
+        color: var(--color-text);
+    }
+
+    /* Certifications List */
+    .cv-cert-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .cv-cert-list li {
+        font-family:
+            ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+            "Liberation Mono", "Courier New", monospace;
+        font-size: 0.875rem;
+        color: var(--color-text-secondary);
+        padding-left: 1rem;
+        position: relative;
+    }
+    .cv-cert-list li::before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        color: var(--color-text-muted);
+    }
+
+    /* Print Instruction (Desktop only) */
+    .print-instruction {
+        margin-top: 4rem;
+        text-align: center;
+        font-size: 0.875rem;
+        color: var(--color-text-muted);
+    }
+
+    kbd {
+        background: var(--color-bg-secondary);
+        border: 1px solid var(--color-border);
+        border-radius: 0.25rem;
+        padding: 0.125rem 0.375rem;
+        font-family: inherit;
+        font-size: 0.75rem;
+    }
+
+    /* Print Media Query */
+    @media print {
+        :root,
+        [data-theme="dark"] {
+            --color-bg: #fff !important;
+            --color-bg-secondary: transparent !important;
+            --color-text: #000 !important;
+            --color-text-secondary: #333 !important;
+            --color-text-muted: #666 !important;
+            --color-border: #ddd !important;
+        }
+
+        html,
+        body {
+            background: white !important;
+            color: black !important;
+        }
+
+        .cv-container {
+            padding: 0.5rem 0 !important;
+            max-width: 100% !important;
+        }
+
+        .cv-content {
+            gap: 0.5rem !important;
+        }
+
+        .cv-contact-links,
+        .print-instruction,
+        :global(header.site-header),
+        :global(footer) {
+            display: none !important;
+        }
+
+        .cv-print-contact-links {
+            display: flex !important;
+            flex-wrap: wrap;
+            gap: 0.25rem;
+            align-items: center;
+            margin-top: 0.25rem;
+        }
+
+        .cv-print-contact-links a,
+        .cv-print-contact-links span {
+            display: inline-flex;
+        }
+
+        .cv-name {
+            font-size: 1.5rem !important;
+        }
+
+        .cv-about {
+            font-size: 0.75rem !important;
+        }
+
+        .cv-section {
+            gap: 0.25rem !important;
+        }
+
+        .cv-item-subtitle,
+        .cv-item-content,
+        .cv-summary {
+            font-size: 0.75rem !important;
+        }
+
+        .cv-tag {
+            font-size: 0.625rem !important;
+            border-color: #ddd !important;
+            padding: 0.125rem 0.375rem !important;
+        }
+        .cv-tag.solid {
+            background: #eee !important;
+            color: #000 !important;
+        }
+    }
+
+    @media (max-width: 640px) {
+        .cv-header {
+            flex-direction: column-reverse;
+            align-items: flex-start;
+        }
+        .cv-avatar {
+            width: 5rem;
+            height: 5rem;
+        }
+    }
+</style>

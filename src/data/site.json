@@ -1,0 +1,77 @@
+{
+  "site": {
+    "url": "https://chinmaysingh.me",
+    "language": "en",
+    "title": "Chinmay Singh - Portfolio",
+    "description": "CS undergrad exploring systems engineering, cloud infrastructure, and backend development. Projects, writing, and things I'm learning along the way.",
+    "favicon": "~/assets/images/site/site/favicon.png"
+  },
+  "author": {
+    "name": "Chinmay Singh",
+    "title": "Systems & Backend Engineering",
+    "bio": "Systems-oriented CS student passionate about backend development, networking, and self-hosted infrastructure. Building reliable systems end-to-end.",
+    "location": "Bangalore, India",
+    "locationLink": "https://www.google.com/maps/place/Bengaluru",
+    "profilePic": "/images/author/author/profilePic.png"
+  },
+  "cms": {
+    "brandName": "Chinmay Singh"
+  },
+  "contact": {
+    "email": "hello@chinmaysingh.me",
+    "social": [
+      {
+        "platform": "github",
+        "url": "https://github.com/singhchinmay",
+        "label": "GitHub"
+      },
+      {
+        "platform": "linkedin",
+        "url": "https://linkedin.com/in/singhchinmayy",
+        "label": "LinkedIn"
+      },
+      {
+        "platform": "twitter",
+        "url": "https://x.com/0xchinmayy",
+        "label": "Twitter"
+      }
+    ]
+  },
+  "contactPage": {
+    "title": "Contact",
+    "description": "Get in touch — happy to chat about projects, opportunities, or anything engineering.",
+    "heading": "Say Hello"
+  },
+  "newsletter": {
+    "action": "https://chinmaysingh.us16.list-manage.com/subscribe/post",
+    "u": "d16ebe6ee210f90bc2f6cae66",
+    "id": "678ed84f8c",
+    "f_id": "002f1ee1f0"
+  },
+  "nav": [
+    {
+      "label": "Home",
+      "href": "/",
+      "show": true,
+      "children": []
+    },
+    {
+      "label": "Projects",
+      "href": "/projects",
+      "show": true,
+      "children": []
+    },
+    {
+      "label": "Writing",
+      "href": "/writing",
+      "show": true,
+      "children": []
+    },
+    {
+      "label": "CV",
+      "href": "/cv",
+      "show": true,
+      "children": []
+    }
+  ]
+}

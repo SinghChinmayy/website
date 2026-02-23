@@ -83,7 +83,6 @@ After removing, either:
 
 ## Next Quick Wins
 
-- **Add a Journey Entry** — Share career milestones in `src/content/journey/`
 - **Write a Blog Post** — Share your knowledge in `src/content/writing/`
 - **Update Uses Page** — Document your tools in `src/content/uses/`
 

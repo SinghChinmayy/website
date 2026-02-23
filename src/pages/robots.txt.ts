@@ -24,7 +24,7 @@
  */
 
 import type { APIRoute } from 'astro';
-import { siteConfig } from '../config';
+import { siteConfig } from '../data/index';
 
 /**
  * GET handler for robots.txt
@@ -40,8 +40,8 @@ export const GET: APIRoute = () => {
    * 
    * Ensures the sitemap URL is consistently formatted without double slashes.
    */
-  const siteUrl = siteConfig.url.endsWith('/') 
-    ? siteConfig.url.slice(0, -1) 
+  const siteUrl = siteConfig.url.endsWith('/')
+    ? siteConfig.url.slice(0, -1)
     : siteConfig.url;
 
   const robotsTxt = `User-agent: *

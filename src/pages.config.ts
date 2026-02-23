@@ -63,15 +63,7 @@ export const pagesConfig = {
     intro: 'A transparent log of architectural and technical decisions I\'ve made across my projects. Each entry documents the context, alternatives considered, and the reasoning behind the choice.',
   },
 
-  /**
-   * Journey timeline page (/journey)
-   */
-  journey: {
-    title: 'Resume & Journey',
-    description: 'My resume, technical skills, and a timeline of what I\'ve been learning and building.',
-    heading: 'Resume & Journey',
-    intro: 'My resume, the tools and technologies I work with, and a timeline of my learning and growth so far.',
-  },
+
 
   /**
    * Writing/blog listing page (/writing)
