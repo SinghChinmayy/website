@@ -65,6 +65,12 @@ export default config({
                     title: fields.text({ label: 'Title / Role' }),
                     bio: fields.text({ label: 'Bio', multiline: true }),
                     location: fields.text({ label: 'Location' }),
+                    profilePic: fields.image({
+                        label: 'Profile Picture',
+                        description: 'Profile photo displayed in the hero section of the homepage.',
+                        directory: 'public/images/author',
+                        publicPath: '/images/author/',
+                    }),
                 }, { label: 'Author Information' }),
                 cms: fields.object({
                     brandName: fields.text({ label: 'CMS Brand Name' }),

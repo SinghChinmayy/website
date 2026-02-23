@@ -54,7 +54,8 @@
     "name": "Chinmay Singh",
     "title": "Engineering Undergrad.",
     "bio": "CS undergrad focused on systems, cloud, and backend engineering. Building reliable and high performance systems.",
-    "location": "BLR, India"
+    "location": "BLR, India",
+    "profilePic": "/images/author/author/profilePic.png"
   },
   "cms": {
     "brandName": "Chinmay Singh"

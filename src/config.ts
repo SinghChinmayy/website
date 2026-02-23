@@ -67,8 +67,12 @@ export const siteConfig = {
    * Author information
    */
   author: {
-    ...settings.author,
+    name: settings.author.name,
+    title: settings.author.title,
+    bio: settings.author.bio,
+    location: settings.author.location,
     email: contact.email,
+    profilePic: (settings.author as Record<string, unknown>).profilePic as string | undefined,
   },
 
   /**
