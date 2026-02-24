@@ -150,13 +150,14 @@ const pageTitle =
     {
       articles.length > 0 ? (
         <div class="card-list">
-          {articles.map((article) => (
+          {articles.map((article: any) => (
             <ArticleCard
               title={article.data.title}
               slug={article.id}
               description={article.data.description}
               publishDate={article.data.publishDate}
               tags={article.data.tags}
+              coverImage={article.data.coverImage}
             />
           ))}
         </div>

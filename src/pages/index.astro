@@ -28,6 +28,7 @@ import ForwardLink from '../components/ForwardLink.astro';
 import SocialLinks from '../components/SocialLinks.astro';
 import { getCollection } from 'astro:content';
 import { siteConfig } from '../data/index';
+import { Image } from 'astro:assets';
 
 /**
  * Queries and filters featured projects for hero section
@@ -144,6 +145,11 @@ const recentPosts = allPosts
             
             return (
               <a href={`/writing/${post.id}`} class="writing-item">
+                {post.data.coverImage && (
+                  <div class="writing-card-image">
+                    <Image src={post.data.coverImage} alt={post.data.title} loading="lazy" />
+                  </div>
+                )}
                 <time class="writing-date" datetime={post.data.publishDate.toISOString()}>
                   {formattedDate}
                 </time>
@@ -151,7 +157,7 @@ const recentPosts = allPosts
                 <p class="writing-description">{post.data.description}</p>
                 {post.data.tags && post.data.tags.length > 0 && (
                   <div class="writing-tags">
-                    {post.data.tags.slice(0, 3).map((tag) => (
+                    {post.data.tags.slice(0, 3).map((tag: string) => (
                       <span class="writing-tag">{tag}</span>
                     ))}
                   </div>
@@ -344,6 +350,24 @@ const recentPosts = allPosts
 
     .writing-item:hover {
       border-color: var(--color-text-muted);
+    }
+    
+    .writing-card-image {
+      margin-bottom: 1rem;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .writing-card-image img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .writing-item:hover .writing-card-image img {
+      transform: scale(1.03);
     }
 
     .writing-date {

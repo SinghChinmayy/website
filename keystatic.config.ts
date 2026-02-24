@@ -200,6 +200,15 @@ export default config({
             format: { contentField: 'content' },
             columns: ['title', 'publishDate'],
             schema: {
+                coverImage: fields.image({
+                    label: 'Cover Image',
+                    directory: 'src/content/writing/_assets',
+                    publicPath: './_assets/',
+                }),
+                coverImageCredit: fields.text({
+                    label: 'Cover Image Credit',
+                    description: 'E.g., "Photo by Jane Doe on Unsplash"',
+                }),
                 title: fields.slug({ name: { label: 'Title' } }),
                 description: fields.text({ label: 'Description', multiline: true }),
                 publishDate: fields.date({ label: 'Publish Date' }),

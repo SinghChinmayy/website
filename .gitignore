@@ -66,4 +66,4 @@ coverage/
 
 
 # ignore example site
-Resources/Example site/*  
+Example Sites/*

@@ -168,7 +168,13 @@ const decisionsCollection = defineCollection({
  */
 const writingCollection = defineCollection({
   loader: glob({ pattern: '**/*.mdx', base: './src/content/writing' }),
-  schema: z.object({
+  schema: ({ image }) => z.object({
+    /** Optional cover image for the article */
+    coverImage: image().optional(),
+
+    /** Optional credit/attribution for the cover image */
+    coverImageCredit: z.string().optional(),
+
     /** Article title */
     title: z.string(),
 

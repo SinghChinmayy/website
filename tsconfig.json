@@ -11,5 +11,8 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "jsx": "react-jsx"
-  }
+  },
+  "exclude": [
+    "Example Sites"
+  ]
 }

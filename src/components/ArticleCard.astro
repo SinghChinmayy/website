@@ -1,13 +1,13 @@
 ---
 /**
  * ArticleCard Component
- * 
+ *
  * Displays a blog/writing entry in a card format with metadata, title, description, and tags.
  * Extends BaseCard component with article-specific formatting and automatically generates
  * links to the full article page.
- * 
+ *
  * @component
- * 
+ *
  * @example
  * ```astro
  * <ArticleCard
@@ -20,58 +20,97 @@
  * ```
  */
 
-import BaseCard from './BaseCard.astro';
-import ForwardLink from './ForwardLink.astro';
+import BaseCard from "./BaseCard.astro";
+import ForwardLink from "./ForwardLink.astro";
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
 
 interface Props {
   /** Article title (displayed as card heading) */
   title: string;
-  
+
   /** URL slug for the article (used to generate /writing/{slug} link) */
   slug: string;
-  
+
   /** Brief description or excerpt of the article */
   description: string;
-  
+
   /** Publication date (formatted as "Month Day, Year") */
   publishDate: Date;
-  
+
   /** Optional array of tags/categories for the article */
   tags?: string[];
+
+  /** Optional cover image for the article */
+  coverImage?: ImageMetadata;
 }
 
-const { title, slug, description, publishDate, tags = [] } = Astro.props;
+const {
+  title,
+  slug,
+  description,
+  publishDate,
+  tags = [],
+  coverImage,
+} = Astro.props;
 
 /**
  * Formats a date object into a human-readable string
- * 
+ *
  * Uses US English locale with long month format.
  * Example output: "January 15, 2024"
- * 
+ *
  * @param date - The date to format
  * @returns Formatted date string in "Month Day, Year" format
  */
 function formatDate(date: Date): string {
-  return new Intl.DateTimeFormat('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
+  return new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
   }).format(date);
 }
 ---
 
 <BaseCard href={`/writing/${slug}`} class="article-card">
+  {
+    coverImage && (
+      <div class="article-card-image" slot="title">
+        <Image src={coverImage} alt={title} loading="lazy" />
+      </div>
+    )
+  }
   <Fragment slot="meta">{formatDate(publishDate)}</Fragment>
   <Fragment slot="title">{title}</Fragment>
   <Fragment slot="description">{description}</Fragment>
-  
-  {tags.length > 0 && (
-    <div slot="tags" class="tags-list">
-      {tags.map((tag) => (
-        <span class="tag">{tag}</span>
-      ))}
-    </div>
-  )}
-  
+
+  {
+    tags.length > 0 && (
+      <div slot="tags" class="tags-list">
+        {tags.map((tag: string) => (
+          <span class="tag">{tag}</span>
+        ))}
+      </div>
+    )
+  }
+
   <ForwardLink text="Read article" />
 </BaseCard>
+
+<style>
+  .article-card-image {
+    margin-bottom: 1rem;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .article-card-image img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+  :global(.article-card:hover) .article-card-image img {
+    transform: scale(1.03);
+  }
+</style>
