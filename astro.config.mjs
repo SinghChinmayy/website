@@ -82,7 +82,9 @@ export default defineConfig({
    * - Keystatic: Headless CMS for content management
    */
   integrations: [
-    mdx(),
+    mdx({
+      remarkPlugins: [remarkAlert, remarkGfm],
+    }),
     sitemap(),
     react(),
     keystatic(),
