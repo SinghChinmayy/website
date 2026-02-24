@@ -1,37 +1,37 @@
 ---
 /**
  * TableOfContents Component
- * 
- * Generates a collapsible table of contents from article headings (h2 and h3 only).
+ *
+ * Generates a collapsible table of contents from article headings (h1, h2, and h3).
  * Only renders when there are 3 or more qualifying headings to ensure the TOC adds value.
  * Starts in a collapsed state by default to save space.
- * 
+ *
  * Features:
  * - Automatic heading extraction and filtering
  * - Collapsible/expandable interface
  * - Smooth scroll to sections with header offset
  * - Visual hierarchy for h2 vs h3 headings
  * - Works with Astro View Transitions
- * 
+ *
  * @component
- * 
+ *
  * @example
  * ```astro
  * ---
  * const { headings } = Astro.props;
  * ---
- * 
+ *
  * <TableOfContents headings={headings} />
  * ```
  */
 
 interface Heading {
-  /** Heading level (2 for h2, 3 for h3) */
+  /** Heading level (1 for h1, 2 for h2, 3 for h3) */
   depth: number;
-  
+
   /** Heading text content */
   text: string;
-  
+
   /** URL-safe slug for anchor linking */
   slug: string;
 }
@@ -44,47 +44,59 @@ interface Props {
 const { headings } = Astro.props;
 
 /**
- * Filters headings to only include h2 and h3 levels
- * 
- * Excludes h1 (page title) and deeper levels (h4+) to keep the TOC
- * focused on main sections and subsections.
+ * Filters headings to include h1, h2, and h3 levels
+ *
+ * Includes h1 for main article sections, and h2/h3 for subsections.
+ * Excludes deeper levels (h4+) to keep the TOC focused.
  */
-const filteredHeadings = headings.filter(h => h.depth === 2 || h.depth === 3);
+const filteredHeadings = headings.filter((h) => h.depth >= 1 && h.depth <= 3);
 
 /**
  * Determines if the TOC should render
- * 
+ *
  * Only renders when there are 3 or more headings to ensure the TOC
  * provides meaningful navigation value.
  */
 const shouldRender = filteredHeadings.length >= 3;
 ---
 
-{shouldRender && (
-  <nav class="table-of-contents" aria-label="Table of contents">
-    <button 
-      class="toc-toggle" 
-      type="button"
-      aria-expanded="false"
-      aria-controls="toc-list"
-    >
-      <span class="toc-title">Table of Contents</span>
-      <span class="toc-count">{filteredHeadings.length} sections</span>
-      <svg class="toc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="6 9 12 15 18 9"></polyline>
-      </svg>
-    </button>
-    <ul class="toc-list" id="toc-list">
-      {filteredHeadings.map((heading) => (
-        <li class={`toc-item toc-depth-${heading.depth}`}>
-          <a href={`#${heading.slug}`} class="toc-link">
-            {heading.text}
-          </a>
-        </li>
-      ))}
-    </ul>
-  </nav>
-)}
+{
+  shouldRender && (
+    <nav class="table-of-contents" aria-label="Table of contents">
+      <button
+        class="toc-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="toc-list"
+      >
+        <span class="toc-title">Table of Contents</span>
+        <span class="toc-count">{filteredHeadings.length} sections</span>
+        <svg
+          class="toc-icon"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
+      </button>
+      <ul class="toc-list" id="toc-list">
+        {filteredHeadings.map((heading) => (
+          <li class={`toc-item toc-depth-${heading.depth}`}>
+            <a href={`#${heading.slug}`} class="toc-link">
+              {heading.text}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
+}
 
 <style>
   .table-of-contents {
@@ -161,8 +173,22 @@ const shouldRender = filteredHeadings.length >= 3;
     margin-bottom: 0;
   }
 
-  .toc-depth-3 {
+  .toc-depth-1 {
+    font-weight: 600;
+    margin-top: 0.75rem;
+    color: var(--color-text);
+  }
+
+  .toc-depth-1:first-child {
+    margin-top: 0;
+  }
+
+  .toc-depth-2 {
     padding-left: 1rem;
+  }
+
+  .toc-depth-3 {
+    padding-left: 2rem;
   }
 
   .toc-link {
@@ -195,41 +221,47 @@ const shouldRender = filteredHeadings.length >= 3;
 
 <script>
   function initTOC() {
-    const toggle = document.querySelector('.toc-toggle');
-    const list = document.querySelector('.toc-list');
-    
+    const toggle = document.querySelector(".toc-toggle");
+    const list = document.querySelector(".toc-list");
+
     if (!toggle || !list) return;
 
     // Toggle expand/collapse
-    toggle.addEventListener('click', () => {
-      const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
-      toggle.setAttribute('aria-expanded', String(!isExpanded));
-      list.classList.toggle('is-open');
+    toggle.addEventListener("click", () => {
+      const isExpanded = toggle.getAttribute("aria-expanded") === "true";
+      toggle.setAttribute("aria-expanded", String(!isExpanded));
+      list.classList.toggle("is-open");
     });
 
     // Smooth scroll for TOC links
-    const tocLinks = document.querySelectorAll('.toc-link');
-    tocLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
+    const tocLinks = document.querySelectorAll(".toc-link");
+    tocLinks.forEach((link) => {
+      link.addEventListener("click", (e) => {
         e.preventDefault();
-        const href = link.getAttribute('href');
+        const href = link.getAttribute("href");
         if (!href) return;
-        
+
         const target = document.querySelector(href);
         if (!target) return;
 
         // Scroll with offset for sticky header
-        const header = document.querySelector('.site-header') as HTMLElement | null;
+        const header = document.querySelector(
+          ".site-header",
+        ) as HTMLElement | null;
         const headerHeight = header?.offsetHeight || 0;
-        const targetPosition = target.getBoundingClientRect().top + window.scrollY - headerHeight - 20;
-        
+        const targetPosition =
+          target.getBoundingClientRect().top +
+          window.scrollY -
+          headerHeight -
+          20;
+
         window.scrollTo({
           top: targetPosition,
-          behavior: 'smooth'
+          behavior: "smooth",
         });
 
         // Update URL without jumping
-        history.pushState(null, '', href);
+        history.pushState(null, "", href);
       });
     });
   }
@@ -238,5 +270,5 @@ const shouldRender = filteredHeadings.length >= 3;
   initTOC();
 
   // Re-run on Astro page transitions
-  document.addEventListener('astro:after-swap', initTOC);
+  document.addEventListener("astro:after-swap", initTOC);
 </script>

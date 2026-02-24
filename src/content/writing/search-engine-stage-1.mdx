@@ -42,8 +42,6 @@ pipeline/
     pipeline_manager.py
 ```
 
-### Worth noting
-
 > This separation matters more than people realize. Real systems do not mix file reading logic with indexing logic. Once you start scaling, that discipline saves you hours of debugging.
 
 ---
@@ -51,8 +49,6 @@ pipeline/
 # Stage 2: Building the Internal Processing Flow
 
 ![](./_assets/search-engine-stage-1/mermaid-diagram-2026-02-23-022455.png)
-
-### What happened here
 
 After defining the structure, I implemented the internal pieces.
 
@@ -110,8 +106,6 @@ for file_path in folder.iterdir():
 
 # Stage 4: Cleaning Text Like It Actually Matters
 
-### What happened here
-
 Raw text is chaotic. Different encodings. Strange characters. Mixed line endings. It is like trying to organize a messy kitchen before you can cook anything useful.
 
 Let me explain what I did.
@@ -146,8 +140,6 @@ Think about tokens like "cafe", "naive", and "resume." Unicode handling is not t
 
 ![](./_assets/search-engine-stage-1/Screenshot%20from%202026-02-23%2002-33-58.png)
 
-### What happened here
-
 I had two options. Use `.split()` or use regex.
 
 Split is easy. But it fails quickly. It cannot handle edge cases like hyphenated words or contractions. It is like using a butter knife to chop vegetables: technically possible, but you will not be happy with the results.
@@ -181,8 +173,6 @@ Tokenization is not about perfection. It is about consistency.
 
 ![](./_assets/search-engine-stage-1/image.png)
 
-### What happened here
-
 Now that the pipeline could generate tokens, I extended the main function.
 
 Instead of just printing tokens, I started assigning document IDs. This keeps indexing logic outside the processing modules. It is like adding serial numbers to files in a cabinet rather than stamping them during production.
@@ -214,8 +204,6 @@ This mirrors how real search engines separate document metadata from term storag
 
 ![](./_assets/search-engine-stage-1/inverted-index-diagram.png)
 
-### What happened here
-
 Now comes the core of search.
 
 Once tokens and document IDs were available in the main flow, building the inverted index became straightforward. Think of it like a book index at the back: you look up a word and it tells you which pages mention it.
@@ -243,8 +231,6 @@ for term in tokens:
 # Stage 8: Basic Keyword Lookup
 
 ![](./_assets/search-engine-stage-1/Screenshot%20from%202026-02-23%2002-45-33.png)
-
-### What happened here
 
 Once the inverted index was ready, querying became simple. This is the payoff moment where you can actually search for something and get results back.
 
