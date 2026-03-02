@@ -43,6 +43,9 @@ interface Props {
 
   /** Optional cover image for the article */
   coverImage?: ImageMetadata;
+
+  /** Optional external URL for the article */
+  externalUrl?: string;
 }
 
 const {
@@ -52,7 +55,13 @@ const {
   publishDate,
   tags = [],
   coverImage,
+  externalUrl,
 } = Astro.props;
+
+const isExternal = !!externalUrl;
+const href = isExternal ? externalUrl : `/writing/${slug}`;
+const target = isExternal ? "_blank" : undefined;
+const rel = isExternal ? "noopener noreferrer" : undefined;
 
 /**
  * Formats a date object into a human-readable string
@@ -72,7 +81,7 @@ function formatDate(date: Date): string {
 }
 ---
 
-<BaseCard href={`/writing/${slug}`} class="article-card">
+<BaseCard href={href} class="article-card" target={target} rel={rel}>
   {
     coverImage && (
       <div class="article-card-image" slot="title">
@@ -94,7 +103,7 @@ function formatDate(date: Date): string {
     )
   }
 
-  <ForwardLink text="Read article" />
+  <ForwardLink text={isExternal ? "Read on external site" : "Read article"} />
 </BaseCard>
 
 <style>

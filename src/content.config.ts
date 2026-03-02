@@ -187,6 +187,9 @@ const writingCollection = defineCollection({
     /** Last updated date (optional) */
     updatedDate: z.coerce.date().optional(),
 
+    /** Link to article on another site (optional) */
+    externalUrl: z.string().url().optional(),
+
     /** Tags for categorization */
     tags: z.array(z.string()).optional(),
 

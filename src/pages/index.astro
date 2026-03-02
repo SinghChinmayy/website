@@ -143,8 +143,16 @@ const recentPosts = allPosts
               year: 'numeric' 
             });
             
+            const href = post.data.externalUrl || `/writing/${post.id}`;
+            const isExternal = !!post.data.externalUrl;
+            
             return (
-              <a href={`/writing/${post.id}`} class="writing-item">
+              <a 
+                href={href} 
+                class="writing-item"
+                target={isExternal ? "_blank" : undefined}
+                rel={isExternal ? "noopener noreferrer" : undefined}
+              >
                 {post.data.coverImage && (
                   <div class="writing-card-image">
                     <Image src={post.data.coverImage} alt={post.data.title} loading="lazy" />

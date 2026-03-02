@@ -213,6 +213,10 @@ export default config({
                 description: fields.text({ label: 'Description', multiline: true }),
                 publishDate: fields.date({ label: 'Publish Date' }),
                 updatedDate: fields.date({ label: 'Updated Date' }),
+                externalUrl: fields.text({
+                    label: 'External URL',
+                    description: 'Link to article on another site (LinkedIn, Substack, etc.)'
+                }),
                 tags: fields.array(fields.text({ label: 'Tag' }), {
                     label: 'Tags',
                     itemLabel: (props) => props.value || 'New Tag',
