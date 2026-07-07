@@ -2,6 +2,44 @@
   "work": [],
   "projects": [
     {
+      "name": "Kidney Care",
+      "description": "Offline-first Flutter app for CKD patients to log vitals with drift (SQLite) as the local source of truth and a registry-driven SyncEngine for Supabase reconciliation.",
+      "startDate": "2026",
+      "endDate": "Present",
+      "url": "https://github.com/SinghChinmayy",
+      "highlights": [
+        {
+          "value": "Built offline-first architecture with drift SQLite mirroring Supabase Postgres, including dirty-row tracking and sync cursors."
+        },
+        {
+          "value": "Implemented a registry-driven SyncEngine with push/pull, last-write-wins conflict resolution, and lifecycle-triggered sync."
+        },
+        {
+          "value": "Delivered auth, patient onboarding, and vitals logging for blood pressure, glucose, and weight with 20+ unit tests."
+        }
+      ],
+      "keywords": [
+        {
+          "value": "Flutter"
+        },
+        {
+          "value": "Dart"
+        },
+        {
+          "value": "Supabase"
+        },
+        {
+          "value": "PostgreSQL"
+        },
+        {
+          "value": "drift"
+        },
+        {
+          "value": "SQLite"
+        }
+      ]
+    },
+    {
       "name": "VPS Infrastructure & Self-Hosted Services Platform",
       "description": "Designed, deployed, and maintained a self-managed VPS and ARM-based Linux infrastructure using Docker to run and operate self-hosted services with focus on reliability, security, and full lifecycle management.",
       "startDate": "2024",
