@@ -8,7 +8,7 @@
       name="description"
       content="Kidney Care helps CKD patients log blood pressure, glucose, and weight reliably — even without connectivity."
     />
-    <meta name="theme-color" content="#ffffff" />
+    <meta name="theme-color" content="#0f766e" />
     <meta property="og:title" content="Kidney Care — Track vitals offline" />
     <meta
       property="og:description"
@@ -17,14 +17,22 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://chinmaysingh.me/kidneycare" />
     <link rel="canonical" href="https://chinmaysingh.me/kidneycare" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
+    <div class="page-bg" aria-hidden="true"></div>
+
     <header class="site-header">
       <div class="container header-inner">
         <a class="brand" href="./">
           <span class="brand-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -34,51 +42,82 @@
           </span>
           <span>Kidney Care</span>
         </a>
-        <a class="button button-primary button-sm" href="#download">Download APK</a>
+        <a class="button button-primary button-sm header-cta" href="#download">Download</a>
       </div>
     </header>
 
     <main>
       <section class="hero">
-        <div class="container hero-grid">
+        <div class="container hero-stack">
           <div class="hero-copy">
-            <p class="eyebrow">For CKD patients &amp; caretakers</p>
-            <h1>Track vitals reliably, even offline.</h1>
+            <div class="pill-row">
+              <span class="pill">CKD patients &amp; caretakers</span>
+              <span class="pill pill-outline">Offline-first</span>
+            </div>
+            <h1>
+              Track vitals reliably,
+              <span class="text-gradient">even offline.</span>
+            </h1>
             <p class="lead">
-              Kidney Care is a mobile health app for chronic kidney disease patients who need
-              consistent blood pressure, glucose, and weight logging — without depending on
-              network access at every reading.
+              Log blood pressure, glucose, and weight without waiting on the network.
+              Every reading saves instantly — sync happens when you are back online.
             </p>
             <div class="hero-actions">
-              <a class="button button-primary" href="#download">
+              <a class="button button-primary button-block" href="#download">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M7.5 11.25 12 15.75m0 0 4.5-4.5M12 15.75V3" />
                 </svg>
                 Download Android APK
               </a>
-              <a class="button button-secondary" href="#features">See features</a>
+              <a class="button button-ghost button-block" href="#features">Explore features</a>
             </div>
-            <p class="hero-note">Android only · v1.0.0 · Requires Android 6.0+</p>
+            <ul class="hero-stats">
+              <li>
+                <strong>3</strong>
+                <span>Vitals tracked</span>
+              </li>
+              <li>
+                <strong>100%</strong>
+                <span>Offline logging</span>
+              </li>
+              <li>
+                <strong>v1.0</strong>
+                <span>Android 6.0+</span>
+              </li>
+            </ul>
           </div>
 
           <div class="hero-preview" aria-hidden="true">
+            <div class="phone-glow"></div>
             <div class="phone-frame">
+              <div class="phone-notch"></div>
               <div class="phone-screen">
                 <div class="screen-header">
-                  <span class="screen-title">Welcome back</span>
-                  <span class="screen-subtitle">Your latest vitals at a glance.</span>
+                  <span class="screen-greeting">Good morning</span>
+                  <span class="screen-title">Your vitals</span>
                 </div>
                 <div class="vital-card vital-bp">
-                  <span class="vital-label">Blood pressure</span>
-                  <span class="vital-value">118 / 76 mmHg</span>
+                  <div class="vital-top">
+                    <span class="vital-label">Blood pressure</span>
+                    <span class="vital-badge">Latest</span>
+                  </div>
+                  <span class="vital-value">118 <small>/</small> 76 <span class="vital-unit">mmHg</span></span>
                 </div>
                 <div class="vital-card vital-glucose">
-                  <span class="vital-label">Blood glucose</span>
-                  <span class="vital-value">104 mg/dL</span>
+                  <div class="vital-top">
+                    <span class="vital-label">Blood glucose</span>
+                  </div>
+                  <span class="vital-value">104 <span class="vital-unit">mg/dL</span></span>
                 </div>
                 <div class="vital-card vital-weight">
-                  <span class="vital-label">Weight</span>
-                  <span class="vital-value">68.4 kg</span>
+                  <div class="vital-top">
+                    <span class="vital-label">Weight</span>
+                  </div>
+                  <span class="vital-value">68.4 <span class="vital-unit">kg</span></span>
+                </div>
+                <div class="sync-bar">
+                  <span class="sync-dot"></span>
+                  Synced · All vitals saved locally
                 </div>
               </div>
             </div>
@@ -89,10 +128,10 @@
       <section class="section" id="features">
         <div class="container">
           <div class="section-heading">
+            <p class="section-label">Features</p>
             <h2>Built for daily kidney care</h2>
             <p>
-              Log the vitals that matter most, review your history, and sync when you are back
-              online.
+              Log the vitals that matter most, review your history, and sync when you are back online.
             </p>
           </div>
 
@@ -128,7 +167,7 @@
             </article>
 
             <article class="feature-card">
-              <span class="feature-icon" aria-hidden="true">
+              <span class="feature-icon feature-icon-teal" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M8.288 15.038a5.25 5.25 0 0 1 7.424 0M5.106 11.856c-3.807 3.808-3.807 9.98 0 13.788m13.788 0c3.807-3.807 3.807-9.98 0-13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
                 </svg>
@@ -138,7 +177,7 @@
             </article>
 
             <article class="feature-card">
-              <span class="feature-icon" aria-hidden="true">
+              <span class="feature-icon feature-icon-teal" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
                 </svg>
@@ -148,7 +187,7 @@
             </article>
 
             <article class="feature-card">
-              <span class="feature-icon" aria-hidden="true">
+              <span class="feature-icon feature-icon-teal" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
                 </svg>
@@ -160,60 +199,75 @@
         </div>
       </section>
 
-      <section class="section section-muted">
-        <div class="container split-section">
-          <div>
-            <h2>Why offline-first matters</h2>
+      <section class="section section-offline">
+        <div class="container offline-grid">
+          <div class="offline-copy">
+            <p class="section-label">Why offline-first</p>
+            <h2>Your readings should never depend on signal.</h2>
             <p>
               Clinic visits and daily life do not guarantee connectivity. A cloud-only app fails
               the moment the network drops. Kidney Care keeps a local database as the source of
-              truth so every reading is saved immediately, then syncs in the background when you
-              are back online.
+              truth so every reading is saved immediately.
             </p>
           </div>
           <ul class="checklist">
-            <li>Log vitals without waiting on the network</li>
-            <li>Review history from your home dashboard</li>
-            <li>Automatic sync when connectivity returns</li>
-            <li>Secure sign-in with encrypted cloud backup</li>
+            <li>
+              <span class="check-icon" aria-hidden="true">✓</span>
+              Log vitals without waiting on the network
+            </li>
+            <li>
+              <span class="check-icon" aria-hidden="true">✓</span>
+              Review history from your home dashboard
+            </li>
+            <li>
+              <span class="check-icon" aria-hidden="true">✓</span>
+              Automatic sync when connectivity returns
+            </li>
+            <li>
+              <span class="check-icon" aria-hidden="true">✓</span>
+              Secure sign-in with encrypted cloud backup
+            </li>
           </ul>
         </div>
       </section>
 
       <section class="section download-section" id="download">
-        <div class="container download-card">
-          <div class="download-copy">
-            <h2>Download Kidney Care</h2>
-            <p>
-              Install the latest Android build directly. You may need to allow installs from
-              unknown sources in your device settings.
-            </p>
-            <dl class="download-meta">
-              <div>
-                <dt>Version</dt>
-                <dd>1.0.0 (build 1)</dd>
-              </div>
-              <div>
-                <dt>Platform</dt>
-                <dd>Android 6.0+</dd>
-              </div>
-              <div>
-                <dt>Package</dt>
-                <dd>APK</dd>
-              </div>
-            </dl>
-          </div>
+        <div class="container">
+          <div class="download-card">
+            <div class="download-copy">
+              <p class="section-label">Get the app</p>
+              <h2>Download Kidney Care</h2>
+              <p>
+                Install the latest Android build directly. You may need to allow installs from
+                unknown sources in your device settings.
+              </p>
+              <dl class="download-meta">
+                <div>
+                  <dt>Version</dt>
+                  <dd>1.0.0 (build 1)</dd>
+                </div>
+                <div>
+                  <dt>Platform</dt>
+                  <dd>Android 6.0+</dd>
+                </div>
+                <div>
+                  <dt>Format</dt>
+                  <dd>APK</dd>
+                </div>
+              </dl>
+            </div>
 
-          <div class="download-actions">
-            <a class="button button-primary button-lg" href="./downloads/kidney-care-v1.0.0.apk" download>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M7.5 11.25 12 15.75m0 0 4.5-4.5M12 15.75V3" />
-              </svg>
-              Download APK
-            </a>
-            <p class="install-note">
-              After downloading, open the file on your Android device and follow the install prompt.
-            </p>
+            <div class="download-actions">
+              <a class="button button-primary button-lg button-block" href="./downloads/kidney-care-v1.0.0.apk" download>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M7.5 11.25 12 15.75m0 0 4.5-4.5M12 15.75V3" />
+                </svg>
+                Download APK
+              </a>
+              <p class="install-note">
+                After downloading, open the file on your Android device and follow the install prompt.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -228,5 +282,11 @@
         <p class="footer-note">Kidney Care is an early-stage health app. Not a substitute for medical advice.</p>
       </div>
     </footer>
+
+    <div class="mobile-download-bar">
+      <a class="button button-primary button-block" href="./downloads/kidney-care-v1.0.0.apk" download>
+        Download Kidney Care
+      </a>
+    </div>
   </body>
 </html>

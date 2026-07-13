@@ -7,8 +7,9 @@
  * 
  * Sections:
  * 1. Hero - Bio, CTAs, and featured case study snapshots
- * 2. Recent Writing - Latest published articles
- * 3. CTA - Call-to-action for collaboration/contact
+ * 2. Kidney Care - Dedicated promo for the app landing page
+ * 3. Recent Writing - Latest published articles
+ * 4. CTA - Call-to-action for collaboration/contact
  * 
  * Features:
  * - Featured projects showcase (top 2-3)
@@ -50,7 +51,7 @@ const featuredProjects = allProjects
  */
 const caseSnapshots = featuredProjects.slice(0, 3);
 
-
+const kidneyCareProject = allProjects.find((project) => project.id === 'kidney-care');
 
 /**
  * Queries and filters writing for recent posts section
@@ -124,6 +125,44 @@ const recentPosts = allPosts
         </div>
       </div>
     </section>
+
+    {kidneyCareProject && (
+      <section class="kidney-care">
+        <div class="kidney-care-card">
+          <div class="kidney-care-copy">
+            <span class="header-label">Mobile App · CKD Vitals Tracking</span>
+            <h2>{kidneyCareProject.data.title}</h2>
+            <p class="kidney-care-description">
+              Offline-first mobile health app for chronic kidney disease patients to log blood
+              pressure, glucose, and weight — even without connectivity.
+            </p>
+            <div class="kidney-care-tags">
+              <span class="kidney-care-tag">Flutter</span>
+              <span class="kidney-care-tag">Offline-first</span>
+              <span class="kidney-care-tag">Supabase</span>
+            </div>
+            <div class="kidney-care-actions">
+              <a href="/kidneycare/" class="btn-primary">Visit landing page</a>
+              <a href={`/projects/${kidneyCareProject.id}`} class="btn-secondary">Case study</a>
+            </div>
+          </div>
+          <div class="kidney-care-highlights">
+            <div class="kidney-care-highlight">
+              <span class="highlight-label">Blood pressure</span>
+              <span class="highlight-value">Systolic, diastolic &amp; heart rate</span>
+            </div>
+            <div class="kidney-care-highlight">
+              <span class="highlight-label">Blood glucose</span>
+              <span class="highlight-value">mg/dL readings with context</span>
+            </div>
+            <div class="kidney-care-highlight">
+              <span class="highlight-label">Weight</span>
+              <span class="highlight-value">Daily tracking with history</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    )}
 
 
     {recentPosts.length > 0 && (
@@ -336,6 +375,104 @@ const recentPosts = allPosts
         color: var(--color-text-muted);
     }
 
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-header h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin: 0;
+    }
+
+    .kidney-care {
+      margin-bottom: 5rem;
+    }
+
+    .kidney-care-card {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 2.5rem;
+      padding: 2rem;
+      background: var(--color-bg-secondary);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+    }
+
+    .kidney-care-copy h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin: 0.75rem 0 1rem;
+      color: var(--color-text);
+    }
+
+    .kidney-care-description {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--color-text-secondary);
+      margin: 0 0 1.25rem;
+      max-width: 540px;
+    }
+
+    .kidney-care-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .kidney-care-tag {
+      font-size: 0.6875rem;
+      font-weight: 500;
+      color: var(--color-text-muted);
+      padding: 0.25rem 0.625rem;
+      background: var(--color-bg-elevated);
+      border: 1px solid var(--color-border);
+      border-radius: 3px;
+    }
+
+    .kidney-care-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .kidney-care-highlights {
+      display: flex;
+      flex-direction: column;
+      gap: 0.875rem;
+    }
+
+    .kidney-care-highlight {
+      padding: 1rem 1.25rem;
+      background: var(--color-bg-elevated);
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+    }
+
+    .highlight-label {
+      display: block;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-text-muted);
+      margin-bottom: 0.375rem;
+    }
+
+    .highlight-value {
+      display: block;
+      font-size: 0.9375rem;
+      color: var(--color-text);
+      line-height: 1.4;
+    }
+
     .recent-writing {
       margin-bottom: 5rem;
     }
@@ -480,6 +617,26 @@ const recentPosts = allPosts
 
       .case-snapshot {
         padding: 1rem 1.25rem;
+      }
+
+      .kidney-care-card {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 1.5rem;
+      }
+
+      .kidney-care-copy h2 {
+        font-size: 1.5rem;
+      }
+
+      .kidney-care-actions {
+        flex-direction: column;
+      }
+
+      .kidney-care-actions :global(.btn-primary),
+      .kidney-care-actions :global(.btn-secondary) {
+        width: 100%;
+        text-align: center;
       }
 
       .writing-grid {

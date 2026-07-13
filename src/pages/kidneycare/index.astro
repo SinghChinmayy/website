@@ -1,0 +1,20 @@
+---
+/**
+ * Kidney Care landing page route
+ *
+ * Serves the static landing page from public/kidneycare/index.html at /kidneycare/.
+ * The Cloudflare dev adapter does not resolve directory indexes for public assets,
+ * so this route ensures the landing page opens at the clean URL in dev and production.
+ */
+export const prerender = true;
+
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+
+const html = readFileSync(
+  fileURLToPath(new URL('../../../public/kidneycare/index.html', import.meta.url)),
+  'utf-8',
+);
+---
+
+<Fragment set:html={html} />
